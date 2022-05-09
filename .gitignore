@@ -1,0 +1,7 @@
+node_modules/
+.next/
+.build/
+*.env
+.keystone
+*.db
+Colors
