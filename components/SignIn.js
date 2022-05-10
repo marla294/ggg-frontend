@@ -35,6 +35,7 @@ export default function SignIn() {
     },
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
+  console.log({ data });
   const error =
     data?.authenticateUserWithPassword.__typename ===
     'UserAuthenticationWithPasswordFailure'
