@@ -33,8 +33,9 @@ export default function SignIn() {
       email: inputs.email,
       password: inputs.password,
     },
-    // refetchQueries: [{ query: CURRENT_USER_QUERY }, 'CURRENT_USER_QUERY'],
-    refetchQueries: 'all',
+    refetchQueries: [
+      { query: CURRENT_USER_QUERY, fetchPolicy: 'network-only' },
+    ],
   });
   console.log({ data });
   const error =
