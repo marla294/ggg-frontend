@@ -37,7 +37,6 @@ export default function SignIn() {
       { query: CURRENT_USER_QUERY, fetchPolicy: 'network-only' },
     ],
   });
-  console.log({ data });
   const error =
     data?.authenticateUserWithPassword.__typename ===
     'UserAuthenticationWithPasswordFailure'
