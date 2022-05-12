@@ -33,9 +33,7 @@ export default function SignIn() {
       email: inputs.email,
       password: inputs.password,
     },
-    refetchQueries: [
-      { query: CURRENT_USER_QUERY, fetchPolicy: 'network-only' },
-    ],
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
   const error =
     data?.authenticateUserWithPassword.__typename ===

@@ -13,6 +13,18 @@ const NavStyles = styled.nav`
     grid-template-columns: repeat(10, auto);
     grid-gap: 1rem;
   }
+
+  button {
+    background-color: transparent;
+    border: none;
+    color: var(--black);
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0;
+    :hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export default function Nav() {
