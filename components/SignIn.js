@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
@@ -47,6 +48,7 @@ export default function SignIn() {
         e.preventDefault();
         await signIn();
         resetForm();
+        Router.push({ pathname: '/' });
       }}
     >
       <fieldset disabled={loading}>

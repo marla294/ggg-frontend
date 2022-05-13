@@ -7,11 +7,19 @@ const NavStyles = styled.nav`
   display: flex;
   justify-self: end;
   font-size: 1.25rem;
+  padding: 0 5rem;
 
   div {
     display: grid;
-    grid-template-columns: repeat(10, auto);
     grid-gap: 1rem;
+  }
+
+  .signedInLinks {
+    grid-template-columns: repeat(5, auto);
+  }
+
+  .signedOutLinks {
+    grid-template-columns: repeat(1, auto);
   }
 
   button {
@@ -31,22 +39,20 @@ export default function Nav() {
   const user = useUser();
   return (
     <NavStyles>
-      <div>
-        {user && (
-          <>
-            <Link href="/shoppinglist">shopping list</Link>
-            <Link href="/recipies">recipes</Link>
-            <Link href="/ingredients">ingredients</Link>
-            <Link href="/account">ur account</Link>
-            <SignOut />
-          </>
-        )}
-        {!user && (
-          <>
-            <Link href="/signin">sign in</Link>
-          </>
-        )}
-      </div>
+      {user && (
+        <div className="signedInLinks">
+          <Link href="/shoppinglist">shopping list</Link>
+          <Link href="/recipies">recipes</Link>
+          <Link href="/ingredients">ingredients</Link>
+          <Link href="/account">ur account</Link>
+          <SignOut />
+        </div>
+      )}
+      {!user && (
+        <div className="signedOutLinks">
+          <Link href="/signin">sign in</Link>
+        </div>
+      )}
     </NavStyles>
   );
 }

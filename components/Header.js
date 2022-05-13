@@ -3,19 +3,25 @@ import styled from 'styled-components';
 import Nav from './Nav';
 
 const Logo = styled.h1`
-  font-size: 3rem;
+  font-size: 2rem;
   background: #ff5733;
   a {
     color: white;
     text-decoration: none;
     text-transform: lowercase;
-    padding: 0.5rem 1rem;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+    a {
+      padding: 0.5rem 1rem;
+    }
   }
 `;
 
 const HeaderStyles = styled.header`
   .bar {
-    border-bottom: 10px solid var(--purple);
+    border-bottom: 1rem solid var(--purple);
     display: grid;
     grid-template-columns: auto 1fr;
     justify-content: space-between;
@@ -28,7 +34,7 @@ export default function Header() {
     <HeaderStyles>
       <div className="bar">
         <Logo>
-          <Link href="/">go get (ur) groceries</Link>
+          <Link href="/">go get ur groceries</Link>
         </Logo>
         <Nav />
       </div>
