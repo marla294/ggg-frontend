@@ -9,13 +9,11 @@ const Logo = styled.h1`
     color: white;
     text-decoration: none;
     text-transform: lowercase;
+    padding: 0.5rem 1rem;
   }
 
   @media (min-width: 768px) {
     font-size: 3rem;
-    a {
-      padding: 0.5rem 1rem;
-    }
   }
 `;
 
@@ -23,7 +21,7 @@ const HeaderStyles = styled.header`
   .bar {
     border-bottom: 1rem solid var(--purple);
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(200px, auto) 1fr;
     justify-content: space-between;
     align-items: center;
   }

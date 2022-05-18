@@ -8,13 +8,21 @@ import PleaseSignIn from './PleaseSignIn';
 const IngredientsBarStyles = styled.div`
   margin-bottom: 1rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 export default function Ingredients() {
   const { inputs, handleChange } = useForm({
     searchTerm: '',
+    sortBy: 'alphabetical',
   });
+
+  const sortOptions = [
+    { display: 'alphabetical', value: 'alphabetical' },
+    { display: 'aisle', value: 'aisle' },
+    { display: 'home area', value: 'homeArea' },
+    { display: 'store', value: 'store' },
+  ];
 
   return (
     <PleaseSignIn>
@@ -30,6 +38,26 @@ export default function Ingredients() {
             New Ingredient
           </button>
         </ButtonStyles>
+        <label htmlFor="sortBy">
+          sort by:&nbsp;
+          <select
+            name="sortBy"
+            id="sortBy"
+            value={inputs.sortBy}
+            onChange={handleChange}
+          >
+            {sortOptions.map((option) => (
+              <option
+                value={option.value}
+                name={option.value}
+                id={option.value}
+                key={Math.random()}
+              >
+                {option.display}
+              </option>
+            ))}
+          </select>
+        </label>
         <input
           name="searchTerm"
           id="searchTerm"
@@ -38,7 +66,7 @@ export default function Ingredients() {
           onChange={handleChange}
         />
       </IngredientsBarStyles>
-      <IngredientsList searchTerm={inputs.searchTerm} />
+      <IngredientsList searchTerm={inputs.searchTerm} sortBy={inputs.sortBy} />
     </PleaseSignIn>
   );
 }

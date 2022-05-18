@@ -6,7 +6,7 @@ import { useUser } from './User';
 const NavStyles = styled.nav`
   display: flex;
   justify-self: end;
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding: 0 5rem;
 
   div {
@@ -16,6 +16,7 @@ const NavStyles = styled.nav`
 
   .signedInLinks {
     grid-template-columns: repeat(5, auto);
+    white-space: nowrap;
   }
 
   .signedOutLinks {
@@ -27,7 +28,7 @@ const NavStyles = styled.nav`
     border: none;
     color: var(--black);
     cursor: pointer;
-    font-size: 1.25rem;
+    font-size: 1rem;
     padding: 0;
     :hover {
       text-decoration: underline;
@@ -44,7 +45,7 @@ export default function Nav() {
           <Link href="/shoppinglist">shopping list</Link>
           <Link href="/recipies">recipes</Link>
           <Link href="/ingredients">ingredients</Link>
-          <Link href="/account">ur account</Link>
+          <Link href="/account">account</Link>
           <SignOut />
         </div>
       )}

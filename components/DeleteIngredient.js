@@ -14,7 +14,7 @@ const DELETE_INGREDIENT_MUTATION = gql`
 export default function DeleteIngredient({ id, children }) {
   const [deleteIngredient, { data, error, loading }] = useMutation(
     DELETE_INGREDIENT_MUTATION,
-    { variables: { id } }
+    { variables: { id }, refetchQueries: 'all' }
   );
 
   return (

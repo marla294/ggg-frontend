@@ -48,6 +48,7 @@ export default function CreateIngredient() {
       refetchQueries: 'all',
     }
   );
+  const sortOptions = ['alphabetical', 'store'];
   return (
     <FormStyles
       onSubmit={async (e) => {

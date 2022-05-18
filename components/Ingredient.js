@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import DeleteIngredient from './DeleteIngredient';
 
 const IngredientStyles = styled.div`
   background: white;
@@ -50,7 +51,7 @@ export default function Ingredient({ ingredient }) {
         </h3>
         <p>{ingredient?.description}</p>
       </div>
-      <button>&times;</button>
+      <DeleteIngredient id={ingredient?.id}>&times;</DeleteIngredient>
     </IngredientStyles>
   );
 }
