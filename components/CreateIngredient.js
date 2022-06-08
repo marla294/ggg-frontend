@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
-import { ALL_INGREDIENTS_QUERY } from './UpdateIngredient';
 import FormStyles from './styles/FormStyles';
+import { UPDATE_INGREDIENT_IMAGE_MUTATION } from './UpdateIngredient';
 
 const CREATE_INGREDIENT_MUTATION = gql`
   mutation CREATE_INGREDIENT_MUTATION(
@@ -14,7 +14,6 @@ const CREATE_INGREDIENT_MUTATION = gql`
     $units: String
     $aisle: String
     $homeArea: String
-    $image: Upload
   ) {
     createIngredient(
       data: {
@@ -24,7 +23,6 @@ const CREATE_INGREDIENT_MUTATION = gql`
         units: $units
         aisle: $aisle
         homeArea: $homeArea
-        photo: { create: { image: $image, altText: $name } }
       }
     ) {
       id
@@ -37,26 +35,35 @@ export default function CreateIngredient() {
     name: '',
     description: '',
     store: 'uncategorized',
-    units: 'uncategorized',
+    units: 'none',
     aisle: 'uncategorized',
     homeArea: 'uncategorized',
   });
-  const [createIngredient, { loading, error, data }] = useMutation(
+  const [createIngredient, { loading, error }] = useMutation(
     CREATE_INGREDIENT_MUTATION,
     {
       variables: inputs,
       refetchQueries: 'all',
     }
   );
-  const sortOptions = ['alphabetical', 'store'];
+  const [updateIngredientImage] = useMutation(UPDATE_INGREDIENT_IMAGE_MUTATION);
   return (
     <FormStyles
       onSubmit={async (e) => {
         e.preventDefault();
         const res = await createIngredient();
+        if (inputs.image && res?.data?.createIngredient?.id) {
+          await updateIngredientImage({
+            variables: {
+              id: res?.data?.createIngredient?.id,
+              name: inputs.name,
+              image: inputs.image,
+            },
+          }).catch(console.error);
+        }
         clearForm();
         Router.push({
-          pathname: `/ingredient/${res.data.createIngredient.id}`,
+          pathname: `/ingredients`,
         });
       }}
     >
@@ -100,9 +107,9 @@ export default function CreateIngredient() {
             value={inputs.store}
           >
             <option value="uncategorized">uncategorized</option>
-            <option value="whole foods">whole foods</option>
             <option value="family fare">family fare</option>
             <option value="hyvee">hyvee</option>
+            <option value="whole foods">whole foods</option>
           </select>
         </label>
         <label htmlFor="units">
@@ -114,11 +121,13 @@ export default function CreateIngredient() {
             onChange={handleChange}
             value={inputs.units}
           >
-            <option value="uncategorized">uncategorized</option>
+            <option value="none">none</option>
+            <option value="can">can</option>
+            <option value="cup">cup</option>
+            <option value="lb">lb</option>
             <option value="oz">oz</option>
             <option value="tbs">tbs</option>
             <option value="tsp">tsp</option>
-            <option value="can">can</option>
           </select>
         </label>
         <label htmlFor="aisle">
@@ -131,10 +140,17 @@ export default function CreateIngredient() {
             value={inputs.aisle}
           >
             <option value="uncategorized">uncategorized</option>
-            <option value="produce">produce</option>
-            <option value="meat">meat</option>
-            <option value="dairy">dairy</option>
+            <option value="baked goods">baked goods</option>
+            <option value="bakery">bakery</option>
             <option value="canned goods">canned goods</option>
+            <option value="condiments">condiments</option>
+            <option value="dairy">dairy</option>
+            <option value="frozen">frozen</option>
+            <option value="meat">meat</option>
+            <option value="paper">paper</option>
+            <option value="pasta">pasta</option>
+            <option value="produce">produce</option>
+            <option value="seafood">seafood</option>
           </select>
         </label>
         <label htmlFor="homeArea">
@@ -147,10 +163,11 @@ export default function CreateIngredient() {
             value={inputs.homeArea}
           >
             <option value="uncategorized">uncategorized</option>
-            <option value="pantry">pantry</option>
-            <option value="fridge">fridge</option>
             <option value="freezer">freezer</option>
+            <option value="fridge">fridge</option>
             <option value="kitchen">kitchen</option>
+            <option value="pantry">pantry</option>
+            <option value="upstairs">upstairs</option>
           </select>
         </label>
         <button type="submit" className="submit">

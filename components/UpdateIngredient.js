@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import useForm from '../lib/useForm';
+import { DELETE_INGREDIENT_IMAGE_MUTATION } from './DeleteIngredient';
 import DisplayError from './ErrorMessage';
 import { SINGLE_INGREDIENT_QUERY } from './SingleIngredient';
 import FormStyles from './styles/FormStyles';
@@ -55,19 +56,38 @@ const UPDATE_INGREDIENT_MUTATION = gql`
   }
 `;
 
+const UPDATE_INGREDIENT_IMAGE_MUTATION = gql`
+  mutation UPDATE_INGREDIENT_IMAGE_MUTATION(
+    $id: ID!
+    $image: Upload
+    $name: String!
+  ) {
+    updateIngredient(
+      id: $id
+      data: { photo: { create: { image: $image, altText: $name } } }
+    ) {
+      id
+    }
+  }
+`;
+
 export default function UpdateIngredient({ id }) {
-  const { data, error, loading } = useQuery(SINGLE_INGREDIENT_QUERY, {
+  const { data, loading } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: {
       id,
     },
   });
-  const [
-    updateIngredient,
-    { data: updateData, error: updateError, loading: updateLoading },
-  ] = useMutation(UPDATE_INGREDIENT_MUTATION);
 
-  const { inputs, handleChange, clearForm, resetForm } = useForm(
-    data?.Ingredient
+  const [updateIngredient, { error: updateError, loading: updateLoading }] =
+    useMutation(UPDATE_INGREDIENT_MUTATION);
+
+  const [updateIngredientImage] = useMutation(UPDATE_INGREDIENT_IMAGE_MUTATION);
+
+  const { inputs, handleChange, resetForm } = useForm(data?.Ingredient);
+
+  const [deleteIngredientImage] = useMutation(
+    DELETE_INGREDIENT_IMAGE_MUTATION,
+    { variables: { id: data?.Ingredient?.photo?.id } }
   );
 
   if (loading) return <p>Loading...</p>;
@@ -75,6 +95,18 @@ export default function UpdateIngredient({ id }) {
     <FormStyles
       onSubmit={async (e) => {
         e.preventDefault();
+        if (inputs.image) {
+          if (data?.Ingredient?.photo?.id) {
+            await deleteIngredientImage();
+          }
+          await updateIngredientImage({
+            variables: {
+              id,
+              name: inputs.name,
+              image: inputs.image,
+            },
+          }).catch(console.error);
+        }
         await updateIngredient({
           variables: {
             id,
@@ -107,6 +139,10 @@ export default function UpdateIngredient({ id }) {
             onChange={handleChange}
           />
         </label>
+        <label htmlFor="image">
+          Image
+          <input type="file" id="image" name="image" onChange={handleChange} />
+        </label>
         <label htmlFor="description">
           Description
           <textarea
@@ -128,9 +164,9 @@ export default function UpdateIngredient({ id }) {
             value={inputs.store}
           >
             <option value="uncategorized">uncategorized</option>
-            <option value="whole foods">whole foods</option>
             <option value="family fare">family fare</option>
             <option value="hyvee">hyvee</option>
+            <option value="whole foods">whole foods</option>
           </select>
         </label>
         <label htmlFor="units">
@@ -142,11 +178,13 @@ export default function UpdateIngredient({ id }) {
             onChange={handleChange}
             value={inputs.units}
           >
-            <option value="uncategorized">uncategorized</option>
+            <option value="none">none</option>
+            <option value="can">can</option>
+            <option value="cup">cup</option>
+            <option value="lb">lb</option>
             <option value="oz">oz</option>
             <option value="tbs">tbs</option>
             <option value="tsp">tsp</option>
-            <option value="can">can</option>
           </select>
         </label>
         <label htmlFor="aisle">
@@ -159,10 +197,17 @@ export default function UpdateIngredient({ id }) {
             value={inputs.aisle}
           >
             <option value="uncategorized">uncategorized</option>
-            <option value="produce">produce</option>
-            <option value="meat">meat</option>
-            <option value="dairy">dairy</option>
+            <option value="baked goods">baked goods</option>
+            <option value="bakery">bakery</option>
             <option value="canned goods">canned goods</option>
+            <option value="condiments">condiments</option>
+            <option value="dairy">dairy</option>
+            <option value="frozen">frozen</option>
+            <option value="meat">meat</option>
+            <option value="paper">paper</option>
+            <option value="pasta">pasta</option>
+            <option value="produce">produce</option>
+            <option value="seafood">seafood</option>
           </select>
         </label>
         <label htmlFor="homeArea">
@@ -175,10 +220,11 @@ export default function UpdateIngredient({ id }) {
             value={inputs.homeArea}
           >
             <option value="uncategorized">uncategorized</option>
-            <option value="pantry">pantry</option>
-            <option value="fridge">fridge</option>
             <option value="freezer">freezer</option>
+            <option value="fridge">fridge</option>
             <option value="kitchen">kitchen</option>
+            <option value="pantry">pantry</option>
+            <option value="upstairs">upstairs</option>
           </select>
         </label>
         <button type="submit" className="submit">
@@ -202,3 +248,5 @@ export default function UpdateIngredient({ id }) {
     </FormStyles>
   );
 }
+
+export { UPDATE_INGREDIENT_IMAGE_MUTATION };

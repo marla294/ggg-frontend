@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const ButtonStyles = styled.div`
   display: grid;
-  grid-template-columns: repeat(10, auto);
   grid-gap: 1rem;
 
   button {

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Router from 'next/router';
-import ButtonStyles from './styles/ButtonStyles';
 import useForm from '../lib/useForm';
-import IngredientsList from './IngredientsList';
 import PleaseSignIn from './PleaseSignIn';
+import ShoppingListItems from './ShoppingListItems';
+import ButtonStyles from './styles/ButtonStyles';
+import { useAddShoppingListItemModal } from '../lib/addShoppingListItemState';
 
 const IngredientsBarStyles = styled.div`
   margin-bottom: 1rem;
@@ -30,11 +30,13 @@ const SortByStyles = styled.div`
   align-items: center;
 `;
 
-export default function Ingredients() {
+export default function ShoppingList() {
   const { inputs, handleChange } = useForm({
     searchTerm: '',
     sortBy: 'alphabetical',
   });
+
+  const { openAddShoppingListItemModal } = useAddShoppingListItemModal();
 
   const sortOptions = [
     { display: 'alphabetical', value: 'alphabetical' },
@@ -51,7 +53,7 @@ export default function Ingredients() {
             type="button"
             className="lime small"
             onClick={() => {
-              Router.push({ pathname: '/createingredient' });
+              openAddShoppingListItemModal();
             }}
           >
             add
@@ -85,7 +87,10 @@ export default function Ingredients() {
           onChange={handleChange}
         />
       </IngredientsBarStyles>
-      <IngredientsList searchTerm={inputs.searchTerm} sortBy={inputs.sortBy} />
+      <ShoppingListItems
+        searchTerm={inputs.searchTerm}
+        sortBy={inputs.sortBy}
+      />
     </PleaseSignIn>
   );
 }

@@ -41,6 +41,7 @@ const SINGLE_INGREDIENT_QUERY = gql`
       units
       store
       photo {
+        id
         image {
           publicUrlTransformed
         }

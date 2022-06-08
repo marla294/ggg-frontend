@@ -1,7 +1,9 @@
+import ShoppingList from '../components/ShoppingList';
+
 export default function ShoppingListPage() {
   return (
     <div>
-      <p>Shopping List Page</p>
+      <ShoppingList />
     </div>
   );
 }
