@@ -1,34 +1,10 @@
-import styled from 'styled-components';
 import Router from 'next/router';
 import ButtonStyles from './styles/ButtonStyles';
 import useForm from '../lib/useForm';
 import IngredientsList from './IngredientsList';
 import PleaseSignIn from './PleaseSignIn';
-
-const IngredientsBarStyles = styled.div`
-  margin-bottom: 1rem;
-  display: grid;
-  grid-template-columns: 3rem repeat(2, 1fr);
-  font-size: 1.1rem;
-  grid-gap: 2rem;
-
-  input,
-  select {
-    padding: 0.5rem;
-    font-size: 1.1rem;
-    border: 1px solid black;
-    &:focus {
-      outline: 0;
-      border-color: var(--orange);
-    }
-  }
-`;
-
-const SortByStyles = styled.div`
-  display: grid;
-  grid-template-columns: minmax(3rem, auto) 1fr;
-  align-items: center;
-`;
+import IngredientsBarStyles from './styles/IngredientsBarStyles';
+import SortByStyles from './styles/SortByStyles';
 
 export default function Ingredients() {
   const { inputs, handleChange } = useForm({

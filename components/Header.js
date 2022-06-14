@@ -18,24 +18,20 @@ const Logo = styled.h1`
 `;
 
 const HeaderStyles = styled.header`
-  .bar {
-    border-bottom: 1rem solid var(--purple);
-    display: grid;
-    grid-template-columns: minmax(200px, auto) 1fr;
-    justify-content: space-between;
-    align-items: center;
-  }
+  border-bottom: 1rem solid var(--purple);
+  display: grid;
+  grid-template-columns: minmax(200px, auto) 1fr;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default function Header() {
   return (
     <HeaderStyles>
-      <div className="bar">
-        <Logo>
-          <Link href="/">go get ur groceries</Link>
-        </Logo>
-        <Nav />
-      </div>
+      <Logo>
+        <Link href="/">go get ur groceries</Link>
+      </Logo>
+      <Nav />
     </HeaderStyles>
   );
 }

@@ -3,15 +3,21 @@ import styled from 'styled-components';
 const ListItemStyles = styled.div`
   background: white;
   border: 1px solid var(--lightGray);
-  height: 5rem;
-  display: flex;
-  flex-direction: row;
-  position: relative;
   font-size: 1rem;
+  position: relative;
+
+  @media (min-width: 768px) {
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+  }
+
   img {
     width: 5rem;
-    height: 100%;
     object-fit: cover;
+    @media (min-width: 768px) {
+      height: 100%;
+    }
   }
   .noPhoto {
     width: 5rem;
@@ -38,15 +44,19 @@ const ListItemStyles = styled.div`
     color: var(--orange);
     border: none;
     font-size: 1.5rem;
-    position: absolute;
-    top: 0;
-    right: 0;
+    @media (min-width: 768px) {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
   .addToShoppingList {
-    width: 14rem;
-    position: absolute;
-    top: 1.2rem;
-    right: 3rem;
+    @media (min-width: 768px) {
+      width: 14rem;
+      position: absolute;
+      top: 1.2rem;
+      right: 3rem;
+    }
   }
 `;
 

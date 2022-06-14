@@ -7,11 +7,14 @@ const NavStyles = styled.nav`
   display: flex;
   justify-self: end;
   font-size: 1rem;
-  padding: 0 5rem;
+  padding: 0 1rem;
 
   div {
-    display: grid;
-    grid-gap: 1rem;
+    display: none;
+    @media (min-width: 768px) {
+      display: grid;
+      grid-gap: 1rem;
+    }
   }
 
   .signedInLinks {
@@ -45,7 +48,6 @@ export default function Nav() {
           <Link href="/shoppinglist">shopping list</Link>
           <Link href="/recipies">recipes</Link>
           <Link href="/ingredients">ingredients</Link>
-          <Link href="/account">account</Link>
           <SignOut />
         </div>
       )}
