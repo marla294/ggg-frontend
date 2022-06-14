@@ -3,19 +3,29 @@ import styled from 'styled-components';
 const ListItemStyles = styled.div`
   background: white;
   border: 1px solid var(--lightGray);
-  font-size: 1rem;
+  font-size: 0.7rem;
   position: relative;
+  display: grid;
+  justify-items: center;
+  padding: 1rem;
 
   @media (min-width: 768px) {
+    padding: 0;
+    font-size: 1rem;
+    max-width: 100%;
     height: 5rem;
     display: flex;
     flex-direction: row;
   }
 
   img {
-    width: 5rem;
     object-fit: cover;
+    height: 8rem;
+    max-width: 10rem;
+    padding: 0.7rem;
     @media (min-width: 768px) {
+      padding: 0;
+      width: 5rem;
       height: 100%;
     }
   }
@@ -25,7 +35,9 @@ const ListItemStyles = styled.div`
     background-color: var(--orange);
   }
   .details {
-    margin-left: 1rem;
+    @media (min-width: 768px) {
+      margin-left: 1rem;
+    }
   }
   .removeFromShoppingList {
     width: 6rem;
@@ -44,10 +56,10 @@ const ListItemStyles = styled.div`
     color: var(--orange);
     border: none;
     font-size: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
     @media (min-width: 768px) {
-      position: absolute;
-      top: 0;
-      right: 0;
     }
   }
   .addToShoppingList {
