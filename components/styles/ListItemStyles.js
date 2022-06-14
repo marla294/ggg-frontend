@@ -7,7 +7,6 @@ const ListItemStyles = styled.div`
   position: relative;
   display: grid;
   justify-items: center;
-  padding: 1rem;
 
   @media (min-width: 768px) {
     padding: 0;
@@ -20,21 +19,37 @@ const ListItemStyles = styled.div`
 
   img {
     object-fit: cover;
-    height: 8rem;
-    max-width: 10rem;
-    padding: 0.7rem;
+    height: 12rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    @media (min-width: 768px) {
+      margin: 0;
+      width: 5rem;
+      height: 100%;
+    }
+  }
+  .noPhoto {
+    background-color: var(--orange);
+    height: 6rem;
+    width: 8rem;
+    margin: 1rem;
     @media (min-width: 768px) {
       padding: 0;
       width: 5rem;
       height: 100%;
     }
   }
-  .noPhoto {
-    width: 5rem;
-    height: 100%;
-    background-color: var(--orange);
-  }
   .details {
+    grid-row: 3;
+    height: 4rem;
+    width: 100%;
+    line-height: 1.2rem;
+    padding-top: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     @media (min-width: 768px) {
       margin-left: 1rem;
     }

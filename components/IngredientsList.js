@@ -11,12 +11,17 @@ const IngredientsListStyles = styled.div`
   display: grid;
   grid-template-areas: 'a a';
   gap: 1rem;
-  grid-auto-columns: minmax(10rem, 15rem);
+  grid-auto-columns: minmax(10rem, 20rem);
   @media (min-width: 768px) {
     grid-template-areas: 'a';
     grid-template-columns: 1fr;
     grid-gap: 1rem;
   }
+`;
+
+const Wrapper = styled.div`
+  display: grid;
+  justify-content: center;
 `;
 
 const IngredientGroupingStyles = styled.div`
@@ -69,20 +74,22 @@ export default function IngredientsList({ searchTerm, sortBy }) {
     return <p>Sorry, no results found for "{searchTerm}"</p>;
   return (
     <AddIngredientToShoppingListModal>
-      <IngredientsListStyles>
-        {sortBy === 'alphabetical'
-          ? data?.allIngredients.map((ingredient) => (
-              <Ingredient ingredient={ingredient} key={ingredient.id} />
-            ))
-          : groupArrayBy(data?.allIngredients, sortBy).map((grouping) => (
-              <IngredientGroupingStyles key={grouping[0]}>
-                <h3>{grouping[0]}</h3>
-                {grouping[1].map((ingredient) => (
-                  <Ingredient ingredient={ingredient} key={ingredient.id} />
-                ))}
-              </IngredientGroupingStyles>
-            ))}
-      </IngredientsListStyles>
+      <Wrapper>
+        <IngredientsListStyles>
+          {sortBy === 'alphabetical'
+            ? data?.allIngredients.map((ingredient) => (
+                <Ingredient ingredient={ingredient} key={ingredient.id} />
+              ))
+            : groupArrayBy(data?.allIngredients, sortBy).map((grouping) => (
+                <IngredientGroupingStyles key={grouping[0]}>
+                  <h3>{grouping[0]}</h3>
+                  {grouping[1].map((ingredient) => (
+                    <Ingredient ingredient={ingredient} key={ingredient.id} />
+                  ))}
+                </IngredientGroupingStyles>
+              ))}
+        </IngredientsListStyles>
+      </Wrapper>
     </AddIngredientToShoppingListModal>
   );
 }
