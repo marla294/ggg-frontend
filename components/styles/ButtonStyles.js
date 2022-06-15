@@ -9,13 +9,14 @@ const ButtonStyles = styled.div`
     width: auto;
     transition: 0.2s;
     @media (min-width: 768px) {
+      margin: 0;
       padding: 0.7rem 1rem;
       font-size: 1.1rem;
     }
   }
 
   .small {
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding: 0.3rem;
     @media (min-width: 768px) {
       padding: 0.5rem 0.8rem;

@@ -21,21 +21,17 @@ const ListItemStyles = styled.div`
     object-fit: cover;
     height: 12rem;
     width: 100%;
-    margin-bottom: 0.5rem;
     @media (min-width: 768px) {
       margin: 0;
-      width: 5rem;
       height: 100%;
     }
   }
   .noPhoto {
-    background-color: var(--orange);
-    height: 6rem;
-    width: 8rem;
-    margin: 1rem;
+    background-color: var(--lime);
+    height: 12rem;
+    width: 100%;
     @media (min-width: 768px) {
-      padding: 0;
-      width: 5rem;
+      margin: 0;
       height: 100%;
     }
   }
@@ -44,7 +40,7 @@ const ListItemStyles = styled.div`
     height: 4rem;
     width: 100%;
     line-height: 1.2rem;
-    padding-top: 0.5rem;
+    padding: 0.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -73,9 +69,7 @@ const ListItemStyles = styled.div`
     font-size: 1.5rem;
     position: absolute;
     top: 0;
-    right: 0;
-    @media (min-width: 768px) {
-    }
+    right: 0.5rem;
   }
   .addToShoppingList {
     @media (min-width: 768px) {
