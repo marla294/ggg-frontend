@@ -75,20 +75,24 @@ export default function IngredientsList({ searchTerm, sortBy }) {
   return (
     <AddIngredientToShoppingListModal>
       <Wrapper>
-        <IngredientsListStyles>
-          {sortBy === 'alphabetical'
-            ? data?.allIngredients.map((ingredient) => (
-                <Ingredient ingredient={ingredient} key={ingredient.id} />
-              ))
-            : groupArrayBy(data?.allIngredients, sortBy).map((grouping) => (
-                <IngredientGroupingStyles key={grouping[0]}>
-                  <h3>{grouping[0]}</h3>
-                  {grouping[1].map((ingredient) => (
-                    <Ingredient ingredient={ingredient} key={ingredient.id} />
-                  ))}
-                </IngredientGroupingStyles>
-              ))}
-        </IngredientsListStyles>
+        {sortBy === 'alphabetical' ? (
+          <IngredientsListStyles>
+            {data?.allIngredients.map((ingredient) => (
+              <Ingredient ingredient={ingredient} key={ingredient.id} />
+            ))}
+          </IngredientsListStyles>
+        ) : (
+          groupArrayBy(data?.allIngredients, sortBy).map((grouping) => (
+            <IngredientGroupingStyles key={grouping[0]}>
+              <h3>{grouping[0]}</h3>
+              <IngredientsListStyles>
+                {grouping[1].map((ingredient) => (
+                  <Ingredient ingredient={ingredient} key={ingredient.id} />
+                ))}
+              </IngredientsListStyles>
+            </IngredientGroupingStyles>
+          ))
+        )}
       </Wrapper>
     </AddIngredientToShoppingListModal>
   );
