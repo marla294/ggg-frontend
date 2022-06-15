@@ -18,11 +18,15 @@ const Logo = styled.h1`
 `;
 
 const HeaderStyles = styled.header`
-  border-bottom: 1rem solid var(--purple);
   display: grid;
   grid-template-columns: minmax(200px, auto) 1fr;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 0.5rem solid var(--purple);
+
+  @media (min-width: 768px) {
+    border-bottom: 1rem solid var(--purple);
+  }
 `;
 
 export default function Header() {

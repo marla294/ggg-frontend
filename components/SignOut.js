@@ -16,6 +16,7 @@ export default function SignOut() {
   return (
     <button
       type="button"
+      className="signOutButton"
       onClick={() => {
         signoutMutation();
         Router.push({ pathname: '/signin' });

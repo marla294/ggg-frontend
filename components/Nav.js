@@ -6,10 +6,14 @@ import { useUser } from './User';
 const NavStyles = styled.nav`
   display: flex;
   justify-self: end;
+  align-items: center;
+  height: 100%;
   font-size: 1rem;
-  padding: 0 1rem;
 
-  div {
+  @media (min-width: 768px) {
+    padding: 0 1rem;
+  }
+  .desktop {
     display: none;
     @media (min-width: 768px) {
       display: grid;
@@ -18,7 +22,7 @@ const NavStyles = styled.nav`
   }
 
   .signedInLinks {
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(4, auto);
     white-space: nowrap;
   }
 
@@ -26,7 +30,7 @@ const NavStyles = styled.nav`
     grid-template-columns: repeat(1, auto);
   }
 
-  button {
+  .signOutButton {
     background-color: transparent;
     border: none;
     color: var(--black);
@@ -37,6 +41,28 @@ const NavStyles = styled.nav`
       text-decoration: underline;
     }
   }
+
+  .mobile-nav-button {
+    display: block;
+    height: 1rem;
+    width: 1.5rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 1rem;
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .mobile-nav-button .line {
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 10px;
+    background: var(--purple);
+  }
 `;
 
 export default function Nav() {
@@ -44,7 +70,7 @@ export default function Nav() {
   return (
     <NavStyles>
       {user && (
-        <div className="signedInLinks">
+        <div className="signedInLinks desktop">
           <Link href="/shoppinglist">shopping list</Link>
           <Link href="/recipies">recipes</Link>
           <Link href="/ingredients">ingredients</Link>
@@ -52,10 +78,15 @@ export default function Nav() {
         </div>
       )}
       {!user && (
-        <div className="signedOutLinks">
+        <div className="signedOutLinks desktop">
           <Link href="/signin">sign in</Link>
         </div>
       )}
+      <div className="mobile-nav-button">
+        <span className="line line1" />
+        <span className="line line2" />
+        <span className="line line3" />
+      </div>
     </NavStyles>
   );
 }
