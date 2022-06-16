@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import MobileNav from './MobileNav';
 import Nav from './Nav';
 
 const Logo = styled.h1`
@@ -23,7 +24,7 @@ const HeaderStyles = styled.header`
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.5rem solid var(--purple);
-
+  z-index: 1;
   @media (min-width: 768px) {
     border-bottom: 1rem solid var(--purple);
   }
@@ -31,11 +32,14 @@ const HeaderStyles = styled.header`
 
 export default function Header() {
   return (
-    <HeaderStyles>
-      <Logo>
-        <Link href="/">go get ur groceries</Link>
-      </Logo>
-      <Nav />
-    </HeaderStyles>
+    <>
+      <HeaderStyles>
+        <Logo>
+          <Link href="/">go get ur groceries</Link>
+        </Logo>
+        <Nav />
+      </HeaderStyles>
+      <MobileNav />
+    </>
   );
 }

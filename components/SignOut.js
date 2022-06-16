@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import styled from 'styled-components';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGN_OUT_MUTATION = gql`
@@ -9,12 +10,24 @@ const SIGN_OUT_MUTATION = gql`
   }
 `;
 
+const SignOutButtonStyles = styled.button`
+  background-color: transparent;
+  border: none;
+  color: var(--black);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
 export default function SignOut() {
   const [signoutMutation] = useMutation(SIGN_OUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
   return (
-    <button
+    <SignOutButtonStyles
       type="button"
       className="signOutButton"
       onClick={() => {
@@ -23,6 +36,6 @@ export default function SignOut() {
       }}
     >
       sign out
-    </button>
+    </SignOutButtonStyles>
   );
 }

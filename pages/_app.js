@@ -7,6 +7,7 @@ import withData from '../lib/withData';
 import { AddIngredientStateProvider } from '../lib/addIngredientState';
 import { UpdateShoppingItemStateProvider } from '../lib/updateShoppingItemState';
 import { AddShoppingListItemStateProvider } from '../lib/addShoppingListItemState';
+import { MobileNavStateProvider } from '../lib/mobileNavState';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -18,9 +19,11 @@ function MyApp({ Component, pageProps, apollo }) {
       <AddIngredientStateProvider>
         <UpdateShoppingItemStateProvider>
           <AddShoppingListItemStateProvider>
-            <Page>
-              <Component {...pageProps} />
-            </Page>
+            <MobileNavStateProvider>
+              <Page>
+                <Component {...pageProps} />
+              </Page>
+            </MobileNavStateProvider>
           </AddShoppingListItemStateProvider>
         </UpdateShoppingItemStateProvider>
       </AddIngredientStateProvider>

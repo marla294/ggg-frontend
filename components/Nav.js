@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+import { useMobileNav } from '../lib/mobileNavState';
 import SignOut from './SignOut';
 import { useUser } from './User';
 
@@ -30,18 +31,6 @@ const NavStyles = styled.nav`
     grid-template-columns: repeat(1, auto);
   }
 
-  .signOutButton {
-    background-color: transparent;
-    border: none;
-    color: var(--black);
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0;
-    :hover {
-      text-decoration: underline;
-    }
-  }
-
   .mobile-nav-button {
     display: block;
     height: 1rem;
@@ -67,6 +56,7 @@ const NavStyles = styled.nav`
 
 export default function Nav() {
   const user = useUser();
+  const { toggleMobileNav } = useMobileNav();
   return (
     <NavStyles>
       {user && (
@@ -82,7 +72,7 @@ export default function Nav() {
           <Link href="/signin">sign in</Link>
         </div>
       )}
-      <div className="mobile-nav-button">
+      <div className="mobile-nav-button" onClick={toggleMobileNav}>
         <span className="line line1" />
         <span className="line line2" />
         <span className="line line3" />
