@@ -25,14 +25,17 @@ const MobileNavStyles = styled.div`
 const InnerMobileNavStyles = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  font-size: 1rem;
+  font-size: 1.1rem;
 
   .signOutButton {
     text-align: left;
-    height: 2rem;
+    font-size: 1.1rem;
+    line-height: 2;
   }
 
-  a {
+  a,
+  .signOutButton {
+    padding: 1.5rem 2.5rem;
     border-bottom: 0.5px solid var(--lightGray);
   }
 `;
