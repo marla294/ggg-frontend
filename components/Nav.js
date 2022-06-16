@@ -33,13 +33,12 @@ const NavStyles = styled.nav`
 
   .mobile-nav-button {
     display: block;
-    height: 1rem;
-    width: 1.5rem;
+    height: 1.3rem;
+    width: 1.6rem;
     z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: 1rem;
     @media (min-width: 768px) {
       display: none;
     }
@@ -49,14 +48,40 @@ const NavStyles = styled.nav`
     display: block;
     height: 2px;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
     background: var(--purple);
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .mobile-nav-button .line1 {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .mobile-nav-button .line2 {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .mobile-nav-button .line3 {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .open .line1 {
+    transform: rotate(45deg);
+  }
+  .open .line2 {
+    transform: scaleY(0);
+  }
+  .open .line3 {
+    transform: rotate(-45deg);
   }
 `;
 
 export default function Nav() {
   const user = useUser();
-  const { toggleMobileNav } = useMobileNav();
+  const { mobileNavOpen, toggleMobileNav } = useMobileNav();
+
   return (
     <NavStyles>
       {user && (
@@ -72,7 +97,12 @@ export default function Nav() {
           <Link href="/signin">sign in</Link>
         </div>
       )}
-      <div className="mobile-nav-button" onClick={toggleMobileNav}>
+      <div
+        className={
+          mobileNavOpen ? 'mobile-nav-button open' : 'mobile-nav-button'
+        }
+        onClick={toggleMobileNav}
+      >
         <span className="line line1" />
         <span className="line line2" />
         <span className="line line3" />
