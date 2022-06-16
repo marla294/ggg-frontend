@@ -42,21 +42,33 @@ const InnerMobileNavStyles = styled.div`
 
 export default function MobileNav() {
   const user = useUser();
-  const { mobileNavOpen } = useMobileNav();
+  const { mobileNavOpen, closeMobileNav } = useMobileNav();
+
+  const clickHandler = () => {
+    closeMobileNav();
+  };
 
   return (
     <MobileNavStyles className={mobileNavOpen ? 'open' : ''}>
       {user && (
         <InnerMobileNavStyles>
-          <Link href="/shoppinglist">shopping list</Link>
-          <Link href="/recipies">recipes</Link>
-          <Link href="/ingredients">ingredients</Link>
+          <Link href="/shoppinglist">
+            <a onClick={clickHandler}>shopping list</a>
+          </Link>
+          <Link href="/recipies">
+            <a onClick={clickHandler}>recipes</a>
+          </Link>
+          <Link href="/ingredients">
+            <a onClick={clickHandler}>ingredients</a>
+          </Link>
           <SignOut />
         </InnerMobileNavStyles>
       )}
       {!user && (
         <InnerMobileNavStyles>
-          <Link href="/signin">sign in</Link>
+          <Link href="/signin">
+            <a onClick={clickHandler}>sign in</a>
+          </Link>
         </InnerMobileNavStyles>
       )}
     </MobileNavStyles>
