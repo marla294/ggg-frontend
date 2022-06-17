@@ -88,7 +88,7 @@ export default function Nav() {
       {user && (
         <div className="signedInLinks desktop">
           <Link href="/shoppinglist">shopping list</Link>
-          <Link href="/recipies">recipes</Link>
+          <Link href="/recipes">recipes</Link>
           <Link href="/ingredients">ingredients</Link>
           <SignOut />
         </div>
