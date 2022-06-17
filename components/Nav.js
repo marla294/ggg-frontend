@@ -39,6 +39,7 @@ const NavStyles = styled.nav`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 0 2rem;
     @media (min-width: 768px) {
       display: none;
     }
@@ -50,12 +51,12 @@ const NavStyles = styled.nav`
     width: 100%;
     border-radius: 5px;
     background: var(--purple);
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.2s ease-in-out;
   }
 
   .mobile-nav-button .line1 {
     transform-origin: 0% 0%;
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.2s ease-in-out;
   }
 
   .mobile-nav-button .line2 {
@@ -64,7 +65,7 @@ const NavStyles = styled.nav`
 
   .mobile-nav-button .line3 {
     transform-origin: 0% 100%;
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.2s ease-in-out;
   }
 
   .open .line1 {
