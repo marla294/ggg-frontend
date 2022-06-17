@@ -11,8 +11,19 @@ import AddShoppingListItemModal from './AddShoppingListItemModal';
 
 const IngredientsListStyles = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 1rem;
+  grid-template-areas: 'a a';
+  gap: 1rem;
+  grid-auto-columns: minmax(10rem, 20rem);
+  @media (min-width: 768px) {
+    grid-template-areas: 'a';
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: grid;
+  justify-content: center;
 `;
 
 const IngredientGroupingStyles = styled.div`
@@ -84,41 +95,43 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
   return (
     <UpdateShoppingListItemModal>
       <AddShoppingListItemModal>
-        <IngredientsListStyles>
-          {sortBy === 'alphabetical'
-            ? Array.from(data?.allShoppingListItems)
-                .sort((a, b) =>
-                  a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
-                )
-                .map((item) => (
-                  <ShoppingListItem
-                    itemId={item?.id}
-                    ingredient={item?.ingredient}
-                    quantity={item?.quantity}
-                    shoppingListItem={item}
-                    key={item?.ingredient?.id}
-                  />
-                ))
-            : groupArrayBy(
-                Array.from(data?.allShoppingListItems).sort((a, b) =>
-                  a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
-                ),
-                sortBy,
-                'ingredient'
-              ).map((grouping) => (
-                <IngredientGroupingStyles key={grouping[0]}>
-                  <h3>{grouping[0]}</h3>
-                  {grouping[1].map((item) => (
+        <Wrapper>
+          <IngredientsListStyles>
+            {sortBy === 'alphabetical'
+              ? Array.from(data?.allShoppingListItems)
+                  .sort((a, b) =>
+                    a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
+                  )
+                  .map((item) => (
                     <ShoppingListItem
                       itemId={item?.id}
                       ingredient={item?.ingredient}
                       quantity={item?.quantity}
+                      shoppingListItem={item}
                       key={item?.ingredient?.id}
                     />
-                  ))}
-                </IngredientGroupingStyles>
-              ))}
-        </IngredientsListStyles>
+                  ))
+              : groupArrayBy(
+                  Array.from(data?.allShoppingListItems).sort((a, b) =>
+                    a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
+                  ),
+                  sortBy,
+                  'ingredient'
+                ).map((grouping) => (
+                  <IngredientGroupingStyles key={grouping[0]}>
+                    <h3>{grouping[0]}</h3>
+                    {grouping[1].map((item) => (
+                      <ShoppingListItem
+                        itemId={item?.id}
+                        ingredient={item?.ingredient}
+                        quantity={item?.quantity}
+                        key={item?.ingredient?.id}
+                      />
+                    ))}
+                  </IngredientGroupingStyles>
+                ))}
+          </IngredientsListStyles>
+        </Wrapper>
       </AddShoppingListItemModal>
     </UpdateShoppingListItemModal>
   );

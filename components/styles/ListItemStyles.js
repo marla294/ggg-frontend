@@ -51,16 +51,20 @@ const ListItemStyles = styled.div`
     }
   }
   .removeFromShoppingList {
-    width: 6rem;
-    position: absolute;
-    top: 1.2rem;
-    right: 3rem;
+    @media (min-width: 768px) {
+      width: 6rem;
+      position: absolute;
+      top: 1.2rem;
+      right: 3rem;
+    }
   }
   .updateShoppingListItem {
-    width: 6rem;
-    position: absolute;
-    top: 1.2rem;
-    right: 10rem;
+    @media (min-width: 768px) {
+      width: 6rem;
+      position: absolute;
+      top: 1.2rem;
+      right: 10rem;
+    }
   }
   .delete {
     background: transparent;
