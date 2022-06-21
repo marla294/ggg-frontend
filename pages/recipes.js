@@ -1,3 +1,9 @@
+import Recipes from '../components/Recipes';
+
 export default function RecipesPage() {
-  return <div>Recipes will appear here</div>;
+  return (
+    <div>
+      <Recipes />
+    </div>
+  );
 }
