@@ -1,7 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
 import { useEffect } from 'react';
-import styled from 'styled-components';
 import gql from 'graphql-tag';
 import groupArrayBy from '../lib/groupArrayBy';
 import { useUser } from './User';
@@ -10,24 +9,8 @@ import UpdateShoppingListItemModal from './UpdateShoppingItemModal';
 import AddShoppingListItemModal from './AddShoppingListItemModal';
 import ListWrapperStyles from './styles/ListWrapperStyles';
 import DisplayError from './ErrorMessage';
-
-const IngredientsListStyles = styled.div`
-  display: grid;
-  grid-template-areas: 'a a';
-  gap: 1rem;
-  grid-auto-columns: minmax(10rem, 20rem);
-  @media (min-width: 768px) {
-    grid-template-areas: 'a';
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
-`;
-
-const IngredientGroupingStyles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 1rem;
-`;
+import ListStyles from './styles/ListStyles';
+import ListGroupingStyles from './styles/ListGroupingStyles';
 
 const SEARCH_SHOPPING_LIST_QUERY = gql`
   query allShoppingListItems($userId: ID!, $searchTerm: String!) {
@@ -106,7 +89,7 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
       <AddShoppingListItemModal>
         <ListWrapperStyles>
           {sortBy === 'alphabetical' ? (
-            <IngredientsListStyles>
+            <ListStyles>
               {Array.from(data?.allShoppingListItems)
                 .sort((a, b) =>
                   a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
@@ -120,7 +103,7 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
                     key={item?.ingredient?.id}
                   />
                 ))}
-            </IngredientsListStyles>
+            </ListStyles>
           ) : (
             groupArrayBy(
               Array.from(data?.allShoppingListItems).sort((a, b) =>
@@ -129,9 +112,9 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
               sortBy,
               'ingredient'
             ).map((grouping) => (
-              <IngredientGroupingStyles key={grouping[0]}>
+              <ListGroupingStyles key={grouping[0]}>
                 <h3>{grouping[0]}</h3>
-                <IngredientsListStyles>
+                <ListStyles>
                   {grouping[1].map((item) => (
                     <ShoppingListItem
                       itemId={item?.id}
@@ -140,8 +123,8 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
                       key={item?.ingredient?.id}
                     />
                   ))}
-                </IngredientsListStyles>
-              </IngredientGroupingStyles>
+                </ListStyles>
+              </ListGroupingStyles>
             ))
           )}
         </ListWrapperStyles>
