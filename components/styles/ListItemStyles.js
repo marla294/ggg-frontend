@@ -11,7 +11,7 @@ const ListItemStyles = styled.div`
   @media (min-width: 768px) {
     padding: 0;
     font-size: 1rem;
-    max-width: 100%;
+    width: 100%;
     height: 5rem;
     display: flex;
     flex-direction: row;

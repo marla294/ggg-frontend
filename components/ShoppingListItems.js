@@ -8,6 +8,8 @@ import { useUser } from './User';
 import ShoppingListItem from './ShoppingListItem';
 import UpdateShoppingListItemModal from './UpdateShoppingItemModal';
 import AddShoppingListItemModal from './AddShoppingListItemModal';
+import ListWrapperStyles from './styles/ListWrapperStyles';
+import DisplayError from './ErrorMessage';
 
 const IngredientsListStyles = styled.div`
   display: grid;
@@ -19,11 +21,6 @@ const IngredientsListStyles = styled.div`
     grid-template-columns: 1fr;
     grid-gap: 1rem;
   }
-`;
-
-const Wrapper = styled.div`
-  display: grid;
-  justify-content: center;
 `;
 
 const IngredientGroupingStyles = styled.div`
@@ -84,56 +81,70 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
     });
   }, [searchTerm]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading)
+    return (
+      <ListWrapperStyles>
+        <div>Loading...</div>
+      </ListWrapperStyles>
+    );
+  if (error)
+    return (
+      <ListWrapperStyles>
+        <DisplayError error={error} />
+      </ListWrapperStyles>
+    );
   if (!data?.allShoppingListItems || data?.allShoppingListItems.length === 0)
     return (
       <AddShoppingListItemModal>
-        <p>Sorry, no results found for "{searchTerm}"</p>
+        <ListWrapperStyles>
+          <div>Sorry, no results found for "{searchTerm}"</div>
+        </ListWrapperStyles>
       </AddShoppingListItemModal>
     );
   return (
     <UpdateShoppingListItemModal>
       <AddShoppingListItemModal>
-        {sortBy === 'alphabetical' ? (
-          <IngredientsListStyles>
-            {Array.from(data?.allShoppingListItems)
-              .sort((a, b) =>
-                a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
-              )
-              .map((item) => (
-                <ShoppingListItem
-                  itemId={item?.id}
-                  ingredient={item?.ingredient}
-                  quantity={item?.quantity}
-                  shoppingListItem={item}
-                  key={item?.ingredient?.id}
-                />
-              ))}
-          </IngredientsListStyles>
-        ) : (
-          groupArrayBy(
-            Array.from(data?.allShoppingListItems).sort((a, b) =>
-              a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
-            ),
-            sortBy,
-            'ingredient'
-          ).map((grouping) => (
-            <IngredientGroupingStyles key={grouping[0]}>
-              <h3>{grouping[0]}</h3>
-              <IngredientsListStyles>
-                {grouping[1].map((item) => (
+        <ListWrapperStyles>
+          {sortBy === 'alphabetical' ? (
+            <IngredientsListStyles>
+              {Array.from(data?.allShoppingListItems)
+                .sort((a, b) =>
+                  a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
+                )
+                .map((item) => (
                   <ShoppingListItem
                     itemId={item?.id}
                     ingredient={item?.ingredient}
                     quantity={item?.quantity}
+                    shoppingListItem={item}
                     key={item?.ingredient?.id}
                   />
                 ))}
-              </IngredientsListStyles>
-            </IngredientGroupingStyles>
-          ))
-        )}
+            </IngredientsListStyles>
+          ) : (
+            groupArrayBy(
+              Array.from(data?.allShoppingListItems).sort((a, b) =>
+                a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
+              ),
+              sortBy,
+              'ingredient'
+            ).map((grouping) => (
+              <IngredientGroupingStyles key={grouping[0]}>
+                <h3>{grouping[0]}</h3>
+                <IngredientsListStyles>
+                  {grouping[1].map((item) => (
+                    <ShoppingListItem
+                      itemId={item?.id}
+                      ingredient={item?.ingredient}
+                      quantity={item?.quantity}
+                      key={item?.ingredient?.id}
+                    />
+                  ))}
+                </IngredientsListStyles>
+              </IngredientGroupingStyles>
+            ))
+          )}
+        </ListWrapperStyles>
       </AddShoppingListItemModal>
     </UpdateShoppingListItemModal>
   );

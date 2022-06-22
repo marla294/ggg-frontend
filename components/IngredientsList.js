@@ -6,6 +6,8 @@ import gql from 'graphql-tag';
 import Ingredient from './Ingredient';
 import groupArrayBy from '../lib/groupArrayBy';
 import AddIngredientToShoppingListModal from './AddIngredientToShoppingListModal';
+import ListWrapperStyles from './styles/ListWrapperStyles';
+import DisplayError from './ErrorMessage';
 
 const IngredientsListStyles = styled.div`
   display: grid;
@@ -17,11 +19,6 @@ const IngredientsListStyles = styled.div`
     grid-template-columns: 1fr;
     grid-gap: 1rem;
   }
-`;
-
-const Wrapper = styled.div`
-  display: grid;
-  justify-content: center;
 `;
 
 const IngredientGroupingStyles = styled.div`
@@ -68,13 +65,27 @@ export default function IngredientsList({ searchTerm, sortBy }) {
     });
   }, [searchTerm]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading)
+    return (
+      <ListWrapperStyles>
+        <div>Loading...</div>
+      </ListWrapperStyles>
+    );
+  if (error)
+    return (
+      <ListWrapperStyles>
+        <DisplayError error={error} />
+      </ListWrapperStyles>
+    );
   if (data?.allIngredients.length === 0)
-    return <p>Sorry, no results found for "{searchTerm}"</p>;
+    return (
+      <ListWrapperStyles>
+        <div>Sorry, no search results found for "{searchTerm}"</div>
+      </ListWrapperStyles>
+    );
   return (
     <AddIngredientToShoppingListModal>
-      <Wrapper>
+      <ListWrapperStyles>
         {sortBy === 'alphabetical' ? (
           <IngredientsListStyles>
             {data?.allIngredients.map((ingredient) => (
@@ -93,7 +104,7 @@ export default function IngredientsList({ searchTerm, sortBy }) {
             </IngredientGroupingStyles>
           ))
         )}
-      </Wrapper>
+      </ListWrapperStyles>
     </AddIngredientToShoppingListModal>
   );
 }

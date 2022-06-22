@@ -2,6 +2,7 @@ import Router from 'next/router';
 import ButtonStyles from './styles/ButtonStyles';
 import PleaseSignIn from './PleaseSignIn';
 import IngredientsBarStyles from './styles/IngredientsBarStyles';
+import RecipesList from './RecipesList';
 
 export default function Recipes() {
   return (
@@ -19,7 +20,7 @@ export default function Recipes() {
           </button>
         </ButtonStyles>
       </IngredientsBarStyles>
-      {/* <IngredientsList searchTerm={inputs.searchTerm} sortBy={inputs.sortBy} /> */}
+      <RecipesList />
     </PleaseSignIn>
   );
 }
