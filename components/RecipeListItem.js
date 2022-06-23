@@ -6,7 +6,7 @@ import ListItemStyles from './styles/ListItemStyles';
 
 export default function RecipeListItem({ recipe }) {
   return (
-    <ListItemStyles>
+    <ListItemStyles key={recipe?.id}>
       {/* {ingredient?.photo?.image?.publicUrlTransformed ? (
         <img
           src={ingredient?.photo?.image?.publicUrlTransformed}

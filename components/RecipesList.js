@@ -39,7 +39,7 @@ export default function RecipesList() {
     <ListWrapperStyles>
       <ListStyles>
         {data?.allRecipes.map((recipe) => (
-          <RecipeListItem recipe={recipe} />
+          <RecipeListItem recipe={recipe} key={recipe?.id} />
         ))}
       </ListStyles>
     </ListWrapperStyles>
