@@ -62,7 +62,7 @@ export default function SingleRecipe({ id }) {
       id,
     },
   });
-  console.log({ allRecipeItemsData });
+
   if (loading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
   const { Recipe } = data;
