@@ -45,10 +45,10 @@ export default function DeleteIngredient({ id, children }) {
     variables: { id },
   });
 
-  const [deleteIngredient, { data, error, loading }] = useMutation(
-    DELETE_INGREDIENT_MUTATION,
-    { variables: { id }, refetchQueries: 'all' }
-  );
+  const [deleteIngredient] = useMutation(DELETE_INGREDIENT_MUTATION, {
+    variables: { id },
+    refetchQueries: 'all',
+  });
 
   const [deleteIngredientImage] = useMutation(
     DELETE_INGREDIENT_IMAGE_MUTATION,
