@@ -5,7 +5,9 @@ import useForm from '../lib/useForm';
 import { DELETE_RECIPE_IMAGE_MUTATION } from './DeleteRecipe';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
-import { SINGLE_RECIPE_QUERY } from './SingleRecipe';
+import { ALL_RECIPE_ITEMS_QUERY, SINGLE_RECIPE_QUERY } from './SingleRecipe';
+import ListStyles from './styles/ListStyles';
+import RecipeIngredient from './RecipeIngredient';
 
 const UPDATE_RECIPE_MUTATION = gql`
   mutation UPDATE_RECIPE_MUTATION(
@@ -51,6 +53,12 @@ export default function UpdateRecipe({ id }) {
 
   const [deleteRecipeImage] = useMutation(DELETE_RECIPE_IMAGE_MUTATION, {
     variables: { id: data?.Recipe?.photo?.id },
+  });
+
+  const { data: allRecipeItemsData } = useQuery(ALL_RECIPE_ITEMS_QUERY, {
+    variables: {
+      id,
+    },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -113,6 +121,18 @@ export default function UpdateRecipe({ id }) {
             onChange={handleChange}
           />
         </label>
+        <div>
+          <h3>Recipe Ingredients</h3>
+          <ListStyles>
+            {allRecipeItemsData.allRecipeItems.map((item) => (
+              <RecipeIngredient
+                ingredient={item?.ingredient}
+                quantity={item?.quantity}
+                key={item?.ingredient?.id}
+              />
+            ))}
+          </ListStyles>
+        </div>
         <button type="submit" className="submit">
           Update Recipe
         </button>

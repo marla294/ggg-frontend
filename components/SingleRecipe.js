@@ -119,4 +119,4 @@ export default function SingleRecipe({ id }) {
   );
 }
 
-export { SINGLE_RECIPE_QUERY };
+export { SINGLE_RECIPE_QUERY, ALL_RECIPE_ITEMS_QUERY };
