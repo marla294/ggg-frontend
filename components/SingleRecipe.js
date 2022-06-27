@@ -1,34 +1,11 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
-import styled from 'styled-components';
 import Link from 'next/link';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteIngredient from './DeleteIngredient';
-
-const SingleRecipeStyles = styled.div`
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
-  min-height: 800px;
-  max-width: var(--maxWidth);
-  align-items: top;
-  grid-gap: 5rem;
-  img {
-    width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-  }
-  .noPhoto {
-    width: 100%;
-    max-height: 300px;
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    border: 1px dashed var(--black);
-  }
-`;
+import { SingleItemStyles } from './styles/SingleItemStyles';
 
 const SINGLE_RECIPE_QUERY = gql`
   query SINGLE_RECIPE_QUERY($id: ID!) {
@@ -57,7 +34,7 @@ export default function SingleRecipe({ id }) {
   if (error) return <DisplayError error={error} />;
   const { Recipe } = data;
   return (
-    <SingleRecipeStyles>
+    <SingleItemStyles>
       <Head>
         <title>Go Get Groceries | {Recipe.name}</title>
       </Head>
@@ -91,6 +68,6 @@ export default function SingleRecipe({ id }) {
           </ButtonStyles>
         </div>
       </div>
-    </SingleRecipeStyles>
+    </SingleItemStyles>
   );
 }
