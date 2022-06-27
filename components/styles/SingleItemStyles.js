@@ -4,7 +4,7 @@ const SingleItemStyles = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
-  min-height: 800px;
+  /* min-height: 800px; */
   max-width: var(--maxWidth);
   align-items: top;
   grid-gap: 5rem;

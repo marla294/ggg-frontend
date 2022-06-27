@@ -6,6 +6,8 @@ import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteRecipe from './DeleteRecipe';
 import { SingleItemStyles } from './styles/SingleItemStyles';
+import ListStyles from './styles/ListStyles';
+import RecipeIngredient from './RecipeIngredient';
 
 const SINGLE_RECIPE_QUERY = gql`
   query SINGLE_RECIPE_QUERY($id: ID!) {
@@ -24,51 +26,96 @@ const SINGLE_RECIPE_QUERY = gql`
   }
 `;
 
+const ALL_RECIPE_ITEMS_QUERY = gql`
+  query ALL_RECIPE_ITEMS_QUERY($id: ID!) {
+    allRecipeItems(where: { recipe: { id: $id } }) {
+      id
+      ingredient {
+        id
+        name
+        description
+        store
+        aisle
+        homeArea
+        units
+        photo {
+          id
+          altText
+          image {
+            publicUrlTransformed
+          }
+        }
+      }
+      quantity
+    }
+  }
+`;
+
 export default function SingleRecipe({ id }) {
   const { data, loading, error } = useQuery(SINGLE_RECIPE_QUERY, {
     variables: {
       id,
     },
   });
+  const { data: allRecipeItemsData } = useQuery(ALL_RECIPE_ITEMS_QUERY, {
+    variables: {
+      id,
+    },
+  });
+  console.log({ allRecipeItemsData });
   if (loading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
   const { Recipe } = data;
   return (
-    <SingleItemStyles>
-      <Head>
-        <title>Go Get Groceries | {Recipe.name}</title>
-      </Head>
-      {Recipe?.photo?.image?.publicUrlTransformed ? (
-        <img
-          src={Recipe?.photo?.image?.publicUrlTransformed}
-          alt={Recipe?.photo?.altText}
-        />
-      ) : (
-        <div className="noPhoto">Needs photo 📸</div>
-      )}
-      <div>
-        <h2>{Recipe.name}</h2>
-        <p>{Recipe.description}</p>
+    <>
+      <SingleItemStyles>
+        <Head>
+          <title>Go Get Groceries | {Recipe.name}</title>
+        </Head>
+        {Recipe?.photo?.image?.publicUrlTransformed ? (
+          <img
+            src={Recipe?.photo?.image?.publicUrlTransformed}
+            alt={Recipe?.photo?.altText}
+          />
+        ) : (
+          <div className="noPhoto">Needs photo 📸</div>
+        )}
         <div>
-          <ButtonStyles style={{ margin: '1rem 0 0 0' }}>
-            <Link
-              passHref
-              href={{
-                pathname: '/updaterecipe',
-                query: {
-                  id: Recipe.id,
-                },
-              }}
-            >
-              <button type="button" className="yellow">
-                Edit Recipe
-              </button>
-            </Link>
-            <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
-          </ButtonStyles>
+          <h2>{Recipe.name}</h2>
+          <p>{Recipe.description}</p>
+          <div>
+            <ButtonStyles style={{ margin: '1rem 0 0 0' }}>
+              <Link
+                passHref
+                href={{
+                  pathname: '/updaterecipe',
+                  query: {
+                    id: Recipe.id,
+                  },
+                }}
+              >
+                <button type="button" className="yellow">
+                  Edit Recipe
+                </button>
+              </Link>
+              <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
+            </ButtonStyles>
+          </div>
         </div>
+      </SingleItemStyles>
+      <div>
+        <h3>Recipe Ingredients</h3>
+        <ListStyles>
+          {allRecipeItemsData.allRecipeItems.map((item) => (
+            <RecipeIngredient
+              ingredient={item?.ingredient}
+              quantity={item?.quantity}
+              key={item?.ingredient?.id}
+            />
+          ))}
+        </ListStyles>
       </div>
-    </SingleItemStyles>
+    </>
   );
 }
 
