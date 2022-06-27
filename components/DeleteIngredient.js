@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import { SINGLE_INGREDIENT_QUERY } from './SingleIngredient';
 
 const DELETE_INGREDIENT_MUTATION = gql`
   mutation DELETE_INGREDIENT_MUTATION($id: ID!) {
@@ -16,6 +15,27 @@ const DELETE_INGREDIENT_IMAGE_MUTATION = gql`
   mutation DELETE_INGREDIENT_IMAGE_MUTATION($id: ID!) {
     deleteIngredientImage(id: $id) {
       id
+    }
+  }
+`;
+
+const SINGLE_INGREDIENT_QUERY = gql`
+  query SINGLE_INGREDIENT_QUERY($id: ID!) {
+    Ingredient(where: { id: $id }) {
+      id
+      name
+      description
+      aisle
+      homeArea
+      units
+      store
+      photo {
+        id
+        image {
+          publicUrlTransformed
+        }
+        altText
+      }
     }
   }
 `;

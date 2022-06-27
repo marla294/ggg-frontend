@@ -110,5 +110,3 @@ export default function SingleIngredient({ id }) {
     </SingleIngredientStyles>
   );
 }
-
-export { SINGLE_INGREDIENT_QUERY };
