@@ -32,7 +32,7 @@ const SingleRecipeStyles = styled.div`
 
 const SINGLE_RECIPE_QUERY = gql`
   query SINGLE_RECIPE_QUERY($id: ID!) {
-    Recipe(where: { id: "62b9c5c0ca352a4c72af5944" }) {
+    Recipe(where: { id: $id }) {
       id
       name
       description
