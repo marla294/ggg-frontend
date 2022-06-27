@@ -56,3 +56,5 @@ export default function RecipesList() {
     </ListWrapperStyles>
   );
 }
+
+export { ALL_RECIPES_QUERY };

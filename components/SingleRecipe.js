@@ -51,7 +51,7 @@ export default function SingleRecipe({ id }) {
         <p>{Recipe.description}</p>
         <div>
           <ButtonStyles style={{ margin: '1rem 0 0 0' }}>
-            {/* <Link
+            <Link
               passHref
               href={{
                 pathname: '/updaterecipe',
@@ -63,7 +63,7 @@ export default function SingleRecipe({ id }) {
               <button type="button" className="yellow">
                 Edit Recipe
               </button>
-            </Link> */}
+            </Link>
             <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
           </ButtonStyles>
         </div>
@@ -71,3 +71,5 @@ export default function SingleRecipe({ id }) {
     </SingleItemStyles>
   );
 }
+
+export { SINGLE_RECIPE_QUERY };

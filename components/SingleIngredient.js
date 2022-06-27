@@ -87,3 +87,5 @@ export default function SingleIngredient({ id }) {
     </SingleItemStyles>
   );
 }
+
+export { SINGLE_INGREDIENT_QUERY };

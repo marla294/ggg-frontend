@@ -7,24 +7,6 @@ import DisplayError from './ErrorMessage';
 import { SINGLE_INGREDIENT_QUERY } from './SingleIngredient';
 import FormStyles from './styles/FormStyles';
 
-export const ALL_INGREDIENTS_QUERY = gql`
-  query ALL_INGREDIENTS_QUERY {
-    allIngredients(sortBy: name_ASC) {
-      id
-      name
-      description
-      aisle
-      homeArea
-      photo {
-        id
-        image {
-          publicUrlTransformed
-        }
-      }
-    }
-  }
-`;
-
 const UPDATE_INGREDIENT_MUTATION = gql`
   mutation UPDATE_INGREDIENT_MUTATION(
     $id: ID!
