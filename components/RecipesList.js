@@ -10,6 +10,14 @@ const ALL_RECIPES_QUERY = gql`
     allRecipes {
       id
       name
+      description
+      photo {
+        id
+        altText
+        image {
+          publicUrlTransformed
+        }
+      }
     }
   }
 `;

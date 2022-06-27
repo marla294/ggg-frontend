@@ -7,15 +7,14 @@ import ListItemStyles from './styles/ListItemStyles';
 export default function RecipeListItem({ recipe }) {
   return (
     <ListItemStyles key={recipe?.id}>
-      {/* {ingredient?.photo?.image?.publicUrlTransformed ? (
+      {recipe?.photo?.image?.publicUrlTransformed ? (
         <img
-          src={ingredient?.photo?.image?.publicUrlTransformed}
-          alt={ingredient?.photo?.altText || ingredient?.name}
+          src={recipe?.photo?.image?.publicUrlTransformed}
+          alt={recipe?.photo?.altText || recipe?.name}
         />
       ) : (
         <div className="noPhoto" />
-      )} */}
-      <div className="noPhoto" />
+      )}
       <div className="details">
         <h3>
           <Link href={`/recipe/${recipe?.id}`}>{recipe?.name}</Link>

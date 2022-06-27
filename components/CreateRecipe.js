@@ -4,11 +4,25 @@ import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
-// import { UPDATE_INGREDIENT_IMAGE_MUTATION } from './UpdateIngredient';
 
 const CREATE_RECIPE_MUTATION = gql`
-  mutation CREATE_RECIPE_MUTATION($name: String!) {
-    createRecipe(data: { name: $name }) {
+  mutation CREATE_RECIPE_MUTATION($name: String!, $description: String!) {
+    createRecipe(data: { name: $name, description: $description }) {
+      id
+    }
+  }
+`;
+
+const UPDATE_RECIPE_IMAGE_MUTATION = gql`
+  mutation UPDATE_RECIPE_IMAGE_MUTATION(
+    $id: ID!
+    $image: Upload
+    $name: String!
+  ) {
+    updateRecipe(
+      id: $id
+      data: { photo: { create: { image: $image, altText: $name } } }
+    ) {
       id
     }
   }
@@ -17,6 +31,7 @@ const CREATE_RECIPE_MUTATION = gql`
 export default function CreateRecipe() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
+    description: '',
   });
   const [createRecipe, { loading, error }] = useMutation(
     CREATE_RECIPE_MUTATION,
@@ -25,21 +40,21 @@ export default function CreateRecipe() {
       refetchQueries: 'all',
     }
   );
-  // const [updateIngredientImage] = useMutation(UPDATE_INGREDIENT_IMAGE_MUTATION);
+  const [updateRecipeImage] = useMutation(UPDATE_RECIPE_IMAGE_MUTATION);
   return (
     <FormStyles
       onSubmit={async (e) => {
         e.preventDefault();
         const res = await createRecipe();
-        // if (inputs.image && res?.data?.createIngredient?.id) {
-        //   await updateIngredientImage({
-        //     variables: {
-        //       id: res?.data?.createIngredient?.id,
-        //       name: inputs.name,
-        //       image: inputs.image,
-        //     },
-        //   }).catch(console.error);
-        // }
+        if (inputs.image && res?.data?.createRecipe?.id) {
+          await updateRecipeImage({
+            variables: {
+              id: res?.data?.createRecipe?.id,
+              name: inputs.name,
+              image: inputs.image,
+            },
+          }).catch(console.error);
+        }
         clearForm();
         Router.push({
           pathname: `/recipes`,
@@ -61,7 +76,7 @@ export default function CreateRecipe() {
             onChange={handleChange}
           />
         </label>
-        {/* <label htmlFor="image">
+        <label htmlFor="image">
           Image
           <input type="file" id="image" name="image" onChange={handleChange} />
         </label>
@@ -75,7 +90,7 @@ export default function CreateRecipe() {
             value={inputs.description}
             onChange={handleChange}
           />
-        </label> */}
+        </label>
         <button type="submit" className="submit">
           Create Recipe
         </button>
