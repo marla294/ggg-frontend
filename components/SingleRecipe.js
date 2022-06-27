@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
-import DeleteIngredient from './DeleteIngredient';
+import DeleteRecipe from './DeleteRecipe';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 
 const SINGLE_RECIPE_QUERY = gql`
@@ -64,7 +64,7 @@ export default function SingleRecipe({ id }) {
                 Edit Recipe
               </button>
             </Link> */}
-            {/* <DeleteIngredient id={Recipe.id}>Delete</DeleteIngredient> */}
+            <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
           </ButtonStyles>
         </div>
       </div>

@@ -60,7 +60,7 @@ export default function DeleteIngredient({ id, children }) {
       type="button"
       className="orange delete"
       onClick={async () => {
-        if (confirm('are you sure you want to delete this item?')) {
+        if (confirm('are you sure you want to delete this ingredient?')) {
           if (ingredientData?.Ingredient?.photo?.id) {
             await deleteIngredientImage();
           }
