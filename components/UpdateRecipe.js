@@ -8,6 +8,9 @@ import FormStyles from './styles/FormStyles';
 import { ALL_RECIPE_ITEMS_QUERY, SINGLE_RECIPE_QUERY } from './SingleRecipe';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
+import ButtonStyles from './styles/ButtonStyles';
+import AddRecipeItem from './AddRecipeItem';
+import AddRecipeItemModal from './AddRecipeItemModal';
 
 const UPDATE_RECIPE_MUTATION = gql`
   mutation UPDATE_RECIPE_MUTATION(
@@ -63,94 +66,107 @@ export default function UpdateRecipe({ id }) {
 
   if (loading) return <p>Loading...</p>;
   return (
-    <FormStyles
-      onSubmit={async (e) => {
-        e.preventDefault();
-        if (inputs.image) {
-          if (data?.Ingredient?.photo?.id) {
-            await deleteRecipeImage();
+    <>
+      <FormStyles
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (inputs.image) {
+            if (data?.Ingredient?.photo?.id) {
+              await deleteRecipeImage();
+            }
+            await updateRecipeImage({
+              variables: {
+                id,
+                name: inputs.name,
+                image: inputs.image,
+              },
+            }).catch(console.error);
           }
-          await updateRecipeImage({
+          await updateRecipe({
             variables: {
               id,
               name: inputs.name,
-              image: inputs.image,
+              description: inputs.description,
             },
+            refetchQueries: 'all',
           }).catch(console.error);
-        }
-        await updateRecipe({
-          variables: {
-            id,
-            name: inputs.name,
-            description: inputs.description,
-          },
-          refetchQueries: 'all',
-        }).catch(console.error);
-        Router.push({
-          pathname: `/recipe/${id}`,
-        });
-      }}
-    >
-      <fieldset disabled={updateLoading}>
-        <h2>Update Recipe</h2>
-        <DisplayError error={updateError} />
-        <label htmlFor="name">
-          Name<span className="required">&nbsp;*</span>
-          <input
-            required
-            type="text"
-            id="name"
-            name="name"
-            placeholder="name"
-            value={inputs.name}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="image">
-          Image
-          <input type="file" id="image" name="image" onChange={handleChange} />
-        </label>
-        <label htmlFor="description">
-          Description
-          <textarea
-            rows="7"
-            id="description"
-            name="description"
-            placeholder="description"
-            value={inputs.description}
-            onChange={handleChange}
-          />
-        </label>
-        <div>
-          <h3>Recipe Ingredients</h3>
-          <ListStyles>
-            {allRecipeItemsData.allRecipeItems.map((item) => (
-              <RecipeIngredient
-                ingredient={item?.ingredient}
-                quantity={item?.quantity}
-                key={item?.ingredient?.id}
-              />
-            ))}
-          </ListStyles>
-        </div>
-        <button type="submit" className="submit">
-          Update Recipe
-        </button>
-        <button type="button" className="clear" onClick={resetForm}>
-          Reset Form
-        </button>
-        <button
-          type="button"
-          className="cancel"
-          onClick={() => {
-            Router.push({
-              pathname: '/recipes',
-            });
-          }}
-        >
-          Cancel
-        </button>
-      </fieldset>
-    </FormStyles>
+          Router.push({
+            pathname: `/recipe/${id}`,
+          });
+        }}
+      >
+        <fieldset disabled={updateLoading}>
+          <h2>Update Recipe</h2>
+          <DisplayError error={updateError} />
+          <label htmlFor="name">
+            Name<span className="required">&nbsp;*</span>
+            <input
+              required
+              type="text"
+              id="name"
+              name="name"
+              placeholder="name"
+              value={inputs.name}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="image">
+            Image
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="description">
+            Description
+            <textarea
+              rows="7"
+              id="description"
+              name="description"
+              placeholder="description"
+              value={inputs.description}
+              onChange={handleChange}
+            />
+          </label>
+          <div>
+            <h3>Recipe Ingredients</h3>
+            <ButtonStyles>
+              <AddRecipeItem recipeId={id}>
+                add ingredient to recipe
+              </AddRecipeItem>
+            </ButtonStyles>
+            <ListStyles>
+              {allRecipeItemsData.allRecipeItems.map((item) => (
+                <RecipeIngredient
+                  ingredient={item?.ingredient}
+                  quantity={item?.quantity}
+                  key={item?.ingredient?.id}
+                />
+              ))}
+            </ListStyles>
+          </div>
+          <button type="submit" className="submit">
+            Update Recipe
+          </button>
+          <button type="button" className="clear" onClick={resetForm}>
+            Reset Form
+          </button>
+          <button
+            type="button"
+            className="cancel"
+            onClick={() => {
+              Router.push({
+                pathname: '/recipes',
+              });
+            }}
+          >
+            Cancel
+          </button>
+        </fieldset>
+      </FormStyles>
+      <AddRecipeItemModal />
+    </>
   );
 }

@@ -22,7 +22,7 @@ const ADD_TO_RECIPE_MUTATION = gql`
   }
 `;
 
-export default function AddRecipeItemModal({ children, recipeId }) {
+export default function AddRecipeItemModal() {
   const [findIngredients, { data }] = useLazyQuery(SEARCH_INGREDIENTS_QUERY, {
     fetchPolicy: 'network-only',
     nextFetchPolicy: 'cache-first',
@@ -43,6 +43,7 @@ export default function AddRecipeItemModal({ children, recipeId }) {
     closeAddRecipeItemModal,
     ingredient,
     setIngredient,
+    recipeId,
   } = useAddRecipeItemModal();
 
   const handleSearch = (e) => {
@@ -182,9 +183,8 @@ export default function AddRecipeItemModal({ children, recipeId }) {
         className={addRecipeItemModalOpen && 'open'}
         onClick={closeAddRecipeItemModal}
       />
-      {children}
     </>
   ) : (
-    children
+    <div />
   );
 }
