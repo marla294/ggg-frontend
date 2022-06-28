@@ -1,7 +1,12 @@
 import Link from 'next/link';
+import DeleteRecipeItem from './DeleteRecipeItem';
 import ListItemStyles from './styles/ListItemStyles';
 
-export default function RecipeIngredient({ ingredient, quantity }) {
+export default function RecipeIngredient({
+  recipeItemId,
+  ingredient,
+  quantity,
+}) {
   return (
     <ListItemStyles>
       {ingredient?.photo?.image?.publicUrlTransformed ? (
@@ -21,6 +26,9 @@ export default function RecipeIngredient({ ingredient, quantity }) {
           {ingredient?.units === 'none' ? '' : ingredient?.units}
         </p>
       </div>
+      {recipeItemId && (
+        <DeleteRecipeItem itemId={recipeItemId}>&times;</DeleteRecipeItem>
+      )}
     </ListItemStyles>
   );
 }

@@ -142,6 +142,7 @@ export default function UpdateRecipe({ id }) {
                 <RecipeIngredient
                   ingredient={item?.ingredient}
                   quantity={item?.quantity}
+                  recipeItemId={item?.id}
                   key={item?.ingredient?.id}
                 />
               ))}
