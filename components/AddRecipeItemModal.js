@@ -2,7 +2,7 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
 import { useEffect, useState } from 'react';
-import { useAddShoppingListItemModal } from '../lib/addShoppingListItemState';
+import { useAddRecipeItemModal } from '../lib/addRecipeItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
 import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
@@ -10,22 +10,23 @@ import ModalStyles from './styles/ModalStyles';
 import { SEARCH_INGREDIENTS_QUERY } from './IngredientsList';
 import { DropDown, DropDownItemCover, DropDownItem } from './styles/Dropdown';
 
-const ADD_TO_SHOPPING_LIST_MUTATION = gql`
-  mutation ADD_TO_SHOPPING_LIST_MUTATION($id: ID!, $quantity: String!) {
-    addToShoppingList(ingredientId: $id, quantity: $quantity) {
+const ADD_TO_RECIPE_MUTATION = gql`
+  mutation ADD_TO_RECIPE_MUTATION(
+    $id: ID!
+    $recipeId: ID!
+    $quantity: String!
+  ) {
+    addToRecipe(ingredientId: $id, recipeId: $recipeId, quantity: $quantity) {
       id
     }
   }
 `;
 
-export default function AddShoppingListItemModal({ children }) {
-  const [findIngredients, { loading, data, error }] = useLazyQuery(
-    SEARCH_INGREDIENTS_QUERY,
-    {
-      fetchPolicy: 'network-only',
-      nextFetchPolicy: 'cache-first',
-    }
-  );
+export default function AddRecipeItemModal({ children, recipeId }) {
+  const [findIngredients, { data }] = useLazyQuery(SEARCH_INGREDIENTS_QUERY, {
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'cache-first',
+  });
   const findItemsButChill = debounce(findIngredients, 5);
   const [searchTerm, setSearchTerm] = useState('');
   const [dropdownClosed, setDropdownClosed] = useState(false);
@@ -38,11 +39,11 @@ export default function AddShoppingListItemModal({ children }) {
   }, [searchTerm]);
 
   const {
-    addShoppingListItemModalOpen,
-    closeAddShoppingListItemModal,
+    addRecipeItemModalOpen,
+    closeAddRecipeItemModal,
     ingredient,
     setIngredient,
-  } = useAddShoppingListItemModal();
+  } = useAddRecipeItemModal();
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -58,13 +59,13 @@ export default function AddShoppingListItemModal({ children }) {
     quantity: '1',
   });
 
-  const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST_MUTATION);
+  const [addToRecipe] = useMutation(ADD_TO_RECIPE_MUTATION);
 
-  return addShoppingListItemModalOpen ? (
+  return addRecipeItemModalOpen ? (
     <>
       <ModalStyles
-        className={addShoppingListItemModalOpen && 'open'}
-        id="addIngredientToShoppingListModal"
+        className={addRecipeItemModalOpen && 'open'}
+        id="addRecipeItemModal"
         onClick={() => {
           setDropdownClosed(true);
         }}
@@ -79,9 +80,10 @@ export default function AddShoppingListItemModal({ children }) {
               parsedQuantity < 1
             )
               return;
-            await addToShoppingList({
+            await addToRecipe({
               variables: {
                 id: ingredient.id,
+                recipeId,
                 quantity: parsedQuantity.toString(),
               },
               refetchQueries: 'all',
@@ -89,10 +91,10 @@ export default function AddShoppingListItemModal({ children }) {
             resetForm();
             setSearchTerm('');
             setIngredient(null);
-            closeAddShoppingListItemModal();
+            closeAddRecipeItemModal();
           }}
         >
-          <h2>add ingredient to shopping list</h2>
+          <h2>add ingredient to recipe</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -159,7 +161,7 @@ export default function AddShoppingListItemModal({ children }) {
               type="button"
               className="cancel"
               onClick={() => {
-                closeAddShoppingListItemModal();
+                closeAddRecipeItemModal();
               }}
             >
               cancel
@@ -170,15 +172,15 @@ export default function AddShoppingListItemModal({ children }) {
           type="button"
           className="close"
           onClick={() => {
-            closeAddShoppingListItemModal();
+            closeAddRecipeItemModal();
           }}
         >
           &times;
         </button>
       </ModalStyles>
       <ModalBackgroundStyles
-        className={addShoppingListItemModalOpen && 'open'}
-        onClick={closeAddShoppingListItemModal}
+        className={addRecipeItemModalOpen && 'open'}
+        onClick={closeAddRecipeItemModal}
       />
       {children}
     </>
