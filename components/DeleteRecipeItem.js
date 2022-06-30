@@ -42,7 +42,7 @@ function DeleteRecipeItem({ itemId, children }) {
 
 DeleteRecipeItem.propTypes = {
   itemId: PropTypes.string,
-  children: PropTypes.object,
+  children: PropTypes.any,
 };
 
 export default DeleteRecipeItem;

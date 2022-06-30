@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import { useUpdateShoppingItemModal } from '../lib/updateShoppingItemState';
 
-export default function UpdateShoppingListItem({ shoppingListItem, children }) {
+function UpdateShoppingListItem({ shoppingListItem, children }) {
   const { openUpdateShoppingItemModal, setShoppingListItem } =
     useUpdateShoppingItemModal();
 
@@ -17,3 +18,10 @@ export default function UpdateShoppingListItem({ shoppingListItem, children }) {
     </button>
   );
 }
+
+UpdateShoppingListItem.propTypes = {
+  shoppingListItem: PropTypes.any,
+  children: PropTypes.any,
+};
+
+export default UpdateShoppingListItem;

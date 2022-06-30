@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteRecipe from './DeleteRecipe';
@@ -51,7 +52,7 @@ const ALL_RECIPE_ITEMS_QUERY = gql`
   }
 `;
 
-export default function SingleRecipe({ id }) {
+function SingleRecipe({ id }) {
   const { data, loading, error } = useQuery(SINGLE_RECIPE_QUERY, {
     variables: {
       id,
@@ -76,6 +77,7 @@ export default function SingleRecipe({ id }) {
           <title>Go Get Groceries | {Recipe.name}</title>
         </Head>
         {Recipe?.photo?.image?.publicUrlTransformed ? (
+          // eslint-disable-next-line jsx-a11y/img-redundant-alt
           <img
             src={Recipe?.photo?.image?.publicUrlTransformed}
             alt={Recipe?.photo?.altText}
@@ -121,5 +123,11 @@ export default function SingleRecipe({ id }) {
     </>
   );
 }
+
+SingleRecipe.propTypes = {
+  id: PropTypes.string,
+};
+
+export default SingleRecipe;
 
 export { SINGLE_RECIPE_QUERY, ALL_RECIPE_ITEMS_QUERY };

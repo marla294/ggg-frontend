@@ -1,15 +1,12 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import RemoveItemFromShoppingList from './RemoveItemFromShoppingList';
 import ButtonStyles from './styles/ButtonStyles';
 import ListItemStyles from './styles/ListItemStyles';
 import UpdateShoppingListItem from './UpdateShoppingListItem';
 
-export default function ShoppingListItem({
-  itemId,
-  ingredient,
-  quantity,
-  shoppingListItem,
-}) {
+function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
   return (
     <ListItemStyles>
       {ingredient?.photo?.image?.publicUrlTransformed ? (
@@ -40,3 +37,22 @@ export default function ShoppingListItem({
     </ListItemStyles>
   );
 }
+
+ShoppingListItem.propTypes = {
+  itemId: PropTypes.string,
+  ingredient: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    units: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    photo: PropTypes.shape({
+      image: PropTypes.shape({
+        publicUrlTransformed: PropTypes.string,
+      }),
+      altText: PropTypes.string,
+    }),
+  }).isRequired,
+  quantity: PropTypes.number.isRequired,
+  shoppingListItem: PropTypes.any,
+};
+
+export default ShoppingListItem;
