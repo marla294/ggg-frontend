@@ -1,6 +1,7 @@
+/* eslint-disable no-restricted-globals */
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-// import Router from 'next/router';
+import PropTypes from 'prop-types';
 
 const DELETE_RECIPE_ITEM_MUTATION = gql`
   mutation DELETE_RECIPE_ITEM_MUTATION($id: ID!) {
@@ -10,7 +11,7 @@ const DELETE_RECIPE_ITEM_MUTATION = gql`
   }
 `;
 
-export default function DeleteRecipeItem({ itemId, children }) {
+function DeleteRecipeItem({ itemId, children }) {
   const [deleteItem] = useMutation(DELETE_RECIPE_ITEM_MUTATION, {
     variables: {
       id: itemId,
@@ -38,3 +39,10 @@ export default function DeleteRecipeItem({ itemId, children }) {
     </button>
   );
 }
+
+DeleteRecipeItem.propTypes = {
+  itemId: PropTypes.string,
+  children: PropTypes.object,
+};
+
+export default DeleteRecipeItem;

@@ -57,13 +57,16 @@ export default function SingleRecipe({ id }) {
       id,
     },
   });
-  const { data: allRecipeItemsData } = useQuery(ALL_RECIPE_ITEMS_QUERY, {
-    variables: {
-      id,
-    },
-  });
+  const { data: allRecipeItemsData, loading: allRecipeItemsLoading } = useQuery(
+    ALL_RECIPE_ITEMS_QUERY,
+    {
+      variables: {
+        id,
+      },
+    }
+  );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading || allRecipeItemsLoading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
   const { Recipe } = data;
   return (
@@ -106,7 +109,7 @@ export default function SingleRecipe({ id }) {
       <div>
         <h3>Recipe Ingredients</h3>
         <ListStyles>
-          {allRecipeItemsData.allRecipeItems.map((item) => (
+          {allRecipeItemsData?.allRecipeItems?.map((item) => (
             <RecipeIngredient
               ingredient={item?.ingredient}
               quantity={item?.quantity}
