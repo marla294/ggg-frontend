@@ -3,10 +3,21 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import DeleteRecipeItem from './DeleteRecipeItem';
 import ListItemStyles from './styles/ListItemStyles';
+import { useUpdateRecipeItemModal } from '../lib/updateRecipeItemState';
 
-function RecipeIngredient({ recipeItemId, ingredient, quantity }) {
+function RecipeIngredient({ recipeItemId, ingredient, quantity, recipeItem }) {
+  const { openUpdateRecipeItemModal, setRecipeItem } =
+    useUpdateRecipeItemModal();
+
   return (
-    <ListItemStyles>
+    <ListItemStyles
+      onClick={() => {
+        if (recipeItemId) {
+          openUpdateRecipeItemModal();
+          setRecipeItem(recipeItem);
+        }
+      }}
+    >
       {ingredient?.photo?.image?.publicUrlTransformed ? (
         <img
           src={ingredient?.photo?.image?.publicUrlTransformed}
@@ -16,9 +27,7 @@ function RecipeIngredient({ recipeItemId, ingredient, quantity }) {
         <div className="noPhoto" />
       )}
       <div className="details">
-        <h3>
-          <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
-        </h3>
+        <h3>{ingredient?.name}</h3>
         <p>
           amount: {quantity}{' '}
           {ingredient?.units === 'none' ? '' : ingredient?.units}
@@ -45,6 +54,7 @@ RecipeIngredient.propTypes = {
     }),
   }).isRequired,
   quantity: PropTypes.number.isRequired,
+  recipeItem: PropTypes.object,
 };
 
 export default RecipeIngredient;

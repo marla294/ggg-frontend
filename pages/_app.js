@@ -6,6 +6,7 @@ import '../components/styles/nprogress.css';
 import withData from '../lib/withData';
 import { AddIngredientStateProvider } from '../lib/addIngredientState';
 import { UpdateShoppingItemStateProvider } from '../lib/updateShoppingItemState';
+import { UpdateRecipeItemStateProvider } from '../lib/updateRecipeItemState';
 import { AddShoppingListItemStateProvider } from '../lib/addShoppingListItemState';
 import { AddRecipeItemStateProvider } from '../lib/addRecipeItemState';
 import { MobileNavStateProvider } from '../lib/mobileNavState';
@@ -21,11 +22,13 @@ function MyApp({ Component, pageProps, apollo }) {
         <UpdateShoppingItemStateProvider>
           <AddShoppingListItemStateProvider>
             <AddRecipeItemStateProvider>
-              <MobileNavStateProvider>
-                <Page>
-                  <Component {...pageProps} />
-                </Page>
-              </MobileNavStateProvider>
+              <UpdateRecipeItemStateProvider>
+                <MobileNavStateProvider>
+                  <Page>
+                    <Component {...pageProps} />
+                  </Page>
+                </MobileNavStateProvider>
+              </UpdateRecipeItemStateProvider>
             </AddRecipeItemStateProvider>
           </AddShoppingListItemStateProvider>
         </UpdateShoppingItemStateProvider>

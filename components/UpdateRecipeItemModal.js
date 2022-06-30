@@ -24,7 +24,7 @@ const UPDATE_RECIPE_ITEM_MUTATION = gql`
   }
 `;
 
-function UpdateRecipeItemModal({ recipeId, children }) {
+function UpdateRecipeItemModal({ recipeId }) {
   const { updateRecipeItemModalOpen, closeUpdateRecipeItemModal, recipeItem } =
     useUpdateRecipeItemModal();
 
@@ -44,7 +44,7 @@ function UpdateRecipeItemModal({ recipeId, children }) {
             e.preventDefault();
             await updateRecipe({
               variables: {
-                id: recipeItem.ingredient.id,
+                id: recipeItem?.ingredient?.id,
                 recipeId,
                 quantity: inputs.quantity,
               },
@@ -55,7 +55,7 @@ function UpdateRecipeItemModal({ recipeId, children }) {
           }}
         >
           <DisplayError error={error} />
-          <h2>update {recipeItem.ingredient.name} quantity</h2>
+          <h2>update {recipeItem?.ingredient?.name} quantity</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -66,9 +66,9 @@ function UpdateRecipeItemModal({ recipeId, children }) {
               value={inputs.quantity}
               onChange={handleChange}
             />
-            {recipeItem.ingredient.units === 'none'
+            {recipeItem?.ingredient?.units === 'none'
               ? ''
-              : recipeItem.ingredient.units}
+              : recipeItem?.ingredient?.units}
           </div>
           <div>
             <button type="submit" className="submit">
@@ -99,16 +99,14 @@ function UpdateRecipeItemModal({ recipeId, children }) {
         className={updateRecipeItemModalOpen && 'open'}
         onClick={closeUpdateRecipeItemModal}
       />
-      {children}
     </>
   ) : (
-    children
+    <div />
   );
 }
 
 UpdateRecipeItemModal.propTypes = {
   recipeId: PropTypes.string,
-  children: PropTypes.any,
 };
 
 export default UpdateRecipeItemModal;

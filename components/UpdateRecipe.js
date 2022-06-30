@@ -11,6 +11,7 @@ import RecipeIngredient from './RecipeIngredient';
 import ButtonStyles from './styles/ButtonStyles';
 import AddRecipeItem from './AddRecipeItem';
 import AddRecipeItemModal from './AddRecipeItemModal';
+import UpdateRecipeItemModal from './UpdateRecipeItemModal';
 
 const UPDATE_RECIPE_MUTATION = gql`
   mutation UPDATE_RECIPE_MUTATION(
@@ -67,6 +68,7 @@ export default function UpdateRecipe({ id }) {
   if (loading) return <p>Loading...</p>;
   return (
     <>
+      <UpdateRecipeItemModal recipeId={id} />
       <FormStyles
         onSubmit={async (e) => {
           e.preventDefault();
@@ -143,6 +145,7 @@ export default function UpdateRecipe({ id }) {
                   ingredient={item?.ingredient}
                   quantity={item?.quantity}
                   recipeItemId={item?.id}
+                  recipeItem={item}
                   key={item?.ingredient?.id}
                 />
               ))}
