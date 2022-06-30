@@ -1,57 +1,61 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
-import { useUpdateShoppingItemModal } from '../lib/updateShoppingItemState';
+import { useUpdateRecipeItemModal } from '../lib/updateRecipeItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
 import DisplayError from './ErrorMessage';
 import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
 import ModalStyles from './styles/ModalStyles';
 
-const UPDATE_SHOPPING_LIST_ITEM_MUTATION = gql`
-  mutation UPDATE_SHOPPING_LIST_ITEM_MUTATION($id: ID!, $quantity: String) {
-    updateShoppingItemQuantity(ingredientId: $id, quantity: $quantity) {
+const UPDATE_RECIPE_ITEM_MUTATION = gql`
+  mutation UPDATE_RECIPE_ITEM_MUTATION(
+    $id: ID!
+    $recipeId: ID!
+    $quantity: String
+  ) {
+    updateRecipeItemQuantity(
+      ingredientId: $id
+      recipeId: $recipeId
+      quantity: $quantity
+    ) {
       id
     }
   }
 `;
 
-function UpdateShoppingListItemModal({ children }) {
-  const {
-    updateShoppingItemModalOpen,
-    closeUpdateShoppingItemModal,
-    shoppingListItem,
-  } = useUpdateShoppingItemModal();
+function UpdateRecipeItemModal({ recipeId, children }) {
+  const { updateRecipeItemModalOpen, closeUpdateRecipeItemModal, recipeItem } =
+    useUpdateRecipeItemModal();
 
   const { inputs, handleChange, resetForm } = useForm({
-    quantity: shoppingListItem?.quantity || '1',
+    quantity: recipeItem?.quantity || '1',
   });
-  const [updateShoppingList, { error }] = useMutation(
-    UPDATE_SHOPPING_LIST_ITEM_MUTATION
-  );
+  const [updateRecipe, { error }] = useMutation(UPDATE_RECIPE_ITEM_MUTATION);
 
-  return updateShoppingItemModalOpen ? (
+  return updateRecipeItemModalOpen ? (
     <>
       <ModalStyles
-        className={updateShoppingItemModalOpen && 'open'}
-        id="addIngredientToShoppingListModal"
+        className={updateRecipeItemModalOpen && 'open'}
+        id="addIngredientToRecipeModal"
       >
         <FormStyles
           onSubmit={async (e) => {
             e.preventDefault();
-            await updateShoppingList({
+            await updateRecipe({
               variables: {
-                id: shoppingListItem.ingredient.id,
+                id: recipeItem.ingredient.id,
+                recipeId,
                 quantity: inputs.quantity,
               },
               refetchQueries: 'all',
             });
             resetForm();
-            closeUpdateShoppingItemModal();
+            closeUpdateRecipeItemModal();
           }}
         >
           <DisplayError error={error} />
-          <h2>update {shoppingListItem.ingredient.name} quantity</h2>
+          <h2>update {recipeItem.ingredient.name} quantity</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -62,9 +66,9 @@ function UpdateShoppingListItemModal({ children }) {
               value={inputs.quantity}
               onChange={handleChange}
             />
-            {shoppingListItem.ingredient.units === 'none'
+            {recipeItem.ingredient.units === 'none'
               ? ''
-              : shoppingListItem.ingredient.units}
+              : recipeItem.ingredient.units}
           </div>
           <div>
             <button type="submit" className="submit">
@@ -74,7 +78,7 @@ function UpdateShoppingListItemModal({ children }) {
               type="button"
               className="cancel"
               onClick={() => {
-                closeUpdateShoppingItemModal();
+                closeUpdateRecipeItemModal();
               }}
             >
               cancel
@@ -85,15 +89,15 @@ function UpdateShoppingListItemModal({ children }) {
           type="button"
           className="close"
           onClick={() => {
-            closeUpdateShoppingItemModal();
+            closeUpdateRecipeItemModal();
           }}
         >
           &times;
         </button>
       </ModalStyles>
       <ModalBackgroundStyles
-        className={updateShoppingItemModalOpen && 'open'}
-        onClick={closeUpdateShoppingItemModal}
+        className={updateRecipeItemModalOpen && 'open'}
+        onClick={closeUpdateRecipeItemModal}
       />
       {children}
     </>
@@ -102,8 +106,9 @@ function UpdateShoppingListItemModal({ children }) {
   );
 }
 
-UpdateShoppingListItemModal.propTypes = {
+UpdateRecipeItemModal.propTypes = {
+  recipeId: PropTypes.string,
   children: PropTypes.any,
 };
 
-export default UpdateShoppingListItemModal;
+export default UpdateRecipeItemModal;

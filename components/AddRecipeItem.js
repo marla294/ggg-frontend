@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import { useAddRecipeItemModal } from '../lib/addRecipeItemState';
 
-export default function AddRecipeItem({ recipeId, children }) {
+function AddRecipeItem({ recipeId, children }) {
   const { openAddRecipeItemModal, setRecipeId } = useAddRecipeItemModal();
 
   return (
@@ -16,3 +17,10 @@ export default function AddRecipeItem({ recipeId, children }) {
     </button>
   );
 }
+
+AddRecipeItem.propTypes = {
+  recipeId: PropTypes.string,
+  children: PropTypes.any,
+};
+
+export default AddRecipeItem;
