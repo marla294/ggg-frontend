@@ -122,9 +122,15 @@ export default function CreateIngredient() {
             value={inputs.units}
           >
             <option value="none">none</option>
+            <option value="bag">bag</option>
+            <option value="box">box</option>
             <option value="can">can</option>
             <option value="cup">cup</option>
+            <option value="dozen">dozen</option>
+            <option value="gallon">gallon</option>
+            <option value="jar">jar</option>
             <option value="lb">lb</option>
+            <option value="loaf">loaf</option>
             <option value="oz">oz</option>
             <option value="tbs">tbs</option>
             <option value="tsp">tsp</option>
@@ -142,15 +148,22 @@ export default function CreateIngredient() {
             <option value="uncategorized">uncategorized</option>
             <option value="baked goods">baked goods</option>
             <option value="bakery">bakery</option>
+            <option value="breakfast">breakfast</option>
             <option value="canned goods">canned goods</option>
+            <option value="cheese">cheese</option>
+            <option value="cleaning">cleaning</option>
             <option value="condiments">condiments</option>
             <option value="dairy">dairy</option>
             <option value="frozen">frozen</option>
+            <option value="health">health</option>
             <option value="meat">meat</option>
             <option value="paper">paper</option>
             <option value="pasta">pasta</option>
             <option value="produce">produce</option>
             <option value="seafood">seafood</option>
+            <option value="snacks">snacks</option>
+            <option value="soups">soups</option>
+            <option value="spices">spices</option>
           </select>
         </label>
         <label htmlFor="homeArea">
