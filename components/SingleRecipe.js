@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import DeleteRecipe from './DeleteRecipe';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
+import { ADD_TO_SHOPPING_LIST_MUTATION } from './AddIngredientToShoppingListModal';
 
 const SINGLE_RECIPE_QUERY = gql`
   query SINGLE_RECIPE_QUERY($id: ID!) {
@@ -66,6 +67,7 @@ function SingleRecipe({ id }) {
       },
     }
   );
+  const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST_MUTATION);
 
   if (loading || allRecipeItemsLoading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
@@ -103,6 +105,23 @@ function SingleRecipe({ id }) {
                   Edit Recipe
                 </button>
               </Link>
+              <button
+                type="button"
+                className="lime"
+                onClick={async () => {
+                  allRecipeItemsData?.allRecipeItems?.forEach(async (item) => {
+                    await addToShoppingList({
+                      variables: {
+                        id: item?.ingredient?.id,
+                        quantity: item?.quantity?.toString(),
+                      },
+                      refetchQueries: 'all',
+                    });
+                  });
+                }}
+              >
+                add to shopping list
+              </button>
               <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
             </ButtonStyles>
           </div>
