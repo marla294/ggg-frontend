@@ -45,4 +45,6 @@ DeleteRecipeItem.propTypes = {
   children: PropTypes.any,
 };
 
+export { DELETE_RECIPE_ITEM_MUTATION };
+
 export default DeleteRecipeItem;
