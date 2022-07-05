@@ -5,6 +5,10 @@ import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
 import { UPDATE_INGREDIENT_IMAGE_MUTATION } from './UpdateIngredient';
+import aisles from '../lib/aisles';
+import homeAreas from '../lib/homeAreas';
+import stores from '../lib/stores';
+import units from '../lib/units';
 
 const CREATE_INGREDIENT_MUTATION = gql`
   mutation CREATE_INGREDIENT_MUTATION(
@@ -34,10 +38,10 @@ export default function CreateIngredient() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     description: '',
-    store: 'uncategorized',
-    units: 'none',
-    aisle: 'uncategorized',
-    homeArea: 'uncategorized',
+    store: stores[0],
+    units: units[0],
+    aisle: aisles[0],
+    homeArea: homeAreas[0],
   });
   const [createIngredient, { loading, error }] = useMutation(
     CREATE_INGREDIENT_MUTATION,
@@ -106,10 +110,11 @@ export default function CreateIngredient() {
             onChange={handleChange}
             value={inputs.store}
           >
-            <option value="uncategorized">uncategorized</option>
-            <option value="family fare">family fare</option>
-            <option value="hyvee">hyvee</option>
-            <option value="whole foods">whole foods</option>
+            {stores.map((store) => (
+              <option value={store} key={store}>
+                {store}
+              </option>
+            ))}
           </select>
         </label>
         <label htmlFor="units">
@@ -121,19 +126,11 @@ export default function CreateIngredient() {
             onChange={handleChange}
             value={inputs.units}
           >
-            <option value="none">none</option>
-            <option value="bag">bag</option>
-            <option value="box">box</option>
-            <option value="can">can</option>
-            <option value="cup">cup</option>
-            <option value="dozen">dozen</option>
-            <option value="gallon">gallon</option>
-            <option value="jar">jar</option>
-            <option value="lb">lb</option>
-            <option value="loaf">loaf</option>
-            <option value="oz">oz</option>
-            <option value="tbs">tbs</option>
-            <option value="tsp">tsp</option>
+            {units.map((unit) => (
+              <option value={unit} key={unit}>
+                {unit}
+              </option>
+            ))}
           </select>
         </label>
         <label htmlFor="aisle">
@@ -145,25 +142,11 @@ export default function CreateIngredient() {
             onChange={handleChange}
             value={inputs.aisle}
           >
-            <option value="uncategorized">uncategorized</option>
-            <option value="baked goods">baked goods</option>
-            <option value="bakery">bakery</option>
-            <option value="breakfast">breakfast</option>
-            <option value="canned goods">canned goods</option>
-            <option value="cheese">cheese</option>
-            <option value="cleaning">cleaning</option>
-            <option value="condiments">condiments</option>
-            <option value="dairy">dairy</option>
-            <option value="frozen">frozen</option>
-            <option value="health">health</option>
-            <option value="meat">meat</option>
-            <option value="paper">paper</option>
-            <option value="pasta">pasta</option>
-            <option value="produce">produce</option>
-            <option value="seafood">seafood</option>
-            <option value="snacks">snacks</option>
-            <option value="soups">soups</option>
-            <option value="spices">spices</option>
+            {aisles.map((aisle) => (
+              <option value={aisle} key={aisle}>
+                {aisle}
+              </option>
+            ))}
           </select>
         </label>
         <label htmlFor="homeArea">
@@ -175,12 +158,11 @@ export default function CreateIngredient() {
             onChange={handleChange}
             value={inputs.homeArea}
           >
-            <option value="uncategorized">uncategorized</option>
-            <option value="freezer">freezer</option>
-            <option value="fridge">fridge</option>
-            <option value="kitchen">kitchen</option>
-            <option value="pantry">pantry</option>
-            <option value="upstairs">upstairs</option>
+            {homeAreas.map((homeArea) => (
+              <option value={homeArea} key={homeArea}>
+                {homeArea}
+              </option>
+            ))}
           </select>
         </label>
         <button type="submit" className="submit">
