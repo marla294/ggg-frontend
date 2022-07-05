@@ -35,6 +35,8 @@ const ListItemStyles = styled.div`
     @media (min-width: 768px) {
       margin: 0;
       height: 100%;
+      min-width: 5rem;
+      width: 5rem;
     }
   }
   .details {
