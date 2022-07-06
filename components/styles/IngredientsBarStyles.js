@@ -9,7 +9,7 @@ const IngredientsBarStyles = styled.div`
   @media (min-width: 768px) {
     font-size: 1.1rem;
     grid-gap: 2rem;
-    grid-template-columns: 3rem repeat(2, 1fr);
+    grid-template-columns: auto repeat(2, 2fr);
   }
 
   input,

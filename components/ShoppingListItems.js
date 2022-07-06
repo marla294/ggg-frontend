@@ -132,3 +132,5 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
     </UpdateShoppingListItemModal>
   );
 }
+
+export { SEARCH_SHOPPING_LIST_QUERY };

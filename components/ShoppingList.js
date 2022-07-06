@@ -1,10 +1,18 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { useLazyQuery, useMutation } from '@apollo/client';
+import { useEffect } from 'react';
 import useForm from '../lib/useForm';
 import PleaseSignIn from './PleaseSignIn';
-import ShoppingListItems from './ShoppingListItems';
+import ShoppingListItems, {
+  SEARCH_SHOPPING_LIST_QUERY,
+} from './ShoppingListItems';
 import ButtonStyles from './styles/ButtonStyles';
 import { useAddShoppingListItemModal } from '../lib/addShoppingListItemState';
 import IngredientsBarStyles from './styles/IngredientsBarStyles';
 import SortByStyles from './styles/SortByStyles';
+import { useUser } from './User';
+import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './RemoveItemFromShoppingList';
 
 export default function ShoppingList() {
   const { inputs, handleChange } = useForm({
@@ -21,6 +29,28 @@ export default function ShoppingList() {
     { display: 'store', value: 'store' },
   ];
 
+  const [findShoppingListItems, { data: shoppingListItems }] = useLazyQuery(
+    SEARCH_SHOPPING_LIST_QUERY
+  );
+
+  const user = useUser();
+
+  const [deleteShoppingListItem] = useMutation(
+    DELETE_SHOPPING_LIST_ITEM_MUTATION,
+    {
+      refetchQueries: 'all',
+    }
+  );
+
+  useEffect(() => {
+    findShoppingListItems({
+      variables: {
+        userId: user?.id,
+        searchTerm: '',
+      },
+    });
+  }, []);
+
   return (
     <PleaseSignIn>
       <IngredientsBarStyles>
@@ -33,6 +63,27 @@ export default function ShoppingList() {
             }}
           >
             add
+          </button>
+          <button
+            type="button"
+            className="yellow small"
+            onClick={() => {
+              if (
+                confirm(
+                  'are you sure you want to clear the entire shopping list?'
+                )
+              ) {
+                shoppingListItems?.allShoppingListItems?.forEach((item) => {
+                  deleteShoppingListItem({
+                    variables: {
+                      id: item?.id,
+                    },
+                  });
+                });
+              }
+            }}
+          >
+            clear list
           </button>
         </ButtonStyles>
         <SortByStyles>
