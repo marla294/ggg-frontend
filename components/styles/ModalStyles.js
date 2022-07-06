@@ -27,8 +27,8 @@ const ModalStyles = styled.div`
     border: none;
     font-size: 1.5rem;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1.2rem;
+    right: 2rem;
   }
   h2 {
     margin-bottom: 0.5rem;
