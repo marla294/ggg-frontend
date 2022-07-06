@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 import { useUpdateShoppingItemModal } from '../lib/updateShoppingItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
@@ -26,9 +27,16 @@ function UpdateShoppingListItemModal({ children }) {
   const { inputs, handleChange, resetForm } = useForm({
     quantity: shoppingListItem?.quantity || '1',
   });
+
   const [updateShoppingList, { error }] = useMutation(
     UPDATE_SHOPPING_LIST_ITEM_MUTATION
   );
+
+  const quantityRef = useRef(null);
+
+  useEffect(() => {
+    quantityRef?.current?.focus();
+  }, [updateShoppingItemModalOpen]);
 
   return updateShoppingItemModalOpen ? (
     <>
@@ -61,6 +69,7 @@ function UpdateShoppingListItemModal({ children }) {
               placeholder="quantity"
               value={inputs.quantity}
               onChange={handleChange}
+              ref={quantityRef}
             />
             {shoppingListItem.ingredient.units === 'none'
               ? ''

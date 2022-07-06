@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 import { useUpdateRecipeItemModal } from '../lib/updateRecipeItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
@@ -32,6 +33,12 @@ function UpdateRecipeItemModal({ recipeId }) {
     quantity: recipeItem?.quantity || '1',
   });
   const [updateRecipe, { error }] = useMutation(UPDATE_RECIPE_ITEM_MUTATION);
+
+  const quantityRef = useRef(null);
+
+  useEffect(() => {
+    quantityRef?.current?.focus();
+  }, [updateRecipeItemModalOpen]);
 
   return updateRecipeItemModalOpen ? (
     <>
@@ -65,6 +72,7 @@ function UpdateRecipeItemModal({ recipeId }) {
               placeholder="quantity"
               value={inputs.quantity}
               onChange={handleChange}
+              ref={quantityRef}
             />
             {recipeItem?.ingredient?.units === 'none'
               ? ''

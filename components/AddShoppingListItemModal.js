@@ -1,7 +1,7 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
-import { useEffect, useState } from 'react';
+import PropTypes, { useEffect, useRef, useState } from 'react';
 import { useAddShoppingListItemModal } from '../lib/addShoppingListItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
@@ -18,17 +18,15 @@ const ADD_TO_SHOPPING_LIST_MUTATION = gql`
   }
 `;
 
-export default function AddShoppingListItemModal({ children }) {
-  const [findIngredients, { loading, data, error }] = useLazyQuery(
-    SEARCH_INGREDIENTS_QUERY,
-    {
-      fetchPolicy: 'network-only',
-      nextFetchPolicy: 'cache-first',
-    }
-  );
+function AddShoppingListItemModal({ children }) {
+  const [findIngredients, { data }] = useLazyQuery(SEARCH_INGREDIENTS_QUERY, {
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'cache-first',
+  });
   const findItemsButChill = debounce(findIngredients, 5);
   const [searchTerm, setSearchTerm] = useState('');
   const [dropdownClosed, setDropdownClosed] = useState(false);
+  const searchRef = useRef(null);
   useEffect(() => {
     findItemsButChill({
       variables: {
@@ -43,6 +41,9 @@ export default function AddShoppingListItemModal({ children }) {
     ingredient,
     setIngredient,
   } = useAddShoppingListItemModal();
+  useEffect(() => {
+    searchRef?.current?.focus();
+  }, [addShoppingListItemModalOpen]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -110,6 +111,7 @@ export default function AddShoppingListItemModal({ children }) {
                 placeholder='search for ingredient (eg, "tomato")'
                 value={searchTerm}
                 onChange={handleSearch}
+                ref={searchRef}
               />
               <DropDown
                 className={items.length > 0 && !dropdownClosed ? 'open' : ''}
@@ -186,3 +188,9 @@ export default function AddShoppingListItemModal({ children }) {
     children
   );
 }
+
+AddShoppingListItemModal.propTypes = {
+  children: PropTypes.any,
+};
+
+export default AddShoppingListItemModal;
