@@ -1,7 +1,7 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAddRecipeItemModal } from '../lib/addRecipeItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
@@ -30,6 +30,7 @@ export default function AddRecipeItemModal() {
   const findItemsButChill = debounce(findIngredients, 5);
   const [searchTerm, setSearchTerm] = useState('');
   const [dropdownClosed, setDropdownClosed] = useState(false);
+  const searchRef = useRef(null);
   useEffect(() => {
     findItemsButChill({
       variables: {
@@ -45,6 +46,10 @@ export default function AddRecipeItemModal() {
     setIngredient,
     recipeId,
   } = useAddRecipeItemModal();
+
+  useEffect(() => {
+    searchRef?.current?.focus();
+  }, [addRecipeItemModalOpen]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -113,6 +118,7 @@ export default function AddRecipeItemModal() {
                 placeholder='search for ingredient (eg, "tomato")'
                 value={searchTerm}
                 onChange={handleSearch}
+                ref={searchRef}
               />
               <DropDown
                 className={items.length > 0 && !dropdownClosed ? 'open' : ''}
