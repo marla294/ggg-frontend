@@ -4,7 +4,7 @@ import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
-import { UPDATE_INGREDIENT_IMAGE_MUTATION } from './UpdateIngredient';
+import { UPDATE_INGREDIENT_IMAGE_MUTATION } from './EditIngredient';
 import aisles from '../lib/aisles';
 import homeAreas from '../lib/homeAreas';
 import stores from '../lib/stores';
