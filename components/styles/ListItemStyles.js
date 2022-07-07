@@ -7,6 +7,7 @@ const ListItemStyles = styled.div`
   position: relative;
   display: grid;
   justify-items: center;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
     padding: 0;
@@ -26,6 +27,7 @@ const ListItemStyles = styled.div`
       height: 100%;
       min-width: 5rem;
       width: 5rem;
+      padding: 1rem;
     }
   }
   .noPhoto {

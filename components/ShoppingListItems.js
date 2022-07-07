@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
-import { useEffect } from 'react';
+import PropTypes, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import groupArrayBy from '../lib/groupArrayBy';
 import { useUser } from './User';
@@ -45,7 +45,7 @@ const SEARCH_SHOPPING_LIST_QUERY = gql`
   }
 `;
 
-export default function ShoppingListItems({ searchTerm, sortBy }) {
+function ShoppingListItems({ searchTerm, sortBy }) {
   const user = useUser();
   const [findItems, { loading, data, error }] = useLazyQuery(
     SEARCH_SHOPPING_LIST_QUERY,
@@ -132,5 +132,12 @@ export default function ShoppingListItems({ searchTerm, sortBy }) {
     </UpdateShoppingListItemModal>
   );
 }
+
+ShoppingListItems.propTypes = {
+  searchTerm: PropTypes.string,
+  sortBy: PropTypes.string,
+};
+
+export default ShoppingListItems;
 
 export { SEARCH_SHOPPING_LIST_QUERY };
