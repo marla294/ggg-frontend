@@ -86,7 +86,7 @@ export default function SignUp() {
           />
         </label>
         <button type="submit" className="submit">
-          sign on up
+          Sign Up
         </button>
       </fieldset>
     </FormStyles>

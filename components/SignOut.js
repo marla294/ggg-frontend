@@ -35,7 +35,7 @@ export default function SignOut() {
         Router.push({ pathname: '/signin' });
       }}
     >
-      sign out
+      Sign Out
     </SignOutButtonStyles>
   );
 }

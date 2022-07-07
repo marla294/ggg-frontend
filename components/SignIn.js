@@ -79,7 +79,7 @@ export default function SignIn() {
           />
         </label>
         <button type="submit" className="submit">
-          sign on in
+          Sign In
         </button>
       </fieldset>
     </FormStyles>
