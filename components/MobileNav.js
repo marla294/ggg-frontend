@@ -55,7 +55,7 @@ export default function MobileNav() {
           <Link href="/shoppinglist">
             <a onClick={clickHandler}>shopping list</a>
           </Link>
-          <Link href="/recipies">
+          <Link href="/recipes">
             <a onClick={clickHandler}>recipes</a>
           </Link>
           <Link href="/ingredients">

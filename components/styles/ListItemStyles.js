@@ -32,7 +32,7 @@ const ListItemStyles = styled.div`
   }
   .noPhoto {
     background-color: var(--lime);
-    height: 12rem;
+    height: 20rem;
     width: 100%;
     @media (min-width: 768px) {
       margin: 0;
