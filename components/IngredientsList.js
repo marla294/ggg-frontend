@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
-import { useEffect } from 'react';
+import PropTypes, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import Ingredient from './Ingredient';
 import groupArrayBy from '../lib/groupArrayBy';
@@ -31,7 +31,7 @@ const SEARCH_INGREDIENTS_QUERY = gql`
   }
 `;
 
-export default function IngredientsList({ searchTerm, sortBy }) {
+function IngredientsList({ searchTerm, sortBy }) {
   const [findItems, { loading, data, error }] = useLazyQuery(
     SEARCH_INGREDIENTS_QUERY,
     {
@@ -60,12 +60,20 @@ export default function IngredientsList({ searchTerm, sortBy }) {
         <DisplayError error={error} />
       </ListWrapperStyles>
     );
-  if (data?.allIngredients.length === 0)
+  if (data?.allIngredients?.length === 0) {
+    if (searchTerm === '') {
+      return (
+        <ListWrapperStyles>
+          <div>Please create some ingredients to get started!</div>
+        </ListWrapperStyles>
+      );
+    }
     return (
       <ListWrapperStyles>
         <div>Sorry, no search results found for "{searchTerm}"</div>
       </ListWrapperStyles>
     );
+  }
   return (
     <AddIngredientToShoppingListModal>
       <ListWrapperStyles>
@@ -91,5 +99,12 @@ export default function IngredientsList({ searchTerm, sortBy }) {
     </AddIngredientToShoppingListModal>
   );
 }
+
+IngredientsList.propTypes = {
+  searchTerm: PropTypes.string,
+  sortBy: PropTypes.string,
+};
+
+export default IngredientsList;
 
 export { SEARCH_INGREDIENTS_QUERY };

@@ -76,7 +76,16 @@ function ShoppingListItems({ searchTerm, sortBy }) {
         <DisplayError error={error} />
       </ListWrapperStyles>
     );
-  if (!data?.allShoppingListItems || data?.allShoppingListItems.length === 0)
+  if (!data?.allShoppingListItems || data?.allShoppingListItems.length === 0) {
+    if (searchTerm === '') {
+      return (
+        <AddShoppingListItemModal>
+          <ListWrapperStyles>
+            <div>Please add some shopping list items to get started!</div>
+          </ListWrapperStyles>
+        </AddShoppingListItemModal>
+      );
+    }
     return (
       <AddShoppingListItemModal>
         <ListWrapperStyles>
@@ -84,6 +93,7 @@ function ShoppingListItems({ searchTerm, sortBy }) {
         </ListWrapperStyles>
       </AddShoppingListItemModal>
     );
+  }
   return (
     <UpdateShoppingListItemModal>
       <AddShoppingListItemModal>
