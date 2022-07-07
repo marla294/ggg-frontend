@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import PropTypes from 'react';
 import useForm from '../lib/useForm';
 import { DELETE_INGREDIENT_IMAGE_MUTATION } from './DeleteIngredient';
 import DisplayError from './ErrorMessage';
@@ -57,17 +58,17 @@ const UPDATE_INGREDIENT_IMAGE_MUTATION = gql`
   }
 `;
 
-export default function UpdateIngredient({ id }) {
+function EditIngredient({ id }) {
   const { data, loading } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: {
       id,
     },
   });
 
-  const [updateIngredient, { error: updateError, loading: updateLoading }] =
+  const [editIngredient, { error: editError, loading: editLoading }] =
     useMutation(UPDATE_INGREDIENT_MUTATION);
 
-  const [updateIngredientImage] = useMutation(UPDATE_INGREDIENT_IMAGE_MUTATION);
+  const [editIngredientImage] = useMutation(UPDATE_INGREDIENT_IMAGE_MUTATION);
 
   const { inputs, handleChange, resetForm } = useForm(data?.Ingredient);
 
@@ -85,7 +86,7 @@ export default function UpdateIngredient({ id }) {
           if (data?.Ingredient?.photo?.id) {
             await deleteIngredientImage();
           }
-          await updateIngredientImage({
+          await editIngredientImage({
             variables: {
               id,
               name: inputs.name,
@@ -93,7 +94,7 @@ export default function UpdateIngredient({ id }) {
             },
           }).catch(console.error);
         }
-        await updateIngredient({
+        await editIngredient({
           variables: {
             id,
             name: inputs.name,
@@ -110,9 +111,9 @@ export default function UpdateIngredient({ id }) {
         });
       }}
     >
-      <fieldset disabled={updateLoading}>
-        <h2>Update Ingredient</h2>
-        <DisplayError error={updateError} />
+      <fieldset disabled={editLoading}>
+        <h2>Edit Ingredient</h2>
+        <DisplayError error={editError} />
         <label htmlFor="name">
           Name<span className="required">&nbsp;*</span>
           <input
@@ -205,10 +206,10 @@ export default function UpdateIngredient({ id }) {
           </select>
         </label>
         <button type="submit" className="submit">
-          Update Ingredient
+          Submit
         </button>
         <button type="button" className="clear" onClick={resetForm}>
-          Reset Form
+          Reset
         </button>
         <button
           type="button"
@@ -225,5 +226,11 @@ export default function UpdateIngredient({ id }) {
     </FormStyles>
   );
 }
+
+EditIngredient.propTypes = {
+  id: PropTypes.string,
+};
+
+export default EditIngredient;
 
 export { UPDATE_INGREDIENT_IMAGE_MUTATION };

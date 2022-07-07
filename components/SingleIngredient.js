@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import Link from 'next/link';
+import PropTypes from 'react';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteIngredient from './DeleteIngredient';
@@ -28,7 +30,7 @@ const SINGLE_INGREDIENT_QUERY = gql`
   }
 `;
 
-export default function SingleIngredient({ id }) {
+function SingleIngredient({ id }) {
   const { data, loading, error } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: {
       id,
@@ -70,7 +72,7 @@ export default function SingleIngredient({ id }) {
             <Link
               passHref
               href={{
-                pathname: '/updateingredient',
+                pathname: '/editingredient',
                 query: {
                   id: Ingredient.id,
                 },
@@ -87,5 +89,11 @@ export default function SingleIngredient({ id }) {
     </SingleItemStyles>
   );
 }
+
+SingleIngredient.propTypes = {
+  id: PropTypes.string,
+};
+
+export default SingleIngredient;
 
 export { SINGLE_INGREDIENT_QUERY };

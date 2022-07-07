@@ -95,7 +95,7 @@ function SingleRecipe({ id }) {
               <Link
                 passHref
                 href={{
-                  pathname: '/updaterecipe',
+                  pathname: '/editrecipe',
                   query: {
                     id: Recipe.id,
                   },
