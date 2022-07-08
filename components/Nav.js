@@ -96,7 +96,7 @@ export default function Nav() {
       )}
       {!user && (
         <div className="signedOutLinks desktop">
-          <Link href="/signin">sign in</Link>
+          <Link href="/signin">Sign in</Link>
         </div>
       )}
       <div

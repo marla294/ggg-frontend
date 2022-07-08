@@ -52,28 +52,28 @@ export default function SignIn() {
       }}
     >
       <fieldset disabled={loading}>
-        <h2>sign into your account</h2>
+        <h2>Sign into your account</h2>
         <DisplayError error={error} />
         <label htmlFor="email">
-          email<span className="required">&nbsp;*</span>
+          Email<span className="required">&nbsp;*</span>
           <input
             required
             type="email"
             id="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={inputs.email}
             onChange={handleChange}
           />
         </label>
         <label htmlFor="password">
-          password<span className="required">&nbsp;*</span>
+          Password<span className="required">&nbsp;*</span>
           <input
             required
             type="password"
             id="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             value={inputs.password}
             onChange={handleChange}
           />

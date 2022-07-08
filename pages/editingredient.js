@@ -1,4 +1,4 @@
-import PropTypes from 'react';
+/* eslint-disable react/prop-types */
 import EditIngredient from '../components/EditIngredient';
 
 function EditIngredientPage({ query }) {
@@ -8,11 +8,5 @@ function EditIngredientPage({ query }) {
     </div>
   );
 }
-
-EditIngredientPage.propTypes = {
-  query: PropTypes.shape({
-    id: PropTypes.string,
-  }),
-};
 
 export default EditIngredientPage;

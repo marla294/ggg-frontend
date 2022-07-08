@@ -37,25 +37,25 @@ export default function RequestReset() {
       }}
     >
       <fieldset disabled={loading}>
-        <h2>request password reset</h2>
+        <h2>Request password reset</h2>
         <DisplayError error={error} />
         {data?.sendUserPasswordResetLink === null && (
           <p>success! check your email for a link.</p>
         )}
         <label htmlFor="email">
-          email<span className="required">&nbsp;*</span>
+          Email<span className="required">&nbsp;*</span>
           <input
             required
             type="email"
             id="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={inputs.email}
             onChange={handleChange}
           />
         </label>
         <button type="submit" className="submit">
-          request reset
+          Request Reset
         </button>
       </fieldset>
     </FormStyles>

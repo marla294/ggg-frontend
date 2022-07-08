@@ -44,37 +44,37 @@ export default function Reset({ token }) {
       }}
     >
       <fieldset>
-        <h2>reset your password</h2>
+        <h2>Reset your password</h2>
         <DisplayError error={error || successfulError} />
         {data?.redeemUserPasswordResetToken === null && (
-          <p>success! you can now sign in</p>
+          <p>Success! you can now sign in</p>
         )}
         <label htmlFor="email">
-          email<span className="required">&nbsp;*</span>
+          Email<span className="required">&nbsp;*</span>
           <input
             required
             type="email"
             id="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={inputs.email}
             onChange={handleChange}
           />
         </label>
         <label htmlFor="password">
-          password<span className="required">&nbsp;*</span>
+          Password<span className="required">&nbsp;*</span>
           <input
             required
             type="password"
             id="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             value={inputs.password}
             onChange={handleChange}
           />
         </label>
         <button type="submit" className="submit">
-          reset
+          Reset
         </button>
       </fieldset>
     </FormStyles>

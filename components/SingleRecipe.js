@@ -120,7 +120,7 @@ function SingleRecipe({ id }) {
                   });
                 }}
               >
-                add to shopping list
+                Add to shopping list
               </button>
               <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
             </ButtonStyles>

@@ -8,7 +8,7 @@ export default function PleaseSignIn({ children }) {
       {user && children}
       {!user && (
         <div>
-          <h2>please sign in to view this page</h2>
+          <h2>Please sign in to view this page</h2>
           <SignIn />
         </div>
       )}

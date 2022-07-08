@@ -22,16 +22,16 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
         </h3>
         <p>
-          amount: {quantity}{' '}
+          Amount: {quantity}{' '}
           {ingredient?.units === 'none' ? '' : ingredient?.units}
         </p>
       </div>
       <ButtonStyles>
         <UpdateShoppingListItem shoppingListItem={shoppingListItem}>
-          update
+          Update
         </UpdateShoppingListItem>
         <RemoveItemFromShoppingList itemId={itemId}>
-          remove
+          Remove
         </RemoveItemFromShoppingList>
       </ButtonStyles>
     </ListItemStyles>

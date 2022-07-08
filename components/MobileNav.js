@@ -55,13 +55,13 @@ export default function MobileNav() {
       {user && (
         <InnerMobileNavStyles>
           <Link href="/shoppinglist">
-            <a onClick={clickHandler}>shopping list</a>
+            <a onClick={clickHandler}>Shopping list</a>
           </Link>
           <Link href="/recipes">
-            <a onClick={clickHandler}>recipes</a>
+            <a onClick={clickHandler}>Recipes</a>
           </Link>
           <Link href="/ingredients">
-            <a onClick={clickHandler}>ingredients</a>
+            <a onClick={clickHandler}>Ingredients</a>
           </Link>
           <SignOut />
         </InnerMobileNavStyles>
@@ -69,7 +69,7 @@ export default function MobileNav() {
       {!user && (
         <InnerMobileNavStyles>
           <Link href="/signin">
-            <a onClick={clickHandler}>sign in</a>
+            <a onClick={clickHandler}>Sign in</a>
           </Link>
         </InnerMobileNavStyles>
       )}

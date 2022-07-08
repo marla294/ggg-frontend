@@ -41,7 +41,7 @@ export default function SignUp() {
       }}
     >
       <fieldset disabled={loading}>
-        <h2>sign up for an account</h2>
+        <h2>Sign up for an account</h2>
         <DisplayError error={error} />
         {data?.createUser && (
           <p>
@@ -50,37 +50,37 @@ export default function SignUp() {
           </p>
         )}
         <label htmlFor="name">
-          your name<span className="required">&nbsp;*</span>
+          Full Name<span className="required">&nbsp;*</span>
           <input
             required
             type="name"
             id="name"
             name="name"
-            placeholder="name"
+            placeholder="Name"
             value={inputs.name}
             onChange={handleChange}
           />
         </label>
         <label htmlFor="email">
-          email<span className="required">&nbsp;*</span>
+          Email<span className="required">&nbsp;*</span>
           <input
             required
             type="email"
             id="email"
             name="email"
-            placeholder="email"
+            placeholder="Email"
             value={inputs.email}
             onChange={handleChange}
           />
         </label>
         <label htmlFor="password">
-          password<span className="required">&nbsp;*</span>
+          Password<span className="required">&nbsp;*</span>
           <input
             required
             type="password"
             id="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             value={inputs.password}
             onChange={handleChange}
           />
