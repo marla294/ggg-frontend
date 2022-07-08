@@ -26,7 +26,7 @@ function DeleteRecipeItem({ itemId, children }) {
       onClick={async () => {
         if (
           confirm(
-            'are you sure you want to delete this ingredient from the recipe?'
+            'Are you sure you want to delete this ingredient from the recipe?'
           )
         ) {
           if (itemId) {

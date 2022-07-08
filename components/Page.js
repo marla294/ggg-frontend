@@ -45,7 +45,6 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.5rem;
     line-height: 2;
     color: var(--black);
-    text-transform: lowercase;
   }
   
   textarea {
@@ -63,7 +62,6 @@ const GlobalStyles = createGlobalStyle`
 
   button {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-transform: lowercase;
     padding: 0;
   }
 

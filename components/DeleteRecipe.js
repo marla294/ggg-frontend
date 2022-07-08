@@ -89,7 +89,7 @@ function DeleteRecipe({ id, children }) {
       className="orange delete"
       onClick={async () => {
         // eslint-disable-next-line no-restricted-globals
-        if (confirm('are you sure you want to delete this recipe?')) {
+        if (confirm('Are you sure you want to delete this recipe?')) {
           if (recipeItemsData?.allRecipeItems) {
             recipeItemsData?.allRecipeItems?.map(async (item) => {
               await deleteRecipeItem({

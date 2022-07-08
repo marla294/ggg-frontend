@@ -129,7 +129,7 @@ function EditRecipe({ id }) {
               rows="7"
               id="description"
               name="description"
-              placeholder="description"
+              placeholder="Description"
               value={inputs.description}
               onChange={handleChange}
             />
@@ -138,7 +138,7 @@ function EditRecipe({ id }) {
             <h3>Recipe Ingredients</h3>
             <ButtonStyles>
               <AddRecipeItem recipeId={id}>
-                add ingredient to recipe
+                Add ingredient to recipe
               </AddRecipeItem>
             </ButtonStyles>
             <ListStyles>

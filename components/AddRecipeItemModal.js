@@ -100,7 +100,7 @@ export default function AddRecipeItemModal() {
             closeAddRecipeItemModal();
           }}
         >
-          <h2>add ingredient to recipe</h2>
+          <h2>Add ingredient to recipe</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -115,7 +115,7 @@ export default function AddRecipeItemModal() {
               <input
                 id="searchTerm"
                 name="searchTerm"
-                placeholder='search for ingredient (eg, "tomato")'
+                placeholder='Search for ingredient (eg, "tomato")'
                 value={searchTerm}
                 onChange={handleSearch}
                 ref={searchRef}
@@ -162,7 +162,7 @@ export default function AddRecipeItemModal() {
           </div>
           <div>
             <button type="submit" className="submit">
-              add
+              Add
             </button>
             <button
               type="button"
@@ -171,7 +171,7 @@ export default function AddRecipeItemModal() {
                 closeAddRecipeItemModal();
               }}
             >
-              cancel
+              Cancel
             </button>
           </div>
         </FormStyles>

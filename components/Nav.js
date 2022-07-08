@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useMobileNav } from '../lib/mobileNavState';
@@ -87,9 +88,9 @@ export default function Nav() {
     <NavStyles>
       {user && (
         <div className="signedInLinks desktop">
-          <Link href="/shoppinglist">shopping list</Link>
-          <Link href="/recipes">recipes</Link>
-          <Link href="/ingredients">ingredients</Link>
+          <Link href="/shoppinglist">Shopping List</Link>
+          <Link href="/recipes">Recipes</Link>
+          <Link href="/ingredients">Ingredients</Link>
           <SignOut />
         </div>
       )}

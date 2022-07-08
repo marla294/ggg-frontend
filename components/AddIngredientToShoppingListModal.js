@@ -48,7 +48,7 @@ function AddIngredientToShoppingListModal({ children }) {
             closeAddIngredientModal();
           }}
         >
-          <h2>add {ingredient.name} to shopping list</h2>
+          <h2>Add {ingredient.name} to shopping list</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -64,7 +64,7 @@ function AddIngredientToShoppingListModal({ children }) {
           </div>
           <div>
             <button type="submit" className="submit">
-              add
+              Add
             </button>
             <button
               type="button"
@@ -73,7 +73,7 @@ function AddIngredientToShoppingListModal({ children }) {
                 closeAddIngredientModal();
               }}
             >
-              cancel
+              Cancel
             </button>
           </div>
         </FormStyles>

@@ -79,7 +79,7 @@ function DeleteIngredient({ id, children }) {
       className="orange delete"
       onClick={async () => {
         // eslint-disable-next-line no-restricted-globals
-        if (confirm('are you sure you want to delete this ingredient?')) {
+        if (confirm('Are you sure you want to delete this ingredient?')) {
           shoppingListItemsData.allShoppingListItems.map(
             async (shoppingListItem) => {
               await deleteShoppingListItem({

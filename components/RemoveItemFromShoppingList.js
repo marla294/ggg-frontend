@@ -26,7 +26,7 @@ function RemoveItemFromShoppingList({ itemId, children }) {
       onClick={async () => {
         if (
           // eslint-disable-next-line no-restricted-globals
-          confirm('are you sure you want to delete this shopping list item?')
+          confirm('Are you sure you want to delete this shopping list item?')
         ) {
           if (itemId) {
             await deleteItem();

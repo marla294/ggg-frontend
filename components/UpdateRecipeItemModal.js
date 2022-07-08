@@ -62,7 +62,7 @@ function UpdateRecipeItemModal({ recipeId }) {
           }}
         >
           <DisplayError error={error} />
-          <h2>update {recipeItem?.ingredient?.name} quantity</h2>
+          <h2>Update {recipeItem?.ingredient?.name} quantity</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -80,7 +80,7 @@ function UpdateRecipeItemModal({ recipeId }) {
           </div>
           <div>
             <button type="submit" className="submit">
-              update
+              Update
             </button>
             <button
               type="button"
@@ -89,7 +89,7 @@ function UpdateRecipeItemModal({ recipeId }) {
                 closeUpdateRecipeItemModal();
               }}
             >
-              cancel
+              Cancel
             </button>
           </div>
         </FormStyles>

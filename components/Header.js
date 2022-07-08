@@ -9,7 +9,6 @@ const Logo = styled.h1`
   a {
     color: white;
     text-decoration: none;
-    text-transform: lowercase;
     padding: 0.5rem 1rem;
   }
 
@@ -35,7 +34,7 @@ export default function Header() {
     <>
       <HeaderStyles>
         <Logo>
-          <Link href="/">go get ur groceries</Link>
+          <Link href="/">Go Get Ur Groceries</Link>
         </Logo>
         <Nav />
       </HeaderStyles>

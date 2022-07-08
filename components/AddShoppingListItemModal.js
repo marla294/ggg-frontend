@@ -93,7 +93,7 @@ function AddShoppingListItemModal({ children }) {
             closeAddShoppingListItemModal();
           }}
         >
-          <h2>add ingredient to shopping list</h2>
+          <h2>Add ingredient to shopping list</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -108,7 +108,7 @@ function AddShoppingListItemModal({ children }) {
               <input
                 id="searchTerm"
                 name="searchTerm"
-                placeholder='search for ingredient (eg, "tomato")'
+                placeholder='Search for ingredient (eg, "tomato")'
                 value={searchTerm}
                 onChange={handleSearch}
                 ref={searchRef}
@@ -155,7 +155,7 @@ function AddShoppingListItemModal({ children }) {
           </div>
           <div>
             <button type="submit" className="submit">
-              add
+              Add
             </button>
             <button
               type="button"
@@ -164,7 +164,7 @@ function AddShoppingListItemModal({ children }) {
                 closeAddShoppingListItemModal();
               }}
             >
-              cancel
+              Cancel
             </button>
           </div>
         </FormStyles>

@@ -23,10 +23,10 @@ export default function ShoppingList() {
   const { openAddShoppingListItemModal } = useAddShoppingListItemModal();
 
   const sortOptions = [
-    { display: 'alphabetical', value: 'alphabetical' },
-    { display: 'aisle', value: 'aisle' },
-    { display: 'home area', value: 'homeArea' },
-    { display: 'store', value: 'store' },
+    { display: 'Alphabetical', value: 'alphabetical' },
+    { display: 'Aisle', value: 'aisle' },
+    { display: 'Home area', value: 'homeArea' },
+    { display: 'Store', value: 'store' },
   ];
 
   const [findShoppingListItems, { data: shoppingListItems }] = useLazyQuery(
@@ -62,7 +62,7 @@ export default function ShoppingList() {
               openAddShoppingListItemModal();
             }}
           >
-            add
+            Add
           </button>
           <button
             type="button"
@@ -83,7 +83,7 @@ export default function ShoppingList() {
               }
             }}
           >
-            clear list
+            Clear
           </button>
         </ButtonStyles>
         <SortByStyles>
@@ -109,7 +109,7 @@ export default function ShoppingList() {
         <input
           name="searchTerm"
           id="searchTerm"
-          placeholder="search..."
+          placeholder="Search..."
           value={inputs.searchTerm}
           onChange={handleChange}
         />

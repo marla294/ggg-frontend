@@ -13,10 +13,10 @@ export default function Ingredients() {
   });
 
   const sortOptions = [
-    { display: 'alphabetical', value: 'alphabetical' },
-    { display: 'aisle', value: 'aisle' },
-    { display: 'home area', value: 'homeArea' },
-    { display: 'store', value: 'store' },
+    { display: 'Alphabetical', value: 'alphabetical' },
+    { display: 'Aisle', value: 'aisle' },
+    { display: 'Home area', value: 'homeArea' },
+    { display: 'Store', value: 'store' },
   ];
 
   return (
@@ -30,7 +30,7 @@ export default function Ingredients() {
               Router.push({ pathname: '/createingredient' });
             }}
           >
-            add
+            Add
           </button>
         </ButtonStyles>
         <SortByStyles>
@@ -56,7 +56,7 @@ export default function Ingredients() {
         <input
           name="searchTerm"
           id="searchTerm"
-          placeholder="search..."
+          placeholder="Search..."
           value={inputs.searchTerm}
           onChange={handleChange}
         />
