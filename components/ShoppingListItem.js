@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import RemoveItemFromShoppingList from './RemoveItemFromShoppingList';
+import DeleteShoppingListItemButton from './DeleteShoppingListItemButton';
 import ButtonStyles from './styles/ButtonStyles';
 import ListItemStyles from './styles/ListItemStyles';
 import UpdateShoppingListItem from './UpdateShoppingListItem';
@@ -30,9 +30,9 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
         <UpdateShoppingListItem shoppingListItem={shoppingListItem}>
           Update
         </UpdateShoppingListItem>
-        <RemoveItemFromShoppingList itemId={itemId}>
+        <DeleteShoppingListItemButton itemId={itemId}>
           Remove
-        </RemoveItemFromShoppingList>
+        </DeleteShoppingListItemButton>
       </ButtonStyles>
     </ListItemStyles>
   );

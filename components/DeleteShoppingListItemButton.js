@@ -11,7 +11,7 @@ const DELETE_SHOPPING_LIST_ITEM_MUTATION = gql`
   }
 `;
 
-function RemoveItemFromShoppingList({ itemId, children }) {
+function DeleteShoppingListItemButton({ itemId, children }) {
   const [deleteItem] = useMutation(DELETE_SHOPPING_LIST_ITEM_MUTATION, {
     variables: {
       id: itemId,
@@ -24,17 +24,12 @@ function RemoveItemFromShoppingList({ itemId, children }) {
       type="button"
       className="removeFromShoppingList orange small"
       onClick={async () => {
-        if (
-          // eslint-disable-next-line no-restricted-globals
-          confirm('Are you sure you want to delete this shopping list item?')
-        ) {
-          if (itemId) {
-            await deleteItem();
-          }
-          Router.push({
-            pathname: '/shoppinglist',
-          });
+        if (itemId) {
+          await deleteItem();
         }
+        Router.push({
+          pathname: '/shoppinglist',
+        });
       }}
     >
       {children}
@@ -42,11 +37,11 @@ function RemoveItemFromShoppingList({ itemId, children }) {
   );
 }
 
-RemoveItemFromShoppingList.propTypes = {
+DeleteShoppingListItemButton.propTypes = {
   itemId: PropTypes.string,
   children: PropTypes.any,
 };
 
 export { DELETE_SHOPPING_LIST_ITEM_MUTATION };
 
-export default RemoveItemFromShoppingList;
+export default DeleteShoppingListItemButton;

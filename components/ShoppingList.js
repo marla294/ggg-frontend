@@ -12,7 +12,7 @@ import { useAddShoppingListItemModal } from '../lib/addShoppingListItemState';
 import IngredientsBarStyles from './styles/IngredientsBarStyles';
 import SortByStyles from './styles/SortByStyles';
 import { useUser } from './User';
-import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './RemoveItemFromShoppingList';
+import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './DeleteShoppingListItemButton';
 
 export default function ShoppingList() {
   const { inputs, handleChange } = useForm({

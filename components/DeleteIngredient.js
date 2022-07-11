@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
-import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './RemoveItemFromShoppingList';
+import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './DeleteShoppingListItemButton';
 
 const DELETE_INGREDIENT_MUTATION = gql`
   mutation DELETE_INGREDIENT_MUTATION($id: ID!) {
