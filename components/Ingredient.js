@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import AddToShoppingList from './AddToShoppingList';
 import DeleteIngredient from './DeleteIngredient';
 import ButtonStyles from './styles/ButtonStyles';
 import ListItemStyles from './styles/ListItemStyles';
 
-export default function Ingredient({ ingredient }) {
+function Ingredient({ ingredient }) {
   return (
     <ListItemStyles>
       {ingredient?.photo?.image?.publicUrlTransformed ? (
@@ -31,3 +32,19 @@ export default function Ingredient({ ingredient }) {
     </ListItemStyles>
   );
 }
+
+Ingredient.propTypes = {
+  ingredient: PropTypes.shape({
+    photo: PropTypes.shape({
+      image: PropTypes.shape({
+        publicUrlTransformed: PropTypes.string,
+      }),
+      altText: PropTypes.string,
+    }),
+    name: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.string,
+  }),
+};
+
+export default Ingredient;
