@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import ListItemStyles from './styles/ListItemStyles';
 
-export default function RecipeListItem({ recipe }) {
+function RecipeListItem({ recipe }) {
   return (
     <ListItemStyles key={recipe?.id}>
       {recipe?.photo?.image?.publicUrlTransformed ? (
@@ -20,3 +21,18 @@ export default function RecipeListItem({ recipe }) {
     </ListItemStyles>
   );
 }
+
+RecipeListItem.propTypes = {
+  recipe: PropTypes.shape({
+    photo: PropTypes.shape({
+      image: PropTypes.shape({
+        publicUrlTransformed: PropTypes.string,
+      }),
+      altText: PropTypes.string,
+    }),
+    name: PropTypes.string,
+    id: PropTypes.string,
+  }),
+};
+
+export default RecipeListItem;
