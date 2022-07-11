@@ -1,10 +1,17 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import DeleteShoppingListItemButton from './DeleteShoppingListItemButton';
-import ButtonStyles from './styles/ButtonStyles';
 import ListItemStyles from './styles/ListItemStyles';
 import UpdateShoppingListItem from './UpdateShoppingListItem';
+
+const ButtonDivStyles = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
+  width: 100%;
+`;
 
 function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
   return (
@@ -26,14 +33,14 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
           {ingredient?.units === 'none' ? '' : ingredient?.units}
         </p>
       </div>
-      <ButtonStyles>
+      <ButtonDivStyles>
         <UpdateShoppingListItem shoppingListItem={shoppingListItem}>
           Update
         </UpdateShoppingListItem>
         <DeleteShoppingListItemButton itemId={itemId}>
           Remove
         </DeleteShoppingListItemButton>
-      </ButtonStyles>
+      </ButtonDivStyles>
     </ListItemStyles>
   );
 }

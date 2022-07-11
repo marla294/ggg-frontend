@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import { useUpdateShoppingItemModal } from '../lib/updateShoppingItemState';
+import ButtonStyles from './styles/ButtonStyles';
 
 function UpdateShoppingListItem({ shoppingListItem, children }) {
   const { openUpdateShoppingItemModal, setShoppingListItem } =
     useUpdateShoppingItemModal();
 
   return (
-    <button
+    <ButtonStyles
       type="button"
       className="updateShoppingListItem yellow small"
       onClick={() => {
@@ -15,7 +16,7 @@ function UpdateShoppingListItem({ shoppingListItem, children }) {
       }}
     >
       {children}
-    </button>
+    </ButtonStyles>
   );
 }
 

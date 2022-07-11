@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { DELETE_RECIPE_ITEM_MUTATION } from './DeleteRecipeItem';
+import ButtonStyles from './styles/ButtonStyles';
 
 const DELETE_RECIPE_MUTATION = gql`
   mutation DELETE_RECIPE_MUTATION($id: ID!) {
@@ -84,7 +85,7 @@ function DeleteRecipe({ id, children }) {
   });
 
   return (
-    <button
+    <ButtonStyles
       type="button"
       className="orange delete"
       onClick={async () => {
@@ -111,7 +112,7 @@ function DeleteRecipe({ id, children }) {
       }}
     >
       {children}
-    </button>
+    </ButtonStyles>
   );
 }
 

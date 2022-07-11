@@ -1,10 +1,12 @@
+import PropTypes from 'prop-types';
 import { useAddIngredientModal } from '../lib/addIngredientState';
+import ButtonStyles from './styles/ButtonStyles';
 
-export default function AddToShoppingList({ ingredient, children }) {
+function AddToShoppingListButton({ ingredient, children }) {
   const { openAddIngredientModal, setIngredient } = useAddIngredientModal();
 
   return (
-    <button
+    <ButtonStyles
       type="button"
       className="addToShoppingList yellow small"
       onClick={() => {
@@ -13,6 +15,13 @@ export default function AddToShoppingList({ ingredient, children }) {
       }}
     >
       {children}
-    </button>
+    </ButtonStyles>
   );
 }
+
+AddToShoppingListButton.propTypes = {
+  ingredient: PropTypes.object,
+  children: PropTypes.any,
+};
+
+export default AddToShoppingListButton;

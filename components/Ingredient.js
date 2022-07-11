@@ -1,9 +1,15 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import AddToShoppingList from './AddToShoppingList';
+import styled from 'styled-components';
+import AddToShoppingListButton from './AddToShoppingListButton';
 import DeleteIngredient from './DeleteIngredient';
-import ButtonStyles from './styles/ButtonStyles';
 import ListItemStyles from './styles/ListItemStyles';
+
+const ButtonDivStyles = styled.div`
+  display: grid;
+  grid-gap: 0.5rem;
+  width: 100%;
+`;
 
 function Ingredient({ ingredient }) {
   return (
@@ -23,11 +29,11 @@ function Ingredient({ ingredient }) {
         </h3>
         <p>{ingredient?.description}</p>
       </div>
-      <ButtonStyles>
-        <AddToShoppingList ingredient={ingredient}>
+      <ButtonDivStyles>
+        <AddToShoppingListButton ingredient={ingredient}>
           Add to shopping list
-        </AddToShoppingList>
-      </ButtonStyles>
+        </AddToShoppingListButton>
+      </ButtonDivStyles>
       <DeleteIngredient id={ingredient?.id}>&times;</DeleteIngredient>
     </ListItemStyles>
   );

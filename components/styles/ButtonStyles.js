@@ -1,22 +1,20 @@
 import styled from 'styled-components';
 
-const ButtonStyles = styled.div`
-  display: grid;
+const ButtonStyles = styled.button`
+  /* display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 0.5rem;
-  width: 100%;
+  width: 100%; */
 
-  button {
-    width: auto;
-    transition: 0.2s;
-    @media (min-width: 768px) {
-      margin: 0;
-      padding: 0.7rem 1rem;
-      font-size: 1.1rem;
-    }
+  width: auto;
+  transition: 0.2s;
+  @media (min-width: 768px) {
+    margin: 0;
+    padding: 0.7rem 1rem;
+    font-size: 1.1rem;
   }
 
-  .small {
+  &.small {
     font-size: 1rem;
     padding: 0.3rem;
     @media (min-width: 768px) {
@@ -25,7 +23,7 @@ const ButtonStyles = styled.div`
     }
   }
 
-  .lime {
+  &.lime {
     background: var(--lime);
     color: var(--darkGreen);
     border: 1px solid var(--darkGreen);
@@ -35,7 +33,7 @@ const ButtonStyles = styled.div`
     }
   }
 
-  .yellow {
+  &.yellow {
     background: var(--yellow);
     color: var(--darkYellow);
     border: 1px solid var(--darkYellow);
@@ -45,7 +43,7 @@ const ButtonStyles = styled.div`
     }
   }
 
-  .orange {
+  &.orange {
     background: var(--orange);
     color: var(--darkOrange);
     border: 1px solid var(--darkOrange);

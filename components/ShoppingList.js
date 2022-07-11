@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { useEffect } from 'react';
+import styled from 'styled-components';
 import useForm from '../lib/useForm';
 import PleaseSignIn from './PleaseSignIn';
 import ShoppingListItems, {
@@ -13,6 +14,13 @@ import IngredientsBarStyles from './styles/IngredientsBarStyles';
 import SortByStyles from './styles/SortByStyles';
 import { useUser } from './User';
 import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './DeleteShoppingListItemButton';
+
+const ButtonDivStyles = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
+  width: 100%;
+`;
 
 export default function ShoppingList() {
   const { inputs, handleChange } = useForm({
@@ -54,8 +62,8 @@ export default function ShoppingList() {
   return (
     <PleaseSignIn>
       <IngredientsBarStyles>
-        <ButtonStyles>
-          <button
+        <ButtonDivStyles>
+          <ButtonStyles
             type="button"
             className="lime small"
             onClick={() => {
@@ -63,8 +71,8 @@ export default function ShoppingList() {
             }}
           >
             Add
-          </button>
-          <button
+          </ButtonStyles>
+          <ButtonStyles
             type="button"
             className="yellow small"
             onClick={() => {
@@ -84,8 +92,8 @@ export default function ShoppingList() {
             }}
           >
             Clear
-          </button>
-        </ButtonStyles>
+          </ButtonStyles>
+        </ButtonDivStyles>
         <SortByStyles>
           <label htmlFor="sortBy">sort:</label>
           <select

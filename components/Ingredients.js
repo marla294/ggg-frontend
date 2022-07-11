@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import Router from 'next/router';
 import ButtonStyles from './styles/ButtonStyles';
 import useForm from '../lib/useForm';
@@ -22,8 +23,8 @@ export default function Ingredients() {
   return (
     <PleaseSignIn>
       <IngredientsBarStyles>
-        <ButtonStyles>
-          <button
+        <div>
+          <ButtonStyles
             type="button"
             className="lime small"
             onClick={() => {
@@ -31,8 +32,8 @@ export default function Ingredients() {
             }}
           >
             Add
-          </button>
-        </ButtonStyles>
+          </ButtonStyles>
+        </div>
         <SortByStyles>
           <label htmlFor="sortBy">sort:</label>
           <select

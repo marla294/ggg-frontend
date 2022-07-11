@@ -9,7 +9,6 @@ import FormStyles from './styles/FormStyles';
 import { ALL_RECIPE_ITEMS_QUERY, SINGLE_RECIPE_QUERY } from './SingleRecipe';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
-import ButtonStyles from './styles/ButtonStyles';
 import AddRecipeItem from './AddRecipeItem';
 import AddRecipeItemModal from './AddRecipeItemModal';
 import UpdateRecipeItemModal from './UpdateRecipeItemModal';
@@ -136,11 +135,11 @@ function EditRecipe({ id }) {
           </label>
           <div>
             <h3>Recipe Ingredients</h3>
-            <ButtonStyles>
+            <div>
               <AddRecipeItem recipeId={id}>
                 Add ingredient to recipe
               </AddRecipeItem>
-            </ButtonStyles>
+            </div>
             <ListStyles>
               {allRecipeItemsData.allRecipeItems.map((item) => (
                 <RecipeIngredient

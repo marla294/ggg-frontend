@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { useAddRecipeItemModal } from '../lib/addRecipeItemState';
+import ButtonStyles from './styles/ButtonStyles';
 
 function AddRecipeItem({ recipeId, children }) {
   const { openAddRecipeItemModal, setRecipeId } = useAddRecipeItemModal();
 
   return (
-    <button
+    <ButtonStyles
       type="button"
       className="addRecipeItem yellow small"
       onClick={() => {
@@ -14,7 +15,7 @@ function AddRecipeItem({ recipeId, children }) {
       }}
     >
       {children}
-    </button>
+    </ButtonStyles>
   );
 }
 

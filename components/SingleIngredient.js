@@ -3,11 +3,19 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import Link from 'next/link';
-import PropTypes from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteIngredient from './DeleteIngredient';
 import { SingleItemStyles } from './styles/SingleItemStyles';
+
+const ButtonDivStyles = styled.div`
+  display: grid;
+  grid-gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+`;
 
 const SINGLE_INGREDIENT_QUERY = gql`
   query SINGLE_INGREDIENT_QUERY($id: ID!) {
@@ -68,7 +76,7 @@ function SingleIngredient({ id }) {
           <b>Store:</b> {Ingredient.store}
         </p>
         <div>
-          <ButtonStyles style={{ margin: '1rem 0 0 0' }}>
+          <ButtonDivStyles>
             <Link
               passHref
               href={{
@@ -78,12 +86,12 @@ function SingleIngredient({ id }) {
                 },
               }}
             >
-              <button type="button" className="yellow">
+              <ButtonStyles type="button" className="yellow">
                 Edit Ingredient
-              </button>
+              </ButtonStyles>
             </Link>
             <DeleteIngredient id={Ingredient.id}>Delete</DeleteIngredient>
-          </ButtonStyles>
+          </ButtonDivStyles>
         </div>
       </div>
     </SingleItemStyles>

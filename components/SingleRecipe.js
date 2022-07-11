@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteRecipe from './DeleteRecipe';
@@ -10,6 +11,13 @@ import { SingleItemStyles } from './styles/SingleItemStyles';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
 import { ADD_TO_SHOPPING_LIST_MUTATION } from './AddIngredientToShoppingListModal';
+
+const ButtonDivStyles = styled.div`
+  display: grid;
+  grid-gap: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
+`;
 
 const SINGLE_RECIPE_QUERY = gql`
   query SINGLE_RECIPE_QUERY($id: ID!) {
@@ -91,7 +99,7 @@ function SingleRecipe({ id }) {
           <h2>{Recipe.name}</h2>
           <p>{Recipe.description}</p>
           <div>
-            <ButtonStyles style={{ margin: '1rem 0 0 0' }}>
+            <ButtonDivStyles>
               <Link
                 passHref
                 href={{
@@ -101,11 +109,11 @@ function SingleRecipe({ id }) {
                   },
                 }}
               >
-                <button type="button" className="yellow">
+                <ButtonStyles type="button" className="yellow">
                   Edit Recipe
-                </button>
+                </ButtonStyles>
               </Link>
-              <button
+              <ButtonStyles
                 type="button"
                 className="lime"
                 onClick={async () => {
@@ -121,9 +129,9 @@ function SingleRecipe({ id }) {
                 }}
               >
                 Add to shopping list
-              </button>
+              </ButtonStyles>
               <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
-            </ButtonStyles>
+            </ButtonDivStyles>
           </div>
         </div>
       </SingleItemStyles>
