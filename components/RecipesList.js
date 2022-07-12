@@ -15,6 +15,7 @@ const ALL_RECIPES_QUERY = gql`
         id
         altText
         image {
+          id
           publicUrlTransformed
         }
       }
@@ -25,7 +26,6 @@ const ALL_RECIPES_QUERY = gql`
 export default function RecipesList() {
   const { loading, data, error } = useQuery(ALL_RECIPES_QUERY, {
     fetchPolicy: 'network-only',
-    nextFetchPolicy: 'cache-first',
   });
 
   if (loading)
