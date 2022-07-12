@@ -1,15 +1,10 @@
 import styled from 'styled-components';
 
 const ButtonStyles = styled.button`
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 0.5rem;
-  width: 100%; */
-
   width: auto;
   transition: 0.2s;
   @media (min-width: 768px) {
-    margin: 0;
+    margin: 0 !important;
     padding: 0.7rem 1rem;
     font-size: 1.1rem;
   }

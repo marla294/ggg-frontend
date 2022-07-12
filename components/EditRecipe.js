@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'react';
+import styled from 'styled-components';
 import useForm from '../lib/useForm';
 import { DELETE_RECIPE_IMAGE_MUTATION } from './DeleteRecipe';
 import DisplayError from './ErrorMessage';
@@ -12,6 +13,10 @@ import RecipeIngredient from './RecipeIngredient';
 import AddRecipeItem from './AddRecipeItem';
 import AddRecipeItemModal from './AddRecipeItemModal';
 import UpdateRecipeItemModal from './UpdateRecipeItemModal';
+
+const EditRecipeItemsBarStyles = styled.div`
+  margin-bottom: 1rem;
+`;
 
 const UPDATE_RECIPE_MUTATION = gql`
   mutation UPDATE_RECIPE_MUTATION(
@@ -135,11 +140,11 @@ function EditRecipe({ id }) {
           </label>
           <div>
             <h3>Recipe Ingredients</h3>
-            <div>
+            <EditRecipeItemsBarStyles>
               <AddRecipeItem recipeId={id}>
                 Add ingredient to recipe
               </AddRecipeItem>
-            </div>
+            </EditRecipeItemsBarStyles>
             <ListStyles>
               {allRecipeItemsData.allRecipeItems.map((item) => (
                 <RecipeIngredient

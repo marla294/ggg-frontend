@@ -2,6 +2,7 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import ButtonStyles from './styles/ButtonStyles';
 
 const DELETE_RECIPE_ITEM_MUTATION = gql`
   mutation DELETE_RECIPE_ITEM_MUTATION($id: ID!) {
@@ -11,7 +12,7 @@ const DELETE_RECIPE_ITEM_MUTATION = gql`
   }
 `;
 
-function DeleteRecipeItem({ itemId, children }) {
+function DeleteRecipeItemButton({ itemId, children }) {
   const [deleteItem] = useMutation(DELETE_RECIPE_ITEM_MUTATION, {
     variables: {
       id: itemId,
@@ -20,9 +21,9 @@ function DeleteRecipeItem({ itemId, children }) {
   });
 
   return (
-    <button
+    <ButtonStyles
       type="button"
-      className="delete orange small"
+      className="delete"
       onClick={async () => {
         if (
           confirm(
@@ -36,15 +37,15 @@ function DeleteRecipeItem({ itemId, children }) {
       }}
     >
       {children}
-    </button>
+    </ButtonStyles>
   );
 }
 
-DeleteRecipeItem.propTypes = {
+DeleteRecipeItemButton.propTypes = {
   itemId: PropTypes.string,
   children: PropTypes.any,
 };
 
 export { DELETE_RECIPE_ITEM_MUTATION };
 
-export default DeleteRecipeItem;
+export default DeleteRecipeItemButton;
