@@ -7,6 +7,7 @@ import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
 import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
 import ModalStyles from './styles/ModalStyles';
+import roundQuantity from '../lib/roundQuantity';
 
 const ADD_TO_SHOPPING_LIST_MUTATION = gql`
   mutation ADD_TO_SHOPPING_LIST_MUTATION($id: ID!, $quantity: String!) {
@@ -40,7 +41,7 @@ function AddIngredientToShoppingListModal({ children }) {
             await addToShoppingList({
               variables: {
                 id: ingredient.id,
-                quantity: inputs.quantity,
+                quantity: roundQuantity(inputs.quantity).toString(),
               },
               refetchQueries: 'all',
             });

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import DeleteShoppingListItemButton from './DeleteShoppingListItemButton';
 import ListItemStyles from './styles/ListItemStyles';
 import UpdateShoppingListItem from './UpdateShoppingListItem';
+import roundQuantity from '../lib/roundQuantity';
 
 const ButtonDivStyles = styled.div`
   display: grid;
@@ -29,7 +30,7 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
         </h3>
         <p>
-          Amount: {quantity}{' '}
+          Amount: {roundQuantity(quantity / 10)}{' '}
           {ingredient?.units === 'none' ? '' : ingredient?.units}
         </p>
       </div>

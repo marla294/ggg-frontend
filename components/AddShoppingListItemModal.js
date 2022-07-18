@@ -9,6 +9,7 @@ import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
 import ModalStyles from './styles/ModalStyles';
 import { SEARCH_INGREDIENTS_QUERY } from './IngredientsList';
 import { DropDown, DropDownItemCover, DropDownItem } from './styles/Dropdown';
+import roundQuantity from '../lib/roundQuantity';
 
 const ADD_TO_SHOPPING_LIST_MUTATION = gql`
   mutation ADD_TO_SHOPPING_LIST_MUTATION($id: ID!, $quantity: String!) {
@@ -83,7 +84,7 @@ function AddShoppingListItemModal({ children }) {
             await addToShoppingList({
               variables: {
                 id: ingredient.id,
-                quantity: parsedQuantity.toString(),
+                quantity: roundQuantity(inputs.quantity).toString(),
               },
               refetchQueries: 'all',
             });
