@@ -9,7 +9,6 @@ const ModalStyles = styled.div`
   background-color: white;
   width: 40rem;
   max-width: 100%;
-  height: 17rem;
   max-height: 100%;
   z-index: 110;
   &.open {
