@@ -8,6 +8,7 @@ import FormStyles from './styles/FormStyles';
 import DisplayError from './ErrorMessage';
 import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
 import ModalStyles from './styles/ModalStyles';
+import roundQuantity from '../lib/roundQuantity';
 
 const UPDATE_RECIPE_ITEM_MUTATION = gql`
   mutation UPDATE_RECIPE_ITEM_MUTATION(
@@ -30,7 +31,7 @@ function UpdateRecipeItemModal({ recipeId }) {
     useUpdateRecipeItemModal();
 
   const { inputs, handleChange, resetForm } = useForm({
-    quantity: recipeItem?.quantity || '1',
+    quantity: roundQuantity(recipeItem?.quantity / 10).toString() || '1',
   });
   const [updateRecipe, { error }] = useMutation(UPDATE_RECIPE_ITEM_MUTATION);
 
@@ -53,7 +54,7 @@ function UpdateRecipeItemModal({ recipeId }) {
               variables: {
                 id: recipeItem?.ingredient?.id,
                 recipeId,
-                quantity: inputs.quantity,
+                quantity: roundQuantity(inputs.quantity).toString(),
               },
               refetchQueries: 'all',
             });

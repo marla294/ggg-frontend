@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import DeleteRecipeItemButton from './DeleteRecipeItemButton';
 import ListItemStyles from './styles/ListItemStyles';
 import { useUpdateRecipeItemModal } from '../lib/updateRecipeItemState';
+import roundQuantity from '../lib/roundQuantity';
 
 const H3Styles = styled.h3`
   cursor: pointer;
@@ -42,7 +43,7 @@ function RecipeIngredient({ recipeItemId, ingredient, quantity, recipeItem }) {
         )}
 
         <p>
-          amount: {quantity}{' '}
+          amount: {roundQuantity(quantity / 10)}{' '}
           {ingredient?.units === 'none' ? '' : ingredient?.units}
         </p>
       </div>

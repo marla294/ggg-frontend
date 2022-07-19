@@ -9,6 +9,7 @@ import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
 import ModalStyles from './styles/ModalStyles';
 import { SEARCH_INGREDIENTS_QUERY } from './IngredientsList';
 import { DropDown, DropDownItemCover, DropDownItem } from './styles/Dropdown';
+import roundQuantity from '../lib/roundQuantity';
 
 const ADD_TO_RECIPE_MUTATION = gql`
   mutation ADD_TO_RECIPE_MUTATION(
@@ -79,18 +80,17 @@ export default function AddRecipeItemModal() {
         <FormStyles
           onSubmit={async (e) => {
             e.preventDefault();
-            const parsedQuantity = parseInt(inputs.quantity);
             if (
               !ingredient ||
-              Number.isNaN(parsedQuantity) ||
-              parsedQuantity < 1
+              Number.isNaN(inputs.quantity) ||
+              inputs.quantity < 0
             )
               return;
             await addToRecipe({
               variables: {
                 id: ingredient.id,
                 recipeId,
-                quantity: parsedQuantity.toString(),
+                quantity: roundQuantity(inputs.quantity).toString(),
               },
               refetchQueries: 'all',
             });

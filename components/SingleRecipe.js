@@ -11,6 +11,7 @@ import { SingleItemStyles } from './styles/SingleItemStyles';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
 import { ADD_TO_SHOPPING_LIST_MUTATION } from './AddIngredientToShoppingListModal';
+import roundQuantity from '../lib/roundQuantity';
 
 const ButtonDivStyles = styled.div`
   display: grid;
@@ -121,7 +122,7 @@ function SingleRecipe({ id }) {
                     await addToShoppingList({
                       variables: {
                         id: item?.ingredient?.id,
-                        quantity: item?.quantity?.toString(),
+                        quantity: roundQuantity(item?.quantity / 10).toString(),
                       },
                       refetchQueries: 'all',
                     });

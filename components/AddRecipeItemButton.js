@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useAddRecipeItemModal } from '../lib/addRecipeItemState';
 import ButtonStyles from './styles/ButtonStyles';
 
-function AddRecipeItem({ recipeId, children }) {
+function AddRecipeItemButton({ recipeId, children }) {
   const { openAddRecipeItemModal, setRecipeId } = useAddRecipeItemModal();
 
   return (
@@ -19,9 +19,9 @@ function AddRecipeItem({ recipeId, children }) {
   );
 }
 
-AddRecipeItem.propTypes = {
+AddRecipeItemButton.propTypes = {
   recipeId: PropTypes.string,
   children: PropTypes.any,
 };
 
-export default AddRecipeItem;
+export default AddRecipeItemButton;
