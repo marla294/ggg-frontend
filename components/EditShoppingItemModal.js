@@ -8,6 +8,7 @@ import FormStyles from './styles/FormStyles';
 import DisplayError from './ErrorMessage';
 import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
 import ModalStyles from './styles/ModalStyles';
+import roundQuantity from '../lib/roundQuantity';
 
 const UPDATE_SHOPPING_LIST_ITEM_MUTATION = gql`
   mutation UPDATE_SHOPPING_LIST_ITEM_MUTATION($id: ID!, $quantity: String) {
@@ -25,7 +26,7 @@ function EditShoppingListItemModal({ children }) {
   } = useEditShoppingItemModal();
 
   const { inputs, handleChange, resetForm } = useForm({
-    quantity: shoppingListItem?.quantity || '1',
+    quantity: roundQuantity(shoppingListItem?.quantity / 10) || 1,
   });
 
   const [updateShoppingList, { error }] = useMutation(
@@ -50,7 +51,7 @@ function EditShoppingListItemModal({ children }) {
             await updateShoppingList({
               variables: {
                 id: shoppingListItem.ingredient.id,
-                quantity: inputs.quantity,
+                quantity: roundQuantity(inputs.quantity).toString(),
               },
               refetchQueries: 'all',
             });
@@ -77,7 +78,7 @@ function EditShoppingListItemModal({ children }) {
           </div>
           <div>
             <button type="submit" className="submit">
-              Edit
+              Submit
             </button>
             <button
               type="button"
