@@ -59,7 +59,7 @@ const RECIPE_LIST_ITEM_QUERY = gql`
   }
 `;
 
-function DeleteIngredient({ id, children }) {
+function DeleteIngredientButton({ id, children }) {
   const { data: ingredientData } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: { id },
   });
@@ -123,11 +123,11 @@ function DeleteIngredient({ id, children }) {
   );
 }
 
-DeleteIngredient.propTypes = {
+DeleteIngredientButton.propTypes = {
   id: PropTypes.string,
   children: PropTypes.any,
 };
 
-export default DeleteIngredient;
+export default DeleteIngredientButton;
 
 export { DELETE_INGREDIENT_IMAGE_MUTATION };

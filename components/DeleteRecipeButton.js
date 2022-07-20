@@ -64,7 +64,7 @@ const ALL_RECIPE_ITEMS_QUERY = gql`
   }
 `;
 
-function DeleteRecipe({ id, children }) {
+function DeleteRecipeButton({ id, children }) {
   const [deleteRecipe] = useMutation(DELETE_RECIPE_MUTATION, {
     variables: { id },
     refetchQueries: 'all',
@@ -116,11 +116,11 @@ function DeleteRecipe({ id, children }) {
   );
 }
 
-DeleteRecipe.propTypes = {
+DeleteRecipeButton.propTypes = {
   id: PropTypes.string,
   children: PropTypes.any,
 };
 
 export { DELETE_RECIPE_IMAGE_MUTATION };
 
-export default DeleteRecipe;
+export default DeleteRecipeButton;

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AddToShoppingListButton from './AddToShoppingListButton';
-import DeleteIngredient from './DeleteIngredient';
+import DeleteIngredientButton from './DeleteIngredientButton';
 import ListItemStyles from './styles/ListItemStyles';
 
 const ButtonDivStyles = styled.div`
@@ -34,7 +34,9 @@ function Ingredient({ ingredient }) {
           Add to shopping list
         </AddToShoppingListButton>
       </ButtonDivStyles>
-      <DeleteIngredient id={ingredient?.id}>&times;</DeleteIngredient>
+      <DeleteIngredientButton id={ingredient?.id}>
+        &times;
+      </DeleteIngredientButton>
     </ListItemStyles>
   );
 }

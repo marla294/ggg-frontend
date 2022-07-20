@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'react';
 import useForm from '../lib/useForm';
-import { DELETE_INGREDIENT_IMAGE_MUTATION } from './DeleteIngredient';
+import { DELETE_INGREDIENT_IMAGE_MUTATION } from './DeleteIngredientButton';
 import DisplayError from './ErrorMessage';
 import { SINGLE_INGREDIENT_QUERY } from './SingleIngredient';
 import FormStyles from './styles/FormStyles';

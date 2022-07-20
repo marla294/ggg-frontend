@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
-import DeleteRecipe from './DeleteRecipe';
+import DeleteRecipeButton from './DeleteRecipeButton';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
@@ -131,7 +131,7 @@ function SingleRecipe({ id }) {
               >
                 Add to shopping list
               </ButtonStyles>
-              <DeleteRecipe id={Recipe.id}>Delete</DeleteRecipe>
+              <DeleteRecipeButton id={Recipe.id}>Delete</DeleteRecipeButton>
             </ButtonDivStyles>
           </div>
         </div>

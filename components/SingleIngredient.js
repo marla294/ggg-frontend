@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
-import DeleteIngredient from './DeleteIngredient';
+import DeleteIngredientButton from './DeleteIngredientButton';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 
 const ButtonDivStyles = styled.div`
@@ -90,7 +90,9 @@ function SingleIngredient({ id }) {
                 Edit Ingredient
               </ButtonStyles>
             </Link>
-            <DeleteIngredient id={Ingredient.id}>Delete</DeleteIngredient>
+            <DeleteIngredientButton id={Ingredient.id}>
+              Delete
+            </DeleteIngredientButton>
           </ButtonDivStyles>
         </div>
       </div>

@@ -4,7 +4,7 @@ import Router from 'next/router';
 import PropTypes from 'react';
 import styled from 'styled-components';
 import useForm from '../lib/useForm';
-import { DELETE_RECIPE_IMAGE_MUTATION } from './DeleteRecipe';
+import { DELETE_RECIPE_IMAGE_MUTATION } from './DeleteRecipeButton';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
 import { ALL_RECIPE_ITEMS_QUERY, SINGLE_RECIPE_QUERY } from './SingleRecipe';
