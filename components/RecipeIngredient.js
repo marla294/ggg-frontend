@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DeleteRecipeItemButton from './DeleteRecipeItemButton';
 import ListItemStyles from './styles/ListItemStyles';
-import { useUpdateRecipeItemModal } from '../lib/updateRecipeItemState';
+import { useEditRecipeItemModal } from '../lib/editRecipeItemState';
 import roundQuantity from '../lib/roundQuantity';
 
 const H3Styles = styled.h3`
@@ -15,8 +15,7 @@ const H3Styles = styled.h3`
 `;
 
 function RecipeIngredient({ recipeItemId, ingredient, quantity, recipeItem }) {
-  const { openUpdateRecipeItemModal, setRecipeItem } =
-    useUpdateRecipeItemModal();
+  const { openEditRecipeItemModal, setRecipeItem } = useEditRecipeItemModal();
 
   return (
     <ListItemStyles>
@@ -32,7 +31,7 @@ function RecipeIngredient({ recipeItemId, ingredient, quantity, recipeItem }) {
         {recipeItemId ? (
           <H3Styles
             onClick={() => {
-              openUpdateRecipeItemModal();
+              openEditRecipeItemModal();
               setRecipeItem(recipeItem);
             }}
           >

@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
-import { useUpdateRecipeItemModal } from '../lib/updateRecipeItemState';
+import { useEditRecipeItemModal } from '../lib/editRecipeItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
 import DisplayError from './ErrorMessage';
@@ -26,9 +26,9 @@ const UPDATE_RECIPE_ITEM_MUTATION = gql`
   }
 `;
 
-function UpdateRecipeItemModal({ recipeId }) {
-  const { updateRecipeItemModalOpen, closeUpdateRecipeItemModal, recipeItem } =
-    useUpdateRecipeItemModal();
+function EditRecipeItemModal({ recipeId }) {
+  const { editRecipeItemModalOpen, closeEditRecipeItemModal, recipeItem } =
+    useEditRecipeItemModal();
 
   const { inputs, handleChange, resetForm } = useForm({
     quantity: roundQuantity(recipeItem?.quantity / 10).toString() || '1',
@@ -39,12 +39,12 @@ function UpdateRecipeItemModal({ recipeId }) {
 
   useEffect(() => {
     quantityRef?.current?.focus();
-  }, [updateRecipeItemModalOpen]);
+  }, [editRecipeItemModalOpen]);
 
-  return updateRecipeItemModalOpen ? (
+  return editRecipeItemModalOpen ? (
     <>
       <ModalStyles
-        className={updateRecipeItemModalOpen && 'open'}
+        className={editRecipeItemModalOpen && 'open'}
         id="addIngredientToRecipeModal"
       >
         <FormStyles
@@ -59,11 +59,11 @@ function UpdateRecipeItemModal({ recipeId }) {
               refetchQueries: 'all',
             });
             resetForm();
-            closeUpdateRecipeItemModal();
+            closeEditRecipeItemModal();
           }}
         >
           <DisplayError error={error} />
-          <h2>Update {recipeItem?.ingredient?.name} quantity</h2>
+          <h2>Edit {recipeItem?.ingredient?.name} quantity</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -87,7 +87,7 @@ function UpdateRecipeItemModal({ recipeId }) {
               type="button"
               className="cancel"
               onClick={() => {
-                closeUpdateRecipeItemModal();
+                closeEditRecipeItemModal();
               }}
             >
               Cancel
@@ -98,15 +98,15 @@ function UpdateRecipeItemModal({ recipeId }) {
           type="button"
           className="close"
           onClick={() => {
-            closeUpdateRecipeItemModal();
+            closeEditRecipeItemModal();
           }}
         >
           &times;
         </button>
       </ModalStyles>
       <ModalBackgroundStyles
-        className={updateRecipeItemModalOpen && 'open'}
-        onClick={closeUpdateRecipeItemModal}
+        className={editRecipeItemModalOpen && 'open'}
+        onClick={closeEditRecipeItemModal}
       />
     </>
   ) : (
@@ -114,8 +114,8 @@ function UpdateRecipeItemModal({ recipeId }) {
   );
 }
 
-UpdateRecipeItemModal.propTypes = {
+EditRecipeItemModal.propTypes = {
   recipeId: PropTypes.string,
 };
 
-export default UpdateRecipeItemModal;
+export default EditRecipeItemModal;

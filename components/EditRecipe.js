@@ -12,7 +12,7 @@ import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
 import AddRecipeItemButton from './AddRecipeItemButton';
 import AddRecipeItemModal from './AddRecipeItemModal';
-import UpdateRecipeItemModal from './UpdateRecipeItemModal';
+import EditRecipeItemModal from './EditRecipeItemModal';
 
 const EditRecipeItemsBarStyles = styled.div`
   margin-bottom: 1rem;
@@ -74,7 +74,7 @@ function EditRecipe({ id }) {
   if (loading) return <p>Loading...</p>;
   return (
     <>
-      <UpdateRecipeItemModal recipeId={id} />
+      <EditRecipeItemModal recipeId={id} />
       <FormStyles
         onSubmit={async (e) => {
           e.preventDefault();
