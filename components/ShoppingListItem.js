@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DeleteShoppingListItemButton from './DeleteShoppingListItemButton';
 import ListItemStyles from './styles/ListItemStyles';
-import UpdateShoppingListItemButton from './UpdateShoppingListItemButton';
+import EditShoppingListItemButton from './EditShoppingListItemButton';
 import roundQuantity from '../lib/roundQuantity';
 
 const ButtonDivStyles = styled.div`
@@ -35,9 +35,9 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
         </p>
       </div>
       <ButtonDivStyles>
-        <UpdateShoppingListItemButton shoppingListItem={shoppingListItem}>
-          Update
-        </UpdateShoppingListItemButton>
+        <EditShoppingListItemButton shoppingListItem={shoppingListItem}>
+          Edit
+        </EditShoppingListItemButton>
         <DeleteShoppingListItemButton itemId={itemId}>
           Remove
         </DeleteShoppingListItemButton>

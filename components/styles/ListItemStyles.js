@@ -64,7 +64,7 @@ const ListItemStyles = styled.div`
       right: 3rem;
     }
   }
-  .updateShoppingListItem {
+  .editShoppingItem {
     @media (min-width: 768px) {
       width: 6rem;
       position: absolute;

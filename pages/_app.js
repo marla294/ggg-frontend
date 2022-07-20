@@ -5,7 +5,7 @@ import Page from '../components/Page';
 import '../components/styles/nprogress.css';
 import withData from '../lib/withData';
 import { AddIngredientStateProvider } from '../lib/addIngredientState';
-import { UpdateShoppingItemStateProvider } from '../lib/updateShoppingItemState';
+import { EditShoppingItemStateProvider } from '../lib/editShoppingItemState';
 import { EditRecipeItemStateProvider } from '../lib/editRecipeItemState';
 import { AddShoppingListItemStateProvider } from '../lib/addShoppingListItemState';
 import { AddRecipeItemStateProvider } from '../lib/addRecipeItemState';
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps, apollo }) {
   return (
     <ApolloProvider client={apollo}>
       <AddIngredientStateProvider>
-        <UpdateShoppingItemStateProvider>
+        <EditShoppingItemStateProvider>
           <AddShoppingListItemStateProvider>
             <AddRecipeItemStateProvider>
               <EditRecipeItemStateProvider>
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps, apollo }) {
               </EditRecipeItemStateProvider>
             </AddRecipeItemStateProvider>
           </AddShoppingListItemStateProvider>
-        </UpdateShoppingItemStateProvider>
+        </EditShoppingItemStateProvider>
       </AddIngredientStateProvider>
     </ApolloProvider>
   );

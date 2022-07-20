@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
-import { useUpdateShoppingItemModal } from '../lib/updateShoppingItemState';
+import { useEditShoppingItemModal } from '../lib/editShoppingItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
 import DisplayError from './ErrorMessage';
@@ -17,12 +17,12 @@ const UPDATE_SHOPPING_LIST_ITEM_MUTATION = gql`
   }
 `;
 
-function UpdateShoppingListItemModal({ children }) {
+function EditShoppingListItemModal({ children }) {
   const {
-    updateShoppingItemModalOpen,
-    closeUpdateShoppingItemModal,
+    editShoppingItemModalOpen,
+    closeEditShoppingItemModal,
     shoppingListItem,
-  } = useUpdateShoppingItemModal();
+  } = useEditShoppingItemModal();
 
   const { inputs, handleChange, resetForm } = useForm({
     quantity: shoppingListItem?.quantity || '1',
@@ -36,12 +36,12 @@ function UpdateShoppingListItemModal({ children }) {
 
   useEffect(() => {
     quantityRef?.current?.focus();
-  }, [updateShoppingItemModalOpen]);
+  }, [editShoppingItemModalOpen]);
 
-  return updateShoppingItemModalOpen ? (
+  return editShoppingItemModalOpen ? (
     <>
       <ModalStyles
-        className={updateShoppingItemModalOpen && 'open'}
+        className={editShoppingItemModalOpen && 'open'}
         id="addIngredientToShoppingListModal"
       >
         <FormStyles
@@ -55,11 +55,11 @@ function UpdateShoppingListItemModal({ children }) {
               refetchQueries: 'all',
             });
             resetForm();
-            closeUpdateShoppingItemModal();
+            closeEditShoppingItemModal();
           }}
         >
           <DisplayError error={error} />
-          <h2>update {shoppingListItem.ingredient.name} quantity</h2>
+          <h2>Edit "{shoppingListItem.ingredient.name}" quantity</h2>
           <div className="modalInputContainer">
             <input
               required
@@ -77,16 +77,16 @@ function UpdateShoppingListItemModal({ children }) {
           </div>
           <div>
             <button type="submit" className="submit">
-              update
+              Edit
             </button>
             <button
               type="button"
               className="cancel"
               onClick={() => {
-                closeUpdateShoppingItemModal();
+                closeEditShoppingItemModal();
               }}
             >
-              cancel
+              Cancel
             </button>
           </div>
         </FormStyles>
@@ -94,15 +94,15 @@ function UpdateShoppingListItemModal({ children }) {
           type="button"
           className="close"
           onClick={() => {
-            closeUpdateShoppingItemModal();
+            closeEditShoppingItemModal();
           }}
         >
           &times;
         </button>
       </ModalStyles>
       <ModalBackgroundStyles
-        className={updateShoppingItemModalOpen && 'open'}
-        onClick={closeUpdateShoppingItemModal}
+        className={editShoppingItemModalOpen && 'open'}
+        onClick={closeEditShoppingItemModal}
       />
       {children}
     </>
@@ -111,8 +111,8 @@ function UpdateShoppingListItemModal({ children }) {
   );
 }
 
-UpdateShoppingListItemModal.propTypes = {
+EditShoppingListItemModal.propTypes = {
   children: PropTypes.any,
 };
 
-export default UpdateShoppingListItemModal;
+export default EditShoppingListItemModal;

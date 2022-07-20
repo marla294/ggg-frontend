@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import groupArrayBy from '../lib/groupArrayBy';
 import { useUser } from './User';
 import ShoppingListItem from './ShoppingListItem';
-import UpdateShoppingListItemModal from './UpdateShoppingItemModal';
+import EditShoppingListItemModal from './EditShoppingItemModal';
 import AddShoppingListItemModal from './AddShoppingListItemModal';
 import ListWrapperStyles from './styles/ListWrapperStyles';
 import DisplayError from './ErrorMessage';
@@ -97,7 +97,7 @@ function ShoppingListItems({ searchTerm, sortBy }) {
     );
   }
   return (
-    <UpdateShoppingListItemModal>
+    <EditShoppingListItemModal>
       <AddShoppingListItemModal />
       <ListWrapperStyles>
         {sortBy === 'alphabetical' ? (
@@ -140,7 +140,7 @@ function ShoppingListItems({ searchTerm, sortBy }) {
           ))
         )}
       </ListWrapperStyles>
-    </UpdateShoppingListItemModal>
+    </EditShoppingListItemModal>
   );
 }
 
