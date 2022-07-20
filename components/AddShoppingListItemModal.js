@@ -1,7 +1,7 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
-import PropTypes, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAddShoppingListItemModal } from '../lib/addShoppingListItemState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
@@ -19,7 +19,7 @@ const ADD_TO_SHOPPING_LIST_MUTATION = gql`
   }
 `;
 
-function AddShoppingListItemModal({ children }) {
+function AddShoppingListItemModal() {
   const [findIngredients, { data }] = useLazyQuery(SEARCH_INGREDIENTS_QUERY, {
     fetchPolicy: 'network-only',
     nextFetchPolicy: 'cache-first',
@@ -183,15 +183,10 @@ function AddShoppingListItemModal({ children }) {
         className={addShoppingListItemModalOpen && 'open'}
         onClick={closeAddShoppingListItemModal}
       />
-      {children}
     </>
   ) : (
-    children
+    <div />
   );
 }
-
-AddShoppingListItemModal.propTypes = {
-  children: PropTypes.any,
-};
 
 export default AddShoppingListItemModal;

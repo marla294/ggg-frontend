@@ -95,7 +95,7 @@ export default function ShoppingList() {
           </ButtonStyles>
         </ButtonDivStyles>
         <SortByStyles>
-          <label htmlFor="sortBy">sort:</label>
+          <label htmlFor="sortBy">Sort:</label>
           <select
             name="sortBy"
             id="sortBy"
