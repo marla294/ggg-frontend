@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import Router from 'next/router';
 import PropTypes from 'prop-types';
 import ButtonStyles from './styles/ButtonStyles';
 
@@ -28,9 +27,6 @@ function DeleteShoppingListItemButton({ itemId, children }) {
         if (itemId) {
           await deleteItem();
         }
-        Router.push({
-          pathname: '/shoppinglist',
-        });
       }}
     >
       {children}

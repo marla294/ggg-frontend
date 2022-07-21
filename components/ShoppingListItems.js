@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
-import PropTypes, { useEffect } from 'react';
+import { useEffect } from 'react';
 import gql from 'graphql-tag';
 import groupArrayBy from '../lib/groupArrayBy';
 import { useUser } from './User';
@@ -143,11 +144,6 @@ function ShoppingListItems({ searchTerm, sortBy }) {
     </EditShoppingListItemModal>
   );
 }
-
-ShoppingListItems.propTypes = {
-  searchTerm: PropTypes.string,
-  sortBy: PropTypes.string,
-};
 
 export default ShoppingListItems;
 
