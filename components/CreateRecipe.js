@@ -4,10 +4,17 @@ import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
+import recipeTypes from '../lib/recipeTypes';
 
 const CREATE_RECIPE_MUTATION = gql`
-  mutation CREATE_RECIPE_MUTATION($name: String!, $description: String!) {
-    createRecipe(data: { name: $name, description: $description }) {
+  mutation CREATE_RECIPE_MUTATION(
+    $name: String!
+    $description: String!
+    $recipeType: String
+  ) {
+    createRecipe(
+      data: { name: $name, description: $description, type: $recipeType }
+    ) {
       id
     }
   }
@@ -32,6 +39,7 @@ export default function CreateRecipe() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     description: '',
+    recipeType: recipeTypes[0],
   });
   const [createRecipe, { loading, error }] = useMutation(
     CREATE_RECIPE_MUTATION,
@@ -90,6 +98,22 @@ export default function CreateRecipe() {
             value={inputs.description}
             onChange={handleChange}
           />
+        </label>
+        <label htmlFor="recipeType">
+          Type of Recipe
+          <select
+            type="text"
+            name="recipeType"
+            id="recipeType"
+            onChange={handleChange}
+            value={inputs.recipeType}
+          >
+            {recipeTypes.map((recipeType) => (
+              <option value={recipeType} key={recipeType}>
+                {recipeType}
+              </option>
+            ))}
+          </select>
         </label>
         <button type="submit" className="submit">
           Create Recipe
