@@ -26,6 +26,7 @@ const SINGLE_RECIPE_QUERY = gql`
       id
       name
       description
+      type
       photo {
         id
         image {
@@ -98,6 +99,7 @@ function SingleRecipe({ id }) {
         )}
         <div>
           <h2>{Recipe.name}</h2>
+          <p>{Recipe.type}</p>
           <p>{Recipe.description}</p>
           <div>
             <ButtonDivStyles>

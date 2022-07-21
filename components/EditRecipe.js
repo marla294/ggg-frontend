@@ -13,6 +13,7 @@ import RecipeIngredient from './RecipeIngredient';
 import AddRecipeItemButton from './AddRecipeItemButton';
 import AddRecipeItemModal from './AddRecipeItemModal';
 import EditRecipeItemModal from './EditRecipeItemModal';
+import recipeTypes from '../lib/recipeTypes';
 
 const EditRecipeItemsBarStyles = styled.div`
   margin-bottom: 1rem;
@@ -23,10 +24,15 @@ const UPDATE_RECIPE_MUTATION = gql`
     $id: ID!
     $name: String!
     $description: String
+    $type: String
   ) {
-    updateRecipe(id: $id, data: { name: $name, description: $description }) {
+    updateRecipe(
+      id: $id
+      data: { name: $name, description: $description, type: $type }
+    ) {
       name
       description
+      type
     }
   }
 `;
@@ -95,6 +101,7 @@ function EditRecipe({ id }) {
               id,
               name: inputs.name,
               description: inputs.description,
+              type: inputs.type,
             },
             refetchQueries: 'all',
           }).catch(console.error);
@@ -137,6 +144,22 @@ function EditRecipe({ id }) {
               value={inputs.description}
               onChange={handleChange}
             />
+          </label>
+          <label htmlFor="type">
+            Type of recipe
+            <select
+              type="text"
+              name="type"
+              id="type"
+              onChange={handleChange}
+              value={inputs.type}
+            >
+              {recipeTypes.map((type) => (
+                <option value={type} key={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
           </label>
           <div>
             <h3>Recipe Ingredients</h3>
