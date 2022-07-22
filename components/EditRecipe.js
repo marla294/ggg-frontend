@@ -80,7 +80,6 @@ function EditRecipe({ id }) {
   if (loading) return <p>Loading...</p>;
   return (
     <>
-      <EditRecipeItemModal recipeId={id} />
       <FormStyles
         onSubmit={async (e) => {
           e.preventDefault();
@@ -161,25 +160,6 @@ function EditRecipe({ id }) {
               ))}
             </select>
           </label>
-          <div>
-            <h3>Recipe Ingredients</h3>
-            <EditRecipeItemsBarStyles>
-              <AddRecipeItemButton recipeId={id}>
-                Add ingredient to recipe
-              </AddRecipeItemButton>
-            </EditRecipeItemsBarStyles>
-            <ListStyles>
-              {allRecipeItemsData.allRecipeItems.map((item) => (
-                <RecipeIngredient
-                  ingredient={item?.ingredient}
-                  quantity={item?.quantity}
-                  recipeItemId={item?.id}
-                  recipeItem={item}
-                  key={item?.ingredient?.id}
-                />
-              ))}
-            </ListStyles>
-          </div>
           <button type="submit" className="submit">
             Submit
           </button>
@@ -199,7 +179,6 @@ function EditRecipe({ id }) {
           </button>
         </fieldset>
       </FormStyles>
-      <AddRecipeItemModal />
     </>
   );
 }

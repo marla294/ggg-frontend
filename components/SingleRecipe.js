@@ -12,12 +12,19 @@ import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
 import { ADD_TO_SHOPPING_LIST_MUTATION } from './AddIngredientToShoppingListModal';
 import roundQuantity from '../lib/roundQuantity';
+import AddRecipeItemButton from './AddRecipeItemButton';
+import AddRecipeItemModal from './AddRecipeItemModal';
+import EditRecipeItemModal from './EditRecipeItemModal';
 
 const ButtonDivStyles = styled.div`
   display: grid;
   grid-gap: 0.5rem;
   width: 100%;
   margin-top: 1rem;
+`;
+
+const EditRecipeItemsBarStyles = styled.div`
+  margin-bottom: 1rem;
 `;
 
 const SINGLE_RECIPE_QUERY = gql`
@@ -84,6 +91,8 @@ function SingleRecipe({ id }) {
   const { Recipe } = data;
   return (
     <>
+      <AddRecipeItemModal />
+      <EditRecipeItemModal recipeId={id} />
       <SingleItemStyles>
         <Head>
           <title>Go Get Groceries | {Recipe.name}</title>
@@ -140,11 +149,18 @@ function SingleRecipe({ id }) {
       </SingleItemStyles>
       <div>
         <h3>Recipe Ingredients</h3>
+        <EditRecipeItemsBarStyles>
+          <AddRecipeItemButton recipeId={id}>
+            Add ingredient to recipe
+          </AddRecipeItemButton>
+        </EditRecipeItemsBarStyles>
         <ListStyles>
-          {allRecipeItemsData?.allRecipeItems?.map((item) => (
+          {allRecipeItemsData.allRecipeItems.map((item) => (
             <RecipeIngredient
               ingredient={item?.ingredient}
               quantity={item?.quantity}
+              recipeItemId={item?.id}
+              recipeItem={item}
               key={item?.ingredient?.id}
             />
           ))}
