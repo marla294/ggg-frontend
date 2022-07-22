@@ -45,7 +45,6 @@ const DropDownItem = styled.div`
   .noPhoto {
     width: 4rem;
     height: 100%;
-    background-color: var(--orange);
   }
   :hover {
     text-decoration: underline;
