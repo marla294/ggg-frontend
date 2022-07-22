@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
 import PropTypes, { useEffect } from 'react';
 import gql from 'graphql-tag';
-import Ingredient from './Ingredient';
+import IngredientListItem from './IngredientListItem';
 import groupArrayBy from '../lib/groupArrayBy';
 import AddIngredientToShoppingListModal from './AddIngredientToShoppingListModal';
 import ListWrapperStyles from './styles/ListWrapperStyles';
@@ -80,7 +80,7 @@ function IngredientsList({ searchTerm, sortBy }) {
         {sortBy === 'alphabetical' ? (
           <ListStyles>
             {data?.allIngredients.map((ingredient) => (
-              <Ingredient ingredient={ingredient} key={ingredient.id} />
+              <IngredientListItem ingredient={ingredient} key={ingredient.id} />
             ))}
           </ListStyles>
         ) : (
@@ -89,7 +89,10 @@ function IngredientsList({ searchTerm, sortBy }) {
               <h3>{grouping[0]}</h3>
               <ListStyles>
                 {grouping[1].map((ingredient) => (
-                  <Ingredient ingredient={ingredient} key={ingredient.id} />
+                  <IngredientListItem
+                    ingredient={ingredient}
+                    key={ingredient.id}
+                  />
                 ))}
               </ListStyles>
             </ListGroupingStyles>

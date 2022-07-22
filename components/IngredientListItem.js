@@ -11,7 +11,7 @@ const ButtonDivStyles = styled.div`
   width: 100%;
 `;
 
-function Ingredient({ ingredient }) {
+function IngredientListItem({ ingredient }) {
   return (
     <ListItemStyles>
       {ingredient?.photo?.image?.publicUrlTransformed ? (
@@ -41,7 +41,7 @@ function Ingredient({ ingredient }) {
   );
 }
 
-Ingredient.propTypes = {
+IngredientListItem.propTypes = {
   ingredient: PropTypes.shape({
     photo: PropTypes.shape({
       image: PropTypes.shape({
@@ -55,4 +55,4 @@ Ingredient.propTypes = {
   }),
 };
 
-export default Ingredient;
+export default IngredientListItem;
