@@ -47,6 +47,12 @@ const ButtonStyles = styled.button`
       color: white;
     }
   }
+
+  &.orange-nohover {
+    background: var(--orange);
+    color: var(--darkOrange);
+    border: 1px solid var(--darkOrange);
+  }
 `;
 
 export default ButtonStyles;

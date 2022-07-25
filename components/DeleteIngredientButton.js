@@ -59,7 +59,7 @@ const RECIPE_LIST_ITEM_QUERY = gql`
   }
 `;
 
-function DeleteIngredientButton({ id, children }) {
+function DeleteIngredientButton({ id, noHover, children }) {
   const { data: ingredientData } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: { id },
   });
@@ -91,7 +91,7 @@ function DeleteIngredientButton({ id, children }) {
   return (
     <ButtonStyles
       type="button"
-      className="orange delete"
+      className={noHover ? 'delete orange-nohover' : 'delete orange'}
       onClick={async () => {
         // eslint-disable-next-line no-restricted-globals
         if (confirm('Are you sure you want to delete this ingredient?')) {
@@ -126,6 +126,7 @@ function DeleteIngredientButton({ id, children }) {
 DeleteIngredientButton.propTypes = {
   id: PropTypes.string,
   children: PropTypes.any,
+  noHover: PropTypes.bool,
 };
 
 export default DeleteIngredientButton;
