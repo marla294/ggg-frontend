@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import { useState } from 'react';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
@@ -9,6 +10,7 @@ import aisles from '../lib/aisles';
 import homeAreas from '../lib/homeAreas';
 import stores from '../lib/stores';
 import units from '../lib/units';
+import AlertMessage from './AlertMessage';
 
 const CREATE_INGREDIENT_MUTATION = gql`
   mutation CREATE_INGREDIENT_MUTATION(
@@ -51,6 +53,7 @@ export default function CreateIngredient() {
     }
   );
   const [updateIngredientImage] = useMutation(UPDATE_INGREDIENT_IMAGE_MUTATION);
+  const [successMessage, setSuccessMessage] = useState(null);
   return (
     <FormStyles
       onSubmit={async (e) => {
@@ -66,14 +69,13 @@ export default function CreateIngredient() {
           }).catch(console.error);
         }
         clearForm();
-        Router.push({
-          pathname: `/ingredients`,
-        });
+        setSuccessMessage(`Ingredient "${inputs.name}" created successfully`);
       }}
     >
       <fieldset disabled={loading}>
         <h2>Create New Ingredient</h2>
         <DisplayError error={error} />
+        <AlertMessage message={successMessage} />
         <label htmlFor="name">
           Name<span className="required">&nbsp;*</span>
           <input
@@ -81,7 +83,7 @@ export default function CreateIngredient() {
             type="text"
             id="name"
             name="name"
-            placeholder="name"
+            placeholder="Name"
             value={inputs.name}
             onChange={handleChange}
           />
@@ -96,7 +98,7 @@ export default function CreateIngredient() {
             rows="7"
             id="description"
             name="description"
-            placeholder="description"
+            placeholder="Description"
             value={inputs.description}
             onChange={handleChange}
           />
