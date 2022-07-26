@@ -13,7 +13,7 @@ const REQUEST_RESET_MUTATION = gql`
   }
 `;
 
-export default function RequestReset() {
+export default function RequestResetForm() {
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
   });

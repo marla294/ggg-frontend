@@ -1,13 +1,13 @@
-import RequestReset from '../components/RequestReset';
-import SignIn from '../components/SignIn';
-import SignUp from '../components/SignUp';
+import RequestResetForm from '../components/RequestResetForm';
+import SignInForm from '../components/SignInForm';
+import SignUpForm from '../components/SignUpForm';
 
 export default function SignInPage() {
   return (
     <div>
-      <SignIn />
-      <SignUp />
-      <RequestReset />
+      <SignInForm />
+      <SignUpForm />
+      <RequestResetForm />
     </div>
   );
 }

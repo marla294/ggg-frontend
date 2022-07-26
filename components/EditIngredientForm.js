@@ -58,7 +58,7 @@ const UPDATE_INGREDIENT_IMAGE_MUTATION = gql`
   }
 `;
 
-function EditIngredient({ id }) {
+function EditIngredientForm({ id }) {
   const { data, loading } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: {
       id,
@@ -227,10 +227,10 @@ function EditIngredient({ id }) {
   );
 }
 
-EditIngredient.propTypes = {
+EditIngredientForm.propTypes = {
   id: PropTypes.string,
 };
 
-export default EditIngredient;
+export default EditIngredientForm;
 
 export { UPDATE_INGREDIENT_IMAGE_MUTATION };

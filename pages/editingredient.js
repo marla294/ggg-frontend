@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import EditIngredient from '../components/EditIngredient';
+import EditIngredientForm from '../components/EditIngredientForm';
 
 function EditIngredientPage({ query }) {
   return (
     <div>
-      <EditIngredient id={query?.id} />
+      <EditIngredientForm id={query?.id} />
     </div>
   );
 }

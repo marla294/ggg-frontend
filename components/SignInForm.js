@@ -1,66 +1,59 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
+import { CURRENT_USER_QUERY } from './User';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
-    $name: String!
-    $email: String!
-    $password: String!
-  ) {
-    createUser(data: { name: $name, email: $email, password: $password }) {
-      id
-      name
-      email
+const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+    authenticateUserWithPassword(email: $email, password: $password) {
+      ... on UserAuthenticationWithPasswordSuccess {
+        item {
+          id
+          email
+          name
+        }
+      }
+      ... on UserAuthenticationWithPasswordFailure {
+        code
+        message
+      }
     }
   }
 `;
 
-export default function SignUp() {
+export default function SignInForm() {
   const { inputs, handleChange, resetForm } = useForm({
-    name: '',
     email: '',
     password: '',
   });
-  const [signUp, { data, error, loading }] = useMutation(SIGNUP_MUTATION, {
+  const [signIn, { data, loading }] = useMutation(SIGNIN_MUTATION, {
     variables: {
-      name: inputs.name,
       email: inputs.email,
       password: inputs.password,
     },
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
+  const error =
+    data?.authenticateUserWithPassword.__typename ===
+    'UserAuthenticationWithPasswordFailure'
+      ? data?.authenticateUserWithPassword
+      : undefined;
   return (
     <FormStyles
       method="POST"
       onSubmit={async (e) => {
         e.preventDefault();
-        await signUp().catch(console.error);
+        await signIn();
         resetForm();
+        Router.push({ pathname: '/' });
       }}
     >
       <fieldset disabled={loading}>
-        <h2>Sign up for an account</h2>
+        <h2>Sign into your account</h2>
         <DisplayError error={error} />
-        {data?.createUser && (
-          <p>
-            Signed up with {data.createUser.email} - Please go ahead and sign
-            in!
-          </p>
-        )}
-        <label htmlFor="name">
-          Full Name<span className="required">&nbsp;*</span>
-          <input
-            required
-            type="name"
-            id="name"
-            name="name"
-            placeholder="Name"
-            value={inputs.name}
-            onChange={handleChange}
-          />
-        </label>
         <label htmlFor="email">
           Email<span className="required">&nbsp;*</span>
           <input
@@ -86,7 +79,7 @@ export default function SignUp() {
           />
         </label>
         <button type="submit" className="submit">
-          Sign Up
+          Sign In
         </button>
       </fieldset>
     </FormStyles>

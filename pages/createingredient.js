@@ -1,9 +1,9 @@
-import CreateIngredient from '../components/CreateIngredient';
+import CreateIngredientForm from '../components/CreateIngredientForm';
 
 export default function CreateIngredientPage() {
   return (
     <div>
-      <CreateIngredient />
+      <CreateIngredientForm />
     </div>
   );
 }

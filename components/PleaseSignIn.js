@@ -1,4 +1,4 @@
-import SignIn from './SignIn';
+import SignInForm from './SignInForm';
 import { useUser } from './User';
 
 export default function PleaseSignIn({ children }) {
@@ -9,7 +9,7 @@ export default function PleaseSignIn({ children }) {
       {!user && (
         <div>
           <h2>Please sign in to view this page</h2>
-          <SignIn />
+          <SignInForm />
         </div>
       )}
     </>

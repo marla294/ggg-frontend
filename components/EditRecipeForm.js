@@ -42,7 +42,7 @@ const UPDATE_RECIPE_IMAGE_MUTATION = gql`
   }
 `;
 
-function EditRecipe({ id }) {
+function EditRecipeForm({ id }) {
   const { data, loading } = useQuery(SINGLE_RECIPE_QUERY, {
     variables: {
       id,
@@ -173,8 +173,8 @@ function EditRecipe({ id }) {
   );
 }
 
-EditRecipe.propTypes = {
+EditRecipeForm.propTypes = {
   id: PropTypes.string,
 };
 
-export default EditRecipe;
+export default EditRecipeForm;

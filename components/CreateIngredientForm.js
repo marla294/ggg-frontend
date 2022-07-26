@@ -5,7 +5,7 @@ import { useState } from 'react';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
-import { UPDATE_INGREDIENT_IMAGE_MUTATION } from './EditIngredient';
+import { UPDATE_INGREDIENT_IMAGE_MUTATION } from './EditIngredientForm';
 import aisles from '../lib/aisles';
 import homeAreas from '../lib/homeAreas';
 import stores from '../lib/stores';
@@ -36,7 +36,7 @@ const CREATE_INGREDIENT_MUTATION = gql`
   }
 `;
 
-export default function CreateIngredient() {
+export default function CreateIngredientForm() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     description: '',

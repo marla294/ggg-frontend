@@ -35,19 +35,16 @@ const UPDATE_RECIPE_IMAGE_MUTATION = gql`
   }
 `;
 
-export default function CreateRecipe() {
+export default function CreateRecipeForm() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     description: '',
     recipeType: recipeTypes[0],
   });
-  const [createRecipe, { loading, error }] = useMutation(
-    CREATE_RECIPE_MUTATION,
-    {
-      variables: inputs,
-      refetchQueries: 'all',
-    }
-  );
+  const [createRecipe, { error }] = useMutation(CREATE_RECIPE_MUTATION, {
+    variables: inputs,
+    refetchQueries: 'all',
+  });
   const [updateRecipeImage] = useMutation(UPDATE_RECIPE_IMAGE_MUTATION);
   return (
     <FormStyles

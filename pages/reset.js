@@ -1,4 +1,4 @@
-import RequestReset from '../components/RequestReset';
+import RequestResetForm from '../components/RequestResetForm';
 import Reset from '../components/Reset';
 
 export default function ResetPage({ query }) {
@@ -6,7 +6,7 @@ export default function ResetPage({ query }) {
     return (
       <div>
         <p>sorry you must supply a token</p>
-        <RequestReset />
+        <RequestResetForm />
       </div>
     );
   }

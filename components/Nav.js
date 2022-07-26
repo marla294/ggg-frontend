@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useMobileNav } from '../lib/mobileNavState';
-import SignOut from './SignOut';
+import SignOutButton from './Buttons/SignOutButton';
 import { useUser } from './User';
 
 const NavStyles = styled.nav`
@@ -91,7 +91,7 @@ export default function Nav() {
           <Link href="/shoppinglist">Shopping List</Link>
           <Link href="/recipes">Recipes</Link>
           <Link href="/ingredients">Ingredients</Link>
-          <SignOut />
+          <SignOutButton />
         </div>
       )}
       {!user && (
