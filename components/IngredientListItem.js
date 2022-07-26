@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import AddToShoppingListButton from './AddToShoppingListButton';
-import DeleteIngredientButton from './DeleteIngredientButton';
+import AddToShoppingListButton from './Buttons/AddToShoppingListButton';
+import DeleteIngredientButton from './Buttons/DeleteIngredientButton';
 import ListItemStyles from './styles/ListItemStyles';
 
 const ButtonDivStyles = styled.div`

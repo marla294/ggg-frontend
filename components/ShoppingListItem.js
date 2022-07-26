@@ -2,9 +2,9 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import DeleteShoppingListItemButton from './DeleteShoppingListItemButton';
+import DeleteShoppingListItemButton from './Buttons/DeleteShoppingListItemButton';
 import ListItemStyles from './styles/ListItemStyles';
-import EditShoppingListItemButton from './EditShoppingListItemButton';
+import EditShoppingListItemButton from './Buttons/EditShoppingListItemButton';
 import roundQuantity from '../lib/roundQuantity';
 
 const ButtonDivStyles = styled.div`

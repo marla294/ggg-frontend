@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useEditShoppingItemModal } from '../lib/editShoppingItemState';
-import ButtonStyles from './styles/ButtonStyles';
+import { useEditShoppingItemModal } from '../../lib/editShoppingItemState';
+import ButtonStyles from '../styles/ButtonStyles';
 
 function EditShoppingItemItemButton({ shoppingListItem, children }) {
   const { openEditShoppingItemModal, setShoppingListItem } =

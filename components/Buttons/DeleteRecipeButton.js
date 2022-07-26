@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { DELETE_RECIPE_ITEM_MUTATION } from './DeleteRecipeItemButton';
-import ButtonStyles from './styles/ButtonStyles';
+import ButtonStyles from '../styles/ButtonStyles';
 
 const DELETE_RECIPE_MUTATION = gql`
   mutation DELETE_RECIPE_MUTATION($id: ID!) {

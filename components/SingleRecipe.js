@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
-import DeleteRecipeButton from './DeleteRecipeButton';
+import DeleteRecipeButton from './Buttons/DeleteRecipeButton';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
 import { ADD_TO_SHOPPING_LIST_MUTATION } from './AddIngredientToShoppingListModal';
 import roundQuantity from '../lib/roundQuantity';
-import AddRecipeItemButton from './AddRecipeItemButton';
+import AddRecipeItemButton from './Buttons/AddRecipeItemButton';
 import AddRecipeItemModal from './AddRecipeItemModal';
 import EditRecipeItemModal from './EditRecipeItemModal';
 

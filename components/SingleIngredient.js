@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
-import DeleteIngredientButton from './DeleteIngredientButton';
+import DeleteIngredientButton from './Buttons/DeleteIngredientButton';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 
 const ButtonDivStyles = styled.div`

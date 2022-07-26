@@ -2,22 +2,12 @@ import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'react';
-import styled from 'styled-components';
 import useForm from '../lib/useForm';
-import { DELETE_RECIPE_IMAGE_MUTATION } from './DeleteRecipeButton';
+import { DELETE_RECIPE_IMAGE_MUTATION } from './Buttons/DeleteRecipeButton';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
 import { ALL_RECIPE_ITEMS_QUERY, SINGLE_RECIPE_QUERY } from './SingleRecipe';
-import ListStyles from './styles/ListStyles';
-import RecipeIngredient from './RecipeIngredient';
-import AddRecipeItemButton from './AddRecipeItemButton';
-import AddRecipeItemModal from './AddRecipeItemModal';
-import EditRecipeItemModal from './EditRecipeItemModal';
 import recipeTypes from '../lib/recipeTypes';
-
-const EditRecipeItemsBarStyles = styled.div`
-  margin-bottom: 1rem;
-`;
 
 const UPDATE_RECIPE_MUTATION = gql`
   mutation UPDATE_RECIPE_MUTATION(

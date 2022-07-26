@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import DeleteRecipeItemButton from './DeleteRecipeItemButton';
+import DeleteRecipeItemButton from './Buttons/DeleteRecipeItemButton';
 import ListItemStyles from './styles/ListItemStyles';
 import { useEditRecipeItemModal } from '../lib/editRecipeItemState';
 import roundQuantity from '../lib/roundQuantity';

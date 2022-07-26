@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './DeleteShoppingListItemButton';
 import { DELETE_RECIPE_ITEM_MUTATION } from './DeleteRecipeItemButton';
-import ButtonStyles from './styles/ButtonStyles';
+import ButtonStyles from '../styles/ButtonStyles';
 
 const DELETE_INGREDIENT_MUTATION = gql`
   mutation DELETE_INGREDIENT_MUTATION($id: ID!) {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useAddRecipeItemModal } from '../lib/addRecipeItemState';
-import ButtonStyles from './styles/ButtonStyles';
+import { useAddRecipeItemModal } from '../../lib/addRecipeItemState';
+import ButtonStyles from '../styles/ButtonStyles';
 
 function AddRecipeItemButton({ recipeId, children }) {
   const { openAddRecipeItemModal, setRecipeId } = useAddRecipeItemModal();

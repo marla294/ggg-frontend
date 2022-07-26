@@ -2,7 +2,7 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
-import ButtonStyles from './styles/ButtonStyles';
+import ButtonStyles from '../styles/ButtonStyles';
 
 const DELETE_RECIPE_ITEM_MUTATION = gql`
   mutation DELETE_RECIPE_ITEM_MUTATION($id: ID!) {

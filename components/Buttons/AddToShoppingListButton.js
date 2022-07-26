@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useAddIngredientModal } from '../lib/addIngredientState';
-import ButtonStyles from './styles/ButtonStyles';
+import { useAddIngredientModal } from '../../lib/addIngredientState';
+import ButtonStyles from '../styles/ButtonStyles';
 
 function AddToShoppingListButton({ ingredient, children }) {
   const { openAddIngredientModal, setIngredient } = useAddIngredientModal();
