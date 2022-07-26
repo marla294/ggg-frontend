@@ -1,7 +1,8 @@
 import { useLazyQuery } from '@apollo/client';
 import debounce from 'lodash.debounce';
-import PropTypes, { useEffect } from 'react';
+import { useEffect } from 'react';
 import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
 import IngredientListItem from './IngredientListItem';
 import groupArrayBy from '../lib/groupArrayBy';
 import AddIngredientToShoppingListModal from './AddIngredientToShoppingListModal';
