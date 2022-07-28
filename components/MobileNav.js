@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { useMobileNav } from '../lib/mobileNavState';
-import SignOutButton from './Buttons/SignOutButton';
 import { useUser } from './User';
 
 const MobileNavStyles = styled.div`
@@ -63,7 +62,9 @@ export default function MobileNav() {
           <Link href="/ingredients">
             <a onClick={clickHandler}>Ingredients</a>
           </Link>
-          <SignOutButton />
+          <Link href="/account">
+            <a onClick={clickHandler}>Your Account</a>
+          </Link>
         </InnerMobileNavStyles>
       )}
       {!user && (
