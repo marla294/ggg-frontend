@@ -4,6 +4,8 @@ import RecipeListItem from './RecipeListItem';
 import ListWrapperStyles from './styles/ListWrapperStyles';
 import DisplayError from './ErrorMessage';
 import ListStyles from './styles/ListStyles';
+import groupArrayBy from '../lib/groupArrayBy';
+import ListGroupingStyles from './styles/ListGroupingStyles';
 
 const ALL_RECIPES_QUERY = gql`
   query ALL_RECIPES_QUERY {
@@ -11,6 +13,7 @@ const ALL_RECIPES_QUERY = gql`
       id
       name
       description
+      type
       photo {
         id
         altText
@@ -23,7 +26,7 @@ const ALL_RECIPES_QUERY = gql`
   }
 `;
 
-export default function RecipesList() {
+export default function RecipesList({ sortBy }) {
   const { loading, data, error } = useQuery(ALL_RECIPES_QUERY, {
     fetchPolicy: 'network-only',
   });
@@ -48,11 +51,35 @@ export default function RecipesList() {
     );
   return (
     <ListWrapperStyles>
-      <ListStyles>
-        {data?.allRecipes.map((recipe) => (
-          <RecipeListItem recipe={recipe} key={recipe?.id} />
-        ))}
-      </ListStyles>
+      {sortBy === 'alphabetical' ? (
+        <ListStyles>
+          {Array.from(data?.allRecipes)
+            .sort((a, b) =>
+              a?.recipe?.name.toLower() < b?.recipe?.name.toLower() ? -1 : 1
+            )
+            .map((recipe) => (
+              <RecipeListItem recipe={recipe} key={recipe?.id} />
+            ))}
+        </ListStyles>
+      ) : (
+        <ListStyles>
+          {groupArrayBy(
+            Array.from(data?.allRecipes).sort((a, b) =>
+              a?.recipe?.name.toLower() < b?.recipe?.name.toLower() ? -1 : 1
+            ),
+            sortBy
+          ).map((grouping) => (
+            <ListGroupingStyles key={grouping[0]}>
+              <h3>{grouping[0]}</h3>
+              <ListStyles>
+                {grouping[1].map((item) => (
+                  <RecipeListItem recipe={item} key={item?.id} />
+                ))}
+              </ListStyles>
+            </ListGroupingStyles>
+          ))}
+        </ListStyles>
+      )}
     </ListWrapperStyles>
   );
 }

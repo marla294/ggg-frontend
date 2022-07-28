@@ -35,7 +35,7 @@ export default function Ingredients() {
           </ButtonStyles>
         </div>
         <SortByStyles>
-          <label htmlFor="sortBy">sort:</label>
+          <label htmlFor="sortBy">Sort:</label>
           <select
             name="sortBy"
             id="sortBy"
