@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import PropTypes from 'react';
+import PropTypes from 'prop-types';
 import useForm from '../lib/useForm';
 import { DELETE_RECIPE_IMAGE_MUTATION } from './Buttons/DeleteRecipeButton';
 import DisplayError from './ErrorMessage';

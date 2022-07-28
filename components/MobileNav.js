@@ -28,14 +28,7 @@ const InnerMobileNavStyles = styled.div`
   grid-template-columns: 1fr;
   font-size: 1.1rem;
 
-  .signOutButton {
-    text-align: left;
-    font-size: 1.1rem;
-    line-height: 2;
-  }
-
-  a,
-  .signOutButton {
+  a {
     padding: 1.5rem 2.5rem;
     border-bottom: 0.5px solid var(--lightGray);
   }
