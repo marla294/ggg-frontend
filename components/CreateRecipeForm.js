@@ -1,10 +1,12 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import { useState } from 'react';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
 import recipeTypes from '../lib/recipeTypes';
+import AlertMessage from './AlertMessage';
 
 const CREATE_RECIPE_MUTATION = gql`
   mutation CREATE_RECIPE_MUTATION(
@@ -46,6 +48,7 @@ export default function CreateRecipeForm() {
     refetchQueries: 'all',
   });
   const [updateRecipeImage] = useMutation(UPDATE_RECIPE_IMAGE_MUTATION);
+  const [successMessage, setSuccessMessage] = useState(null);
   return (
     <FormStyles
       onSubmit={async (e) => {
@@ -61,14 +64,13 @@ export default function CreateRecipeForm() {
           }).catch(console.error);
         }
         clearForm();
-        Router.push({
-          pathname: `/recipes`,
-        });
+        setSuccessMessage(`Recipe "${inputs.name}" created successfully`);
       }}
     >
       <fieldset>
         <h2>Create New Recipe</h2>
         <DisplayError error={error} />
+        <AlertMessage message={successMessage} />
         <label htmlFor="name">
           Name<span className="required">&nbsp;*</span>
           <input
