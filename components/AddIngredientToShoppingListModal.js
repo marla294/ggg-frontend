@@ -1,13 +1,14 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAddIngredientModal } from '../lib/addIngredientState';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/FormStyles';
 import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
 import ModalStyles from './styles/ModalStyles';
 import roundQuantity from '../lib/roundQuantity';
+import DisplayError from './ErrorMessage';
 
 const ADD_TO_SHOPPING_LIST_MUTATION = gql`
   mutation ADD_TO_SHOPPING_LIST_MUTATION($id: ID!, $quantity: String!) {
@@ -23,11 +24,15 @@ function AddIngredientToShoppingListModal({ children }) {
   const { inputs, handleChange, resetForm } = useForm({
     quantity: '1',
   });
-  const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST_MUTATION);
+  const [addToShoppingList, { error }] = useMutation(
+    ADD_TO_SHOPPING_LIST_MUTATION
+  );
   const quantityRef = useRef(null);
   useEffect(() => {
     quantityRef?.current?.focus();
   }, [addIngredientModalOpen]);
+
+  const [warning, setWarning] = useState(null);
 
   return addIngredientModalOpen ? (
     <>
@@ -38,18 +43,27 @@ function AddIngredientToShoppingListModal({ children }) {
         <FormStyles
           onSubmit={async (e) => {
             e.preventDefault();
-            await addToShoppingList({
-              variables: {
-                id: ingredient.id,
-                quantity: roundQuantity(inputs.quantity).toString(),
-              },
-              refetchQueries: 'all',
-            });
-            resetForm();
-            closeAddIngredientModal();
+            const parsedQuantity = Number.parseFloat(inputs.quantity);
+
+            if (Number.isNaN(parsedQuantity)) {
+              setWarning(
+                `'${inputs.quantity}' is not a number.  Please enter a numeric value for the quantity.`
+              );
+            } else {
+              await addToShoppingList({
+                variables: {
+                  id: ingredient.id,
+                  quantity: roundQuantity(inputs.quantity).toString(),
+                },
+                refetchQueries: 'all',
+              });
+              resetForm();
+              closeAddIngredientModal();
+            }
           }}
         >
           <h2>Add {ingredient.name} to shopping list</h2>
+          <DisplayError error={{ message: warning } || error} />
           <div className="modalInputContainer">
             <input
               required
