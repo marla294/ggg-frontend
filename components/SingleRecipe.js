@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useState } from 'react';
 import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteRecipeButton from './Buttons/DeleteRecipeButton';
@@ -15,6 +16,7 @@ import roundQuantity from '../lib/roundQuantity';
 import AddRecipeItemButton from './Buttons/AddRecipeItemButton';
 import AddRecipeItemModal from './AddRecipeItemModal';
 import EditRecipeItemModal from './EditRecipeItemModal';
+import AlertMessage from './AlertMessage';
 
 const ButtonDivStyles = styled.div`
   display: grid;
@@ -85,6 +87,7 @@ function SingleRecipe({ id }) {
     }
   );
   const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST_MUTATION);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   if (loading || allRecipeItemsLoading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
@@ -93,6 +96,7 @@ function SingleRecipe({ id }) {
     <>
       <AddRecipeItemModal />
       <EditRecipeItemModal recipeId={id} />
+      <AlertMessage message={successMessage} />
       <SingleItemStyles>
         <Head>
           <title>Go Get Groceries | {Recipe.name}</title>
@@ -138,6 +142,21 @@ function SingleRecipe({ id }) {
                       refetchQueries: 'all',
                     });
                   });
+                  const date = new Date();
+                  setSuccessMessage(
+                    `Recipe has been added to shopping list successfully (${date.toLocaleString(
+                      'en-US',
+                      {
+                        weekday: 'short', // long, short, narrow
+                        day: 'numeric', // numeric, 2-digit
+                        year: 'numeric', // numeric, 2-digit
+                        month: 'long', // numeric, 2-digit, long, short, narrow
+                        hour: 'numeric', // numeric, 2-digit
+                        minute: 'numeric', // numeric, 2-digit
+                        second: 'numeric', // numeric, 2-digit
+                      }
+                    )})`
+                  );
                 }}
               >
                 Add to shopping list
