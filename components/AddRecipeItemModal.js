@@ -10,6 +10,7 @@ import ModalStyles from './styles/ModalStyles';
 import { SEARCH_INGREDIENTS_QUERY } from './IngredientsList';
 import { DropDown, DropDownItemCover, DropDownItem } from './styles/Dropdown';
 import roundQuantity from '../lib/roundQuantity';
+import DisplayError from './ErrorMessage';
 
 const ADD_TO_RECIPE_MUTATION = gql`
   mutation ADD_TO_RECIPE_MUTATION(
@@ -66,7 +67,17 @@ export default function AddRecipeItemModal() {
     quantity: '1',
   });
 
-  const [addToRecipe] = useMutation(ADD_TO_RECIPE_MUTATION);
+  const [addToRecipe, { error }] = useMutation(ADD_TO_RECIPE_MUTATION);
+
+  const [warning, setWarning] = useState(null);
+
+  const closeDownModal = () => {
+    resetForm();
+    setSearchTerm('');
+    setIngredient(null);
+    setWarning(null);
+    closeAddRecipeItemModal();
+  };
 
   return addRecipeItemModalOpen ? (
     <>
@@ -80,27 +91,28 @@ export default function AddRecipeItemModal() {
         <FormStyles
           onSubmit={async (e) => {
             e.preventDefault();
-            if (
-              !ingredient ||
-              Number.isNaN(inputs.quantity) ||
-              inputs.quantity < 0
-            )
-              return;
-            await addToRecipe({
-              variables: {
-                id: ingredient.id,
-                recipeId,
-                quantity: roundQuantity(inputs.quantity).toString(),
-              },
-              refetchQueries: 'all',
-            });
-            resetForm();
-            setSearchTerm('');
-            setIngredient(null);
-            closeAddRecipeItemModal();
+            const parsedQuantity = Number.parseFloat(inputs.quantity);
+            if (Number.isNaN(parsedQuantity)) {
+              setWarning(
+                `'${inputs.quantity}' is not a number.  Please enter a numeric value for the quantity.`
+              );
+            } else if (!ingredient) {
+              setWarning('Please select an ingredient to add to this recipe');
+            } else {
+              await addToRecipe({
+                variables: {
+                  id: ingredient.id,
+                  recipeId,
+                  quantity: roundQuantity(inputs.quantity).toString(),
+                },
+                refetchQueries: 'all',
+              });
+              closeDownModal();
+            }
           }}
         >
           <h2>Add ingredient to recipe</h2>
+          <DisplayError error={{ message: warning } || error} />
           <div className="modalInputContainer">
             <input
               required
@@ -168,7 +180,7 @@ export default function AddRecipeItemModal() {
               type="button"
               className="cancel"
               onClick={() => {
-                closeAddRecipeItemModal();
+                closeDownModal();
               }}
             >
               Cancel
@@ -179,7 +191,7 @@ export default function AddRecipeItemModal() {
           type="button"
           className="close"
           onClick={() => {
-            closeAddRecipeItemModal();
+            closeDownModal();
           }}
         >
           &times;
@@ -187,7 +199,7 @@ export default function AddRecipeItemModal() {
       </ModalStyles>
       <ModalBackgroundStyles
         className={addRecipeItemModalOpen && 'open'}
-        onClick={closeAddRecipeItemModal}
+        onClick={closeDownModal}
       />
     </>
   ) : (
