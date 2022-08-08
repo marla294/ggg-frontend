@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './DeleteShoppingListItemButton';
 import { DELETE_RECIPE_ITEM_MUTATION } from './DeleteRecipeItemButton';
 import ButtonStyles from '../styles/ButtonStyles';
@@ -59,7 +60,7 @@ const RECIPE_LIST_ITEM_QUERY = gql`
   }
 `;
 
-function DeleteIngredientButton({ id, noHover, children }) {
+function DeleteIngredientButton({ id, ingredientsPage, children }) {
   const { data: ingredientData } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: { id },
   });
@@ -91,7 +92,7 @@ function DeleteIngredientButton({ id, noHover, children }) {
   return (
     <ButtonStyles
       type="button"
-      className={noHover ? 'delete orange-nohover' : 'delete orange'}
+      className={ingredientsPage ? 'delete orange-nohover' : 'delete orange'}
       onClick={async () => {
         // eslint-disable-next-line no-restricted-globals
         if (confirm('Are you sure you want to delete this ingredient?')) {
@@ -115,6 +116,12 @@ function DeleteIngredientButton({ id, noHover, children }) {
             await deleteIngredientImage();
           }
           await deleteIngredient();
+          // don't want to redirect from the main ingredients page b/c then it refreshes the page
+          if (!ingredientsPage) {
+            Router.push({
+              pathname: '/ingredients',
+            });
+          }
         }
       }}
     >
@@ -126,7 +133,7 @@ function DeleteIngredientButton({ id, noHover, children }) {
 DeleteIngredientButton.propTypes = {
   id: PropTypes.string,
   children: PropTypes.any,
-  noHover: PropTypes.bool,
+  ingredientsPage: PropTypes.bool,
 };
 
 export default DeleteIngredientButton;

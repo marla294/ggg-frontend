@@ -34,7 +34,7 @@ function IngredientListItem({ ingredient }) {
           Add to shopping list
         </AddToShoppingListButton>
       </ButtonDivStyles>
-      <DeleteIngredientButton id={ingredient?.id} noHover>
+      <DeleteIngredientButton id={ingredient?.id} ingredientsPage>
         &times;
       </DeleteIngredientButton>
     </ListItemStyles>
