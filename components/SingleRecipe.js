@@ -34,6 +34,7 @@ const SINGLE_RECIPE_QUERY = gql`
     Recipe(where: { id: $id }) {
       id
       name
+      recipeLink
       description
       type
       photo {

@@ -13,14 +13,21 @@ const UPDATE_RECIPE_MUTATION = gql`
   mutation UPDATE_RECIPE_MUTATION(
     $id: ID!
     $name: String!
+    $recipeLink: String!
     $description: String
     $type: String
   ) {
     updateRecipe(
       id: $id
-      data: { name: $name, description: $description, type: $type }
+      data: {
+        name: $name
+        recipeLink: $recipeLink
+        description: $description
+        type: $type
+      }
     ) {
       name
+      recipeLink
       description
       type
     }
@@ -89,6 +96,7 @@ function EditRecipeForm({ id }) {
             variables: {
               id,
               name: inputs.name,
+              recipeLink: inputs.recipeLink,
               description: inputs.description,
               type: inputs.type,
             },
@@ -111,6 +119,18 @@ function EditRecipeForm({ id }) {
               name="name"
               placeholder="name"
               value={inputs.name}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="recipeLink">
+            Recipe link<span className="required">&nbsp;*</span>
+            <input
+              required
+              type="text"
+              id="recipeLink"
+              name="recipeLink"
+              placeholder="Link to recipe"
+              value={inputs.recipeLink}
               onChange={handleChange}
             />
           </label>
