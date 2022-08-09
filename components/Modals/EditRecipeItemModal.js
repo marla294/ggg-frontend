@@ -2,13 +2,13 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
-import { useEditRecipeItemModal } from '../lib/editRecipeItemState';
-import useForm from '../lib/useForm';
-import FormStyles from './styles/FormStyles';
-import DisplayError from './ErrorMessage';
-import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
-import ModalStyles from './styles/ModalStyles';
-import roundQuantity from '../lib/roundQuantity';
+import { useEditRecipeItemModal } from '../../lib/editRecipeItemState';
+import useForm from '../../lib/useForm';
+import FormStyles from '../styles/FormStyles';
+import DisplayError from '../ErrorMessage';
+import ModalBackgroundStyles from '../styles/ModalBackgroundStyles';
+import ModalStyles from '../styles/ModalStyles';
+import roundQuantity from '../../lib/roundQuantity';
 
 const UPDATE_RECIPE_ITEM_MUTATION = gql`
   mutation UPDATE_RECIPE_ITEM_MUTATION(

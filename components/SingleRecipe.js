@@ -11,11 +11,11 @@ import DeleteRecipeButton from './Buttons/DeleteRecipeButton';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 import ListStyles from './styles/ListStyles';
 import RecipeIngredient from './RecipeIngredient';
-import { ADD_TO_SHOPPING_LIST_MUTATION } from './AddIngredientToShoppingListModal';
+import { ADD_TO_SHOPPING_LIST_MUTATION } from './Modals/AddIngredientToShoppingListModal';
 import roundQuantity from '../lib/roundQuantity';
 import AddRecipeItemButton from './Buttons/AddRecipeItemButton';
-import AddRecipeItemModal from './AddRecipeItemModal';
-import EditRecipeItemModal from './EditRecipeItemModal';
+import AddRecipeItemModal from './Modals/AddRecipeItemModal';
+import EditRecipeItemModal from './Modals/EditRecipeItemModal';
 import AlertMessage from './AlertMessage';
 
 const ButtonDivStyles = styled.div`

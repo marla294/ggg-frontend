@@ -10,6 +10,7 @@ import ButtonStyles from './styles/ButtonStyles';
 import DeleteIngredientButton from './Buttons/DeleteIngredientButton';
 import { SingleItemStyles } from './styles/SingleItemStyles';
 import AddToShoppingListButton from './Buttons/AddToShoppingListButton';
+import AddIngredientToShoppingListModal from './Modals/AddIngredientToShoppingListModal';
 
 const ButtonDivStyles = styled.div`
   display: grid;
@@ -49,58 +50,60 @@ function SingleIngredient({ id }) {
   if (error) return <DisplayError error={error} />;
   const { Ingredient } = data;
   return (
-    <SingleItemStyles>
-      <Head>
-        <title>Go Get Groceries | {Ingredient.name}</title>
-      </Head>
-      {Ingredient?.photo?.image?.publicUrlTransformed ? (
-        <img
-          src={Ingredient?.photo?.image?.publicUrlTransformed}
-          alt={Ingredient?.photo?.altText}
-        />
-      ) : (
-        <div className="noPhoto">Needs photo 📸</div>
-      )}
-      <div>
-        <h2>{Ingredient.name}</h2>
-        <p>{Ingredient.description}</p>
-        <p>
-          <b>Aisle:</b> {Ingredient.aisle}
-        </p>
-        <p>
-          <b>Home Area:</b> {Ingredient.homeArea}
-        </p>
-        <p>
-          <b>Units:</b> {Ingredient.units}
-        </p>
-        <p>
-          <b>Store:</b> {Ingredient.store}
-        </p>
+    <AddIngredientToShoppingListModal>
+      <SingleItemStyles>
+        <Head>
+          <title>Go Get Groceries | {Ingredient.name}</title>
+        </Head>
+        {Ingredient?.photo?.image?.publicUrlTransformed ? (
+          <img
+            src={Ingredient?.photo?.image?.publicUrlTransformed}
+            alt={Ingredient?.photo?.altText}
+          />
+        ) : (
+          <div className="noPhoto">Needs photo 📸</div>
+        )}
         <div>
-          <ButtonDivStyles>
-            <Link
-              passHref
-              href={{
-                pathname: '/editingredient',
-                query: {
-                  id: Ingredient.id,
-                },
-              }}
-            >
-              <ButtonStyles type="button" className="yellow">
-                Edit Ingredient
-              </ButtonStyles>
-            </Link>
-            <AddToShoppingListButton ingredient={Ingredient}>
-              Add to shopping list
-            </AddToShoppingListButton>
-            <DeleteIngredientButton id={Ingredient.id}>
-              Delete
-            </DeleteIngredientButton>
-          </ButtonDivStyles>
+          <h2>{Ingredient.name}</h2>
+          <p>{Ingredient.description}</p>
+          <p>
+            <b>Aisle:</b> {Ingredient.aisle}
+          </p>
+          <p>
+            <b>Home Area:</b> {Ingredient.homeArea}
+          </p>
+          <p>
+            <b>Units:</b> {Ingredient.units}
+          </p>
+          <p>
+            <b>Store:</b> {Ingredient.store}
+          </p>
+          <div>
+            <ButtonDivStyles>
+              <Link
+                passHref
+                href={{
+                  pathname: '/editingredient',
+                  query: {
+                    id: Ingredient.id,
+                  },
+                }}
+              >
+                <ButtonStyles type="button" className="yellow">
+                  Edit Ingredient
+                </ButtonStyles>
+              </Link>
+              <AddToShoppingListButton ingredient={Ingredient}>
+                Add to shopping list
+              </AddToShoppingListButton>
+              <DeleteIngredientButton id={Ingredient.id}>
+                Delete
+              </DeleteIngredientButton>
+            </ButtonDivStyles>
+          </div>
         </div>
-      </div>
-    </SingleItemStyles>
+      </SingleItemStyles>
+    </AddIngredientToShoppingListModal>
   );
 }
 

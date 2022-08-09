@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import IngredientListItem from './IngredientListItem';
 import groupArrayBy from '../lib/groupArrayBy';
-import AddIngredientToShoppingListModal from './AddIngredientToShoppingListModal';
+import AddIngredientToShoppingListModal from './Modals/AddIngredientToShoppingListModal';
 import ListWrapperStyles from './styles/ListWrapperStyles';
 import DisplayError from './ErrorMessage';
 import ListStyles from './styles/ListStyles';

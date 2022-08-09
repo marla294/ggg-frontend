@@ -2,13 +2,13 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
-import { useEditShoppingItemModal } from '../lib/editShoppingItemState';
-import useForm from '../lib/useForm';
-import FormStyles from './styles/FormStyles';
-import DisplayError from './ErrorMessage';
-import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
-import ModalStyles from './styles/ModalStyles';
-import roundQuantity from '../lib/roundQuantity';
+import { useEditShoppingItemModal } from '../../lib/editShoppingItemState';
+import useForm from '../../lib/useForm';
+import FormStyles from '../styles/FormStyles';
+import DisplayError from '../ErrorMessage';
+import ModalBackgroundStyles from '../styles/ModalBackgroundStyles';
+import ModalStyles from '../styles/ModalStyles';
+import roundQuantity from '../../lib/roundQuantity';
 
 const UPDATE_SHOPPING_LIST_ITEM_MUTATION = gql`
   mutation UPDATE_SHOPPING_LIST_ITEM_MUTATION($id: ID!, $quantity: String) {

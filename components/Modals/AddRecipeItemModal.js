@@ -2,24 +2,29 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import { useAddShoppingListItemModal } from '../lib/addShoppingListItemState';
-import useForm from '../lib/useForm';
-import FormStyles from './styles/FormStyles';
-import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
-import ModalStyles from './styles/ModalStyles';
-import { SEARCH_INGREDIENTS_QUERY } from './IngredientsList';
-import { DropDown, DropDownItemCover, DropDownItem } from './styles/Dropdown';
-import roundQuantity from '../lib/roundQuantity';
+import { useAddRecipeItemModal } from '../../lib/addRecipeItemState';
+import useForm from '../../lib/useForm';
+import FormStyles from '../styles/FormStyles';
+import ModalBackgroundStyles from '../styles/ModalBackgroundStyles';
+import ModalStyles from '../styles/ModalStyles';
+import { SEARCH_INGREDIENTS_QUERY } from '../IngredientsList';
+import { DropDown, DropDownItemCover, DropDownItem } from '../styles/Dropdown';
+import roundQuantity from '../../lib/roundQuantity';
+import DisplayError from '../ErrorMessage';
 
-const ADD_TO_SHOPPING_LIST_MUTATION = gql`
-  mutation ADD_TO_SHOPPING_LIST_MUTATION($id: ID!, $quantity: String!) {
-    addToShoppingList(ingredientId: $id, quantity: $quantity) {
+const ADD_TO_RECIPE_MUTATION = gql`
+  mutation ADD_TO_RECIPE_MUTATION(
+    $id: ID!
+    $recipeId: ID!
+    $quantity: String!
+  ) {
+    addToRecipe(ingredientId: $id, recipeId: $recipeId, quantity: $quantity) {
       id
     }
   }
 `;
 
-function AddShoppingListItemModal() {
+export default function AddRecipeItemModal() {
   const [findIngredients, { data }] = useLazyQuery(SEARCH_INGREDIENTS_QUERY, {
     fetchPolicy: 'network-only',
     nextFetchPolicy: 'cache-first',
@@ -37,14 +42,16 @@ function AddShoppingListItemModal() {
   }, [searchTerm]);
 
   const {
-    addShoppingListItemModalOpen,
-    closeAddShoppingListItemModal,
+    addRecipeItemModalOpen,
+    closeAddRecipeItemModal,
     ingredient,
     setIngredient,
-  } = useAddShoppingListItemModal();
+    recipeId,
+  } = useAddRecipeItemModal();
+
   useEffect(() => {
     searchRef?.current?.focus();
-  }, [addShoppingListItemModalOpen]);
+  }, [addRecipeItemModalOpen]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -60,13 +67,23 @@ function AddShoppingListItemModal() {
     quantity: '1',
   });
 
-  const [addToShoppingList] = useMutation(ADD_TO_SHOPPING_LIST_MUTATION);
+  const [addToRecipe, { error }] = useMutation(ADD_TO_RECIPE_MUTATION);
 
-  return addShoppingListItemModalOpen ? (
+  const [warning, setWarning] = useState(null);
+
+  const closeDownModal = () => {
+    resetForm();
+    setSearchTerm('');
+    setIngredient(null);
+    setWarning(null);
+    closeAddRecipeItemModal();
+  };
+
+  return addRecipeItemModalOpen ? (
     <>
       <ModalStyles
-        className={addShoppingListItemModalOpen && 'open'}
-        id="addIngredientToShoppingListModal"
+        className={addRecipeItemModalOpen && 'open'}
+        id="addRecipeItemModal"
         onClick={() => {
           setDropdownClosed(true);
         }}
@@ -74,27 +91,28 @@ function AddShoppingListItemModal() {
         <FormStyles
           onSubmit={async (e) => {
             e.preventDefault();
-            const parsedQuantity = parseInt(inputs.quantity);
-            if (
-              !ingredient ||
-              Number.isNaN(parsedQuantity) ||
-              parsedQuantity < 1
-            )
-              return;
-            await addToShoppingList({
-              variables: {
-                id: ingredient.id,
-                quantity: roundQuantity(inputs.quantity).toString(),
-              },
-              refetchQueries: 'all',
-            });
-            resetForm();
-            setSearchTerm('');
-            setIngredient(null);
-            closeAddShoppingListItemModal();
+            const parsedQuantity = Number.parseFloat(inputs.quantity);
+            if (Number.isNaN(parsedQuantity)) {
+              setWarning(
+                `'${inputs.quantity}' is not a number.  Please enter a numeric value for the quantity.`
+              );
+            } else if (!ingredient) {
+              setWarning('Please select an ingredient to add to this recipe');
+            } else {
+              await addToRecipe({
+                variables: {
+                  id: ingredient.id,
+                  recipeId,
+                  quantity: roundQuantity(inputs.quantity).toString(),
+                },
+                refetchQueries: 'all',
+              });
+              closeDownModal();
+            }
           }}
         >
-          <h2>Add ingredient to shopping list</h2>
+          <h2>Add ingredient to recipe</h2>
+          <DisplayError error={{ message: warning } || error} />
           <div className="modalInputContainer">
             <input
               required
@@ -162,7 +180,7 @@ function AddShoppingListItemModal() {
               type="button"
               className="cancel"
               onClick={() => {
-                closeAddShoppingListItemModal();
+                closeDownModal();
               }}
             >
               Cancel
@@ -173,20 +191,18 @@ function AddShoppingListItemModal() {
           type="button"
           className="close"
           onClick={() => {
-            closeAddShoppingListItemModal();
+            closeDownModal();
           }}
         >
           &times;
         </button>
       </ModalStyles>
       <ModalBackgroundStyles
-        className={addShoppingListItemModalOpen && 'open'}
-        onClick={closeAddShoppingListItemModal}
+        className={addRecipeItemModalOpen && 'open'}
+        onClick={closeDownModal}
       />
     </>
   ) : (
     <div />
   );
 }
-
-export default AddShoppingListItemModal;

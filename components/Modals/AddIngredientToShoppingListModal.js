@@ -2,13 +2,13 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
-import { useAddIngredientModal } from '../lib/addIngredientState';
-import useForm from '../lib/useForm';
-import FormStyles from './styles/FormStyles';
-import ModalBackgroundStyles from './styles/ModalBackgroundStyles';
-import ModalStyles from './styles/ModalStyles';
-import roundQuantity from '../lib/roundQuantity';
-import DisplayError from './ErrorMessage';
+import { useAddIngredientModal } from '../../lib/addIngredientState';
+import useForm from '../../lib/useForm';
+import FormStyles from '../styles/FormStyles';
+import ModalBackgroundStyles from '../styles/ModalBackgroundStyles';
+import ModalStyles from '../styles/ModalStyles';
+import roundQuantity from '../../lib/roundQuantity';
+import DisplayError from '../ErrorMessage';
 
 const ADD_TO_SHOPPING_LIST_MUTATION = gql`
   mutation ADD_TO_SHOPPING_LIST_MUTATION($id: ID!, $quantity: String!) {
