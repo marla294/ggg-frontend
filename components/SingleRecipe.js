@@ -115,6 +115,14 @@ function SingleRecipe({ id }) {
           <h2>{Recipe.name}</h2>
           <p>{Recipe.type}</p>
           <p>{Recipe.description}</p>
+          {Recipe.recipeLink ? (
+            <a href={Recipe.recipeLink} target="_blank" rel="noreferrer">
+              Website Link
+            </a>
+          ) : (
+            ''
+          )}
+
           <div>
             <ButtonDivStyles>
               <Link
