@@ -8,7 +8,7 @@ function AddToShoppingListButton({ ingredient, children }) {
   return (
     <ButtonStyles
       type="button"
-      className="addToShoppingList yellow small"
+      className="addToShoppingList lime"
       onClick={() => {
         setIngredient(ingredient);
         openAddIngredientModal();

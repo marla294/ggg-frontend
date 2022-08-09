@@ -9,6 +9,7 @@ import DisplayError from './ErrorMessage';
 import ButtonStyles from './styles/ButtonStyles';
 import DeleteIngredientButton from './Buttons/DeleteIngredientButton';
 import { SingleItemStyles } from './styles/SingleItemStyles';
+import AddToShoppingListButton from './Buttons/AddToShoppingListButton';
 
 const ButtonDivStyles = styled.div`
   display: grid;
@@ -90,6 +91,9 @@ function SingleIngredient({ id }) {
                 Edit Ingredient
               </ButtonStyles>
             </Link>
+            <AddToShoppingListButton ingredient={Ingredient}>
+              Add to shopping list
+            </AddToShoppingListButton>
             <DeleteIngredientButton id={Ingredient.id}>
               Delete
             </DeleteIngredientButton>
