@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import PropTypes from 'react';
+import PropTypes, { useState } from 'react';
 import useForm from '../lib/useForm';
 import { DELETE_INGREDIENT_IMAGE_MUTATION } from './Buttons/DeleteIngredientButton';
 import DisplayError from './ErrorMessage';
@@ -11,6 +11,7 @@ import aisles from '../lib/aisles';
 import homeAreas from '../lib/homeAreas';
 import stores from '../lib/stores';
 import units from '../lib/units';
+import AlertMessage from './AlertMessage';
 
 const UPDATE_INGREDIENT_MUTATION = gql`
   mutation UPDATE_INGREDIENT_MUTATION(
@@ -59,6 +60,7 @@ const UPDATE_INGREDIENT_IMAGE_MUTATION = gql`
 `;
 
 function EditIngredientForm({ id }) {
+  const [successMessage, setSuccessMessage] = useState(null);
   const { data, loading } = useQuery(SINGLE_INGREDIENT_QUERY, {
     variables: {
       id,
@@ -106,14 +108,27 @@ function EditIngredientForm({ id }) {
           },
           refetchQueries: 'all',
         }).catch(console.error);
-        Router.push({
-          pathname: `/ingredient/${id}`,
-        });
+        const date = new Date();
+        setSuccessMessage(
+          `Ingredient has been edited successfully (${date.toLocaleString(
+            'en-US',
+            {
+              weekday: 'short', // long, short, narrow
+              day: 'numeric', // numeric, 2-digit
+              year: 'numeric', // numeric, 2-digit
+              month: 'long', // numeric, 2-digit, long, short, narrow
+              hour: 'numeric', // numeric, 2-digit
+              minute: 'numeric', // numeric, 2-digit
+              second: 'numeric', // numeric, 2-digit
+            }
+          )})`
+        );
       }}
     >
       <fieldset disabled={editLoading}>
         <h2>Edit Ingredient</h2>
         <DisplayError error={editError} />
+        <AlertMessage message={successMessage} />
         <label htmlFor="name">
           Name<span className="required">&nbsp;*</span>
           <input
