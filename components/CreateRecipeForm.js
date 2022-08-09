@@ -11,11 +11,17 @@ import AlertMessage from './AlertMessage';
 const CREATE_RECIPE_MUTATION = gql`
   mutation CREATE_RECIPE_MUTATION(
     $name: String!
+    $recipeLink: String!
     $description: String!
     $recipeType: String
   ) {
     createRecipe(
-      data: { name: $name, description: $description, type: $recipeType }
+      data: {
+        name: $name
+        recipeLink: $recipeLink
+        description: $description
+        type: $recipeType
+      }
     ) {
       id
     }
@@ -40,6 +46,7 @@ const UPDATE_RECIPE_IMAGE_MUTATION = gql`
 export default function CreateRecipeForm() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
+    recipeLink: '',
     description: '',
     recipeType: recipeTypes[0],
   });
@@ -78,8 +85,20 @@ export default function CreateRecipeForm() {
             type="text"
             id="name"
             name="name"
-            placeholder="name"
+            placeholder="Name"
             value={inputs.name}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="recipeLink">
+          Recipe link<span className="required">&nbsp;*</span>
+          <input
+            required
+            type="text"
+            id="recipeLink"
+            name="recipeLink"
+            placeholder="Link to recipe"
+            value={inputs.recipeLink}
             onChange={handleChange}
           />
         </label>
@@ -93,7 +112,7 @@ export default function CreateRecipeForm() {
             rows="7"
             id="description"
             name="description"
-            placeholder="description"
+            placeholder="Description"
             value={inputs.description}
             onChange={handleChange}
           />
