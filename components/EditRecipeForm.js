@@ -2,12 +2,14 @@ import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import useForm from '../lib/useForm';
 import { DELETE_RECIPE_IMAGE_MUTATION } from './Buttons/DeleteRecipeButton';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
 import { ALL_RECIPE_ITEMS_QUERY, SINGLE_RECIPE_QUERY } from './SingleRecipe';
 import recipeTypes from '../lib/recipeTypes';
+import AlertMessage from './AlertMessage';
 
 const UPDATE_RECIPE_MUTATION = gql`
   mutation UPDATE_RECIPE_MUTATION(
@@ -50,6 +52,7 @@ const UPDATE_RECIPE_IMAGE_MUTATION = gql`
 `;
 
 function EditRecipeForm({ id }) {
+  const [successMessage, setSuccessMessage] = useState(null);
   const { data, loading } = useQuery(SINGLE_RECIPE_QUERY, {
     variables: {
       id,
@@ -102,14 +105,28 @@ function EditRecipeForm({ id }) {
             },
             refetchQueries: 'all',
           }).catch(console.error);
-          Router.push({
-            pathname: `/recipe/${id}`,
-          });
+
+          const date = new Date();
+          setSuccessMessage(
+            `Recipe has been edited successfully (${date.toLocaleString(
+              'en-US',
+              {
+                weekday: 'short', // long, short, narrow
+                day: 'numeric', // numeric, 2-digit
+                year: 'numeric', // numeric, 2-digit
+                month: 'long', // numeric, 2-digit, long, short, narrow
+                hour: 'numeric', // numeric, 2-digit
+                minute: 'numeric', // numeric, 2-digit
+                second: 'numeric', // numeric, 2-digit
+              }
+            )})`
+          );
         }}
       >
         <fieldset disabled={editLoading}>
           <h2>Edit Recipe</h2>
           <DisplayError error={editError} />
+          <AlertMessage message={successMessage} />
           <label htmlFor="name">
             Name<span className="required">&nbsp;*</span>
             <input
@@ -123,9 +140,8 @@ function EditRecipeForm({ id }) {
             />
           </label>
           <label htmlFor="recipeLink">
-            Recipe link<span className="required">&nbsp;*</span>
+            Recipe link
             <input
-              required
               type="text"
               id="recipeLink"
               name="recipeLink"
