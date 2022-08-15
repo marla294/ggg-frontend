@@ -27,6 +27,7 @@ export default function ShoppingList() {
   const { inputs, handleChange } = useForm({
     searchTerm: '',
     sortBy: 'alphabetical',
+    filterStore: 'all',
   });
 
   const { openAddShoppingListItemModal } = useAddShoppingListItemModal();
@@ -38,10 +39,12 @@ export default function ShoppingList() {
     { display: 'Store', value: 'store' },
   ];
 
-  const storeOptions = stores.map((store) => ({
-    display: store,
-    value: store,
-  }));
+  const storeOptions = [{ display: 'all', value: 'all' }].concat(
+    stores.map((store) => ({
+      display: store,
+      value: store,
+    }))
+  );
 
   const [findShoppingListItems, { data: shoppingListItems }] = useLazyQuery(
     SEARCH_SHOPPING_LIST_QUERY
@@ -151,6 +154,7 @@ export default function ShoppingList() {
       <ShoppingListItems
         searchTerm={inputs.searchTerm}
         sortBy={inputs.sortBy}
+        filterStore={inputs.filterStore}
       />
     </PleaseSignIn>
   );

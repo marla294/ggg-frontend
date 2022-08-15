@@ -46,7 +46,7 @@ const SEARCH_SHOPPING_LIST_QUERY = gql`
   }
 `;
 
-function ShoppingListItems({ searchTerm, sortBy }) {
+function ShoppingListItems({ searchTerm, sortBy, filterStore }) {
   const user = useUser();
   const [findItems, { loading, data, error }] = useLazyQuery(
     SEARCH_SHOPPING_LIST_QUERY,
@@ -104,6 +104,14 @@ function ShoppingListItems({ searchTerm, sortBy }) {
         {sortBy === 'alphabetical' ? (
           <ListStyles>
             {Array.from(data?.allShoppingListItems)
+              .filter((item) => {
+                if (
+                  filterStore === 'all' ||
+                  item?.ingredient?.store === filterStore
+                )
+                  return item;
+                return null;
+              })
               .sort((a, b) =>
                 a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
               )
@@ -119,9 +127,18 @@ function ShoppingListItems({ searchTerm, sortBy }) {
           </ListStyles>
         ) : (
           groupArrayBy(
-            Array.from(data?.allShoppingListItems).sort((a, b) =>
-              a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
-            ),
+            Array.from(data?.allShoppingListItems)
+              .filter((item) => {
+                if (
+                  filterStore === 'all' ||
+                  item?.ingredient?.store === filterStore
+                )
+                  return item;
+                return null;
+              })
+              .sort((a, b) =>
+                a?.ingredient?.name < b?.ingredient?.name ? -1 : 1
+              ),
             sortBy,
             'ingredient'
           ).map((grouping) => (
