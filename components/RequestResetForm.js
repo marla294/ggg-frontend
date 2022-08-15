@@ -40,7 +40,7 @@ export default function RequestResetForm() {
         <h2>Request password reset</h2>
         <DisplayError error={error} />
         {data?.sendUserPasswordResetLink === null && (
-          <p>success! check your email for a link.</p>
+          <p>Success! check your email for a link.</p>
         )}
         <label htmlFor="email">
           Email<span className="required">&nbsp;*</span>

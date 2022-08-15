@@ -9,7 +9,7 @@ const IngredientsBarStyles = styled.div`
   @media (min-width: 768px) {
     font-size: 1.1rem;
     grid-gap: 2rem;
-    grid-template-columns: auto repeat(2, 2fr);
+    grid-template-columns: auto repeat(3, 2fr);
   }
 
   input,
@@ -25,9 +25,6 @@ const IngredientsBarStyles = styled.div`
       outline: 0;
       border-color: var(--orange);
     }
-  }
-
-  button {
   }
 `;
 

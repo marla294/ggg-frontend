@@ -14,6 +14,7 @@ import IngredientsBarStyles from './styles/IngredientsBarStyles';
 import SortByStyles from './styles/SortByStyles';
 import { useUser } from './User';
 import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './Buttons/DeleteShoppingListItemButton';
+import stores from '../lib/stores';
 
 const ButtonDivStyles = styled.div`
   display: grid;
@@ -36,6 +37,11 @@ export default function ShoppingList() {
     { display: 'Home area', value: 'homeArea' },
     { display: 'Store', value: 'store' },
   ];
+
+  const storeOptions = stores.map((store) => ({
+    display: store,
+    value: store,
+  }));
 
   const [findShoppingListItems, { data: shoppingListItems }] = useLazyQuery(
     SEARCH_SHOPPING_LIST_QUERY
@@ -103,6 +109,26 @@ export default function ShoppingList() {
             onChange={handleChange}
           >
             {sortOptions.map((option) => (
+              <option
+                value={option.value}
+                name={option.value}
+                id={option.value}
+                key={Math.random()}
+              >
+                {option.display}
+              </option>
+            ))}
+          </select>
+        </SortByStyles>
+        <SortByStyles>
+          <label htmlFor="filterStore">Store:</label>
+          <select
+            name="filterStore"
+            id="filterStore"
+            value={inputs.filterStore}
+            onChange={handleChange}
+          >
+            {storeOptions.map((option) => (
               <option
                 value={option.value}
                 name={option.value}
