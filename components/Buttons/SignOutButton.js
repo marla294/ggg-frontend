@@ -3,22 +3,11 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import styled from 'styled-components';
 import { CURRENT_USER_QUERY } from '../User';
+import ButtonStyles from '../styles/ButtonStyles';
 
 const SIGN_OUT_MUTATION = gql`
   mutation {
     endSession
-  }
-`;
-
-const SignOutButtonStyles = styled.button`
-  background-color: transparent;
-  border: none;
-  color: var(--black);
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 0;
-  :hover {
-    text-decoration: underline;
   }
 `;
 
@@ -27,15 +16,15 @@ export default function SignOutButton() {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
   return (
-    <SignOutButtonStyles
+    <ButtonStyles
       type="button"
-      className="signOutButton"
+      className="signOutButton yellow"
       onClick={() => {
         signoutMutation();
         Router.push({ pathname: '/signin' });
       }}
     >
       Sign Out
-    </SignOutButtonStyles>
+    </ButtonStyles>
   );
 }

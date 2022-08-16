@@ -19,6 +19,7 @@ export default function Account() {
       <div>
         <b>Join Date: </b> {user?.joinDate || 'N/A'}
       </div>
+      <br />
       <SignOutButton />
     </div>
   );
