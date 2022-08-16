@@ -53,7 +53,7 @@ function SingleIngredient({ id }) {
     <AddIngredientToShoppingListModal>
       <SingleItemStyles>
         <Head>
-          <title>Go Get Groceries | {Ingredient.name}</title>
+          <title>{Ingredient.name} | Go Get Ur Groceries</title>
         </Head>
         {Ingredient?.photo?.image?.publicUrlTransformed ? (
           <img

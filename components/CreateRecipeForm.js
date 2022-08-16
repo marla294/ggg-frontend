@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import { useState } from 'react';
+import Head from 'next/head';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
@@ -74,6 +75,9 @@ export default function CreateRecipeForm() {
         setSuccessMessage(`Recipe "${inputs.name}" created successfully`);
       }}
     >
+      <Head>
+        <title>Create New Recipe | Go Get Ur Groceries</title>
+      </Head>
       <fieldset>
         <h2>Create New Recipe</h2>
         <DisplayError error={error} />

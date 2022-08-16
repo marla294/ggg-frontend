@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes, { useState } from 'react';
+import Head from 'next/head';
 import useForm from '../lib/useForm';
 import { DELETE_INGREDIENT_IMAGE_MUTATION } from './Buttons/DeleteIngredientButton';
 import DisplayError from './ErrorMessage';
@@ -125,6 +126,9 @@ function EditIngredientForm({ id }) {
         );
       }}
     >
+      <Head>
+        <title>Edit Ingredient "{inputs.name}" | Go Get Ur Groceries</title>
+      </Head>
       <fieldset disabled={editLoading}>
         <h2>Edit Ingredient</h2>
         <DisplayError error={editError} />

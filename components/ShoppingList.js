@@ -3,6 +3,7 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import Head from 'next/head';
 import useForm from '../lib/useForm';
 import PleaseSignIn from './PleaseSignIn';
 import ShoppingListItems, {
@@ -70,6 +71,9 @@ export default function ShoppingList() {
 
   return (
     <PleaseSignIn>
+      <Head>
+        <title>Shopping List | Go Get Ur Groceries</title>
+      </Head>
       <IngredientsBarStyles>
         <ButtonDivStyles>
           <ButtonStyles

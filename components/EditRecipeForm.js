@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import Head from 'next/head';
 import useForm from '../lib/useForm';
 import { DELETE_RECIPE_IMAGE_MUTATION } from './Buttons/DeleteRecipeButton';
 import DisplayError from './ErrorMessage';
@@ -123,6 +124,9 @@ function EditRecipeForm({ id }) {
           );
         }}
       >
+        <Head>
+          <title>Edit Recipe "{inputs.name}" | Go Get Ur Groceries</title>
+        </Head>
         <fieldset disabled={editLoading}>
           <h2>Edit Recipe</h2>
           <DisplayError error={editError} />

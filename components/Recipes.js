@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Router from 'next/router';
 import styled from 'styled-components';
+import Head from 'next/head';
 import ButtonStyles from './styles/ButtonStyles';
 import PleaseSignIn from './PleaseSignIn';
 import IngredientsBarStyles from './styles/IngredientsBarStyles';
@@ -26,6 +27,9 @@ export default function Recipes() {
 
   return (
     <PleaseSignIn>
+      <Head>
+        <title>Recipes | Go Get Ur Groceries</title>
+      </Head>
       <IngredientsBarStyles>
         <ButtonDivStyles>
           <ButtonStyles

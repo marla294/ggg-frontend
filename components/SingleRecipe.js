@@ -100,7 +100,7 @@ function SingleRecipe({ id }) {
       <AlertMessage message={successMessage} />
       <SingleItemStyles>
         <Head>
-          <title>Go Get Groceries | {Recipe.name}</title>
+          <title>{Recipe.name} | Go Get Ur Groceries</title>
         </Head>
         {Recipe?.photo?.image?.publicUrlTransformed ? (
           // eslint-disable-next-line jsx-a11y/img-redundant-alt
