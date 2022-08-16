@@ -1,7 +1,7 @@
-import { useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import useForm from '../lib/useForm';
 import DisplayError from './ErrorMessage';
@@ -29,6 +29,14 @@ const CREATE_RECIPE_MUTATION = gql`
   }
 `;
 
+const SEARCH_RECIPES_QUERY = gql`
+  query SEARCH_RECIPES_QUERY($searchName: String!) {
+    allRecipes(where: { name_i: $searchName }) {
+      id
+    }
+  }
+`;
+
 const UPDATE_RECIPE_IMAGE_MUTATION = gql`
   mutation UPDATE_RECIPE_IMAGE_MUTATION(
     $id: ID!
@@ -45,6 +53,8 @@ const UPDATE_RECIPE_IMAGE_MUTATION = gql`
 `;
 
 export default function CreateRecipeForm() {
+  const [findRecipes, { data: existingRecipeData }] =
+    useLazyQuery(SEARCH_RECIPES_QUERY);
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     recipeLink: '',
@@ -57,10 +67,23 @@ export default function CreateRecipeForm() {
   });
   const [updateRecipeImage] = useMutation(UPDATE_RECIPE_IMAGE_MUTATION);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  useEffect(() => {
+    findRecipes({
+      variables: {
+        searchName: inputs.name,
+      },
+    });
+  }, [inputs.name]);
   return (
     <FormStyles
       onSubmit={async (e) => {
         e.preventDefault();
+        if (existingRecipeData?.allRecipes?.length > 0) {
+          setSuccessMessage(`Recipe "${inputs.name}" already exists`);
+          clearForm();
+          return;
+        }
         const res = await createRecipe();
         if (inputs.image && res?.data?.createRecipe?.id) {
           await updateRecipeImage({

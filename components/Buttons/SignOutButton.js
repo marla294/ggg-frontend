@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import styled from 'styled-components';
 import { CURRENT_USER_QUERY } from '../User';
 import ButtonStyles from '../styles/ButtonStyles';
 
