@@ -36,10 +36,10 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
       </div>
       <ButtonDivStyles>
         <EditShoppingListItemButton shoppingListItem={shoppingListItem}>
-          Edit
+          ✏️
         </EditShoppingListItemButton>
         <DeleteShoppingListItemButton itemId={itemId}>
-          Remove
+          &times;
         </DeleteShoppingListItemButton>
       </ButtonDivStyles>
     </ListItemStyles>

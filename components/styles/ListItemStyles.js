@@ -40,16 +40,20 @@ const ListItemStyles = styled.div`
     align-self: start;
   }
   .removeFromShoppingList {
-    width: 6rem;
+    width: 2.5rem;
+    height: 2.7rem;
     position: absolute;
     top: 1.2rem;
-    right: 3rem;
+    right: 2rem;
   }
   .editShoppingItem {
-    width: 6rem;
+    width: 2.5rem;
+    height: 2.7rem;
     position: absolute;
     top: 1.2rem;
-    right: 10rem;
+    right: 5rem;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.6rem;
   }
   .delete {
     background: transparent;
