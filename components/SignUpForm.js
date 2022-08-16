@@ -9,8 +9,16 @@ const SIGNUP_MUTATION = gql`
     $name: String!
     $email: String!
     $password: String!
+    $joinDate: String!
   ) {
-    createUser(data: { name: $name, email: $email, password: $password }) {
+    createUser(
+      data: {
+        name: $name
+        email: $email
+        password: $password
+        joinDate: $joinDate
+      }
+    ) {
       id
       name
       email
@@ -24,11 +32,13 @@ export default function SignUpForm() {
     email: '',
     password: '',
   });
+
   const [signUp, { data, error, loading }] = useMutation(SIGNUP_MUTATION, {
     variables: {
       name: inputs.name,
       email: inputs.email,
       password: inputs.password,
+      joinDate: new Date().toLocaleDateString(),
     },
   });
   return (
