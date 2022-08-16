@@ -62,6 +62,7 @@ export default function Ingredients() {
           onChange={handleChange}
         />
       </IngredientsBarStyles>
+      <h2>Ingredients</h2>
       <IngredientsList searchTerm={inputs.searchTerm} sortBy={inputs.sortBy} />
     </PleaseSignIn>
   );

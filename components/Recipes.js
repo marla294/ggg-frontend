@@ -59,6 +59,7 @@ export default function Recipes() {
           </select>
         </SortByStyles>
       </IngredientsBarStyles>
+      <h2>Recipes</h2>
       <RecipesList sortBy={inputs.sortBy} />
     </PleaseSignIn>
   );

@@ -151,6 +151,7 @@ export default function ShoppingList() {
           onChange={handleChange}
         />
       </IngredientsBarStyles>
+      <h2>Shopping List</h2>
       <ShoppingListItems
         searchTerm={inputs.searchTerm}
         sortBy={inputs.sortBy}
