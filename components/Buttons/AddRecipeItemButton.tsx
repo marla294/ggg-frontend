@@ -1,8 +1,13 @@
-import PropTypes from 'prop-types';
+/* eslint-disable react/jsx-filename-extension */
 import { useAddRecipeItemModal } from '../../lib/addRecipeItemState';
 import ButtonStyles from '../styles/ButtonStyles';
 
-function AddRecipeItemButton({ recipeId, children }) {
+interface Props {
+  recipeId: string;
+  children: any;
+}
+
+function AddRecipeItemButton({ recipeId, children }: Props) {
   const { openAddRecipeItemModal, setRecipeId } = useAddRecipeItemModal();
 
   return (
@@ -18,10 +23,5 @@ function AddRecipeItemButton({ recipeId, children }) {
     </ButtonStyles>
   );
 }
-
-AddRecipeItemButton.propTypes = {
-  recipeId: PropTypes.string,
-  children: PropTypes.any,
-};
 
 export default AddRecipeItemButton;
