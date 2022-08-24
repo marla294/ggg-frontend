@@ -8,6 +8,7 @@ import DisplayError from './ErrorMessage';
 import FormStyles from './styles/FormStyles';
 import recipeTypes from '../lib/recipeTypes';
 import AlertMessage from './AlertMessage';
+import { useUser } from './User';
 
 const CREATE_RECIPE_MUTATION = gql`
   mutation CREATE_RECIPE_MUTATION(
@@ -30,8 +31,8 @@ const CREATE_RECIPE_MUTATION = gql`
 `;
 
 const SEARCH_RECIPES_QUERY = gql`
-  query SEARCH_RECIPES_QUERY($searchName: String!) {
-    allRecipes(where: { name_i: $searchName }) {
+  query SEARCH_RECIPES_QUERY($userId: ID!, $searchName: String!) {
+    allRecipes(where: { name_i: $searchName, user: { id: $userId } }) {
       id
     }
   }
@@ -53,6 +54,7 @@ const UPDATE_RECIPE_IMAGE_MUTATION = gql`
 `;
 
 export default function CreateRecipeForm() {
+  const user = useUser();
   const [findRecipes, { data: existingRecipeData }] =
     useLazyQuery(SEARCH_RECIPES_QUERY);
   const { inputs, handleChange, clearForm } = useForm({
@@ -72,6 +74,7 @@ export default function CreateRecipeForm() {
   useEffect(() => {
     findRecipes({
       variables: {
+        userId: user?.id,
         searchName: inputs.name,
       },
     });
