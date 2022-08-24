@@ -121,9 +121,8 @@ export default function CreateRecipeForm() {
           />
         </label>
         <label htmlFor="recipeLink">
-          Recipe link<span className="required">&nbsp;*</span>
+          Recipe link
           <input
-            required
             type="text"
             id="recipeLink"
             name="recipeLink"
