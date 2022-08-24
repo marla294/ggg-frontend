@@ -67,6 +67,7 @@ export default function CreateRecipeForm() {
   });
   const [updateRecipeImage] = useMutation(UPDATE_RECIPE_IMAGE_MUTATION);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     findRecipes({
@@ -80,7 +81,9 @@ export default function CreateRecipeForm() {
       onSubmit={async (e) => {
         e.preventDefault();
         if (existingRecipeData?.allRecipes?.length > 0) {
-          setSuccessMessage(`Recipe "${inputs.name}" already exists`);
+          setErrorMessage({
+            message: `Recipe "${inputs.name}" already exists`,
+          });
           clearForm();
           return;
         }
@@ -103,7 +106,7 @@ export default function CreateRecipeForm() {
       </Head>
       <fieldset>
         <h2>Create New Recipe</h2>
-        <DisplayError error={error} />
+        <DisplayError error={error || errorMessage} />
         <AlertMessage message={successMessage} />
         <label htmlFor="name">
           Name<span className="required">&nbsp;*</span>
