@@ -15,14 +15,14 @@ const ListItemStyles = styled.div`
   img {
     object-fit: cover;
     margin: 0;
-    height: 100%;
+    height: 5rem;
     min-width: 5rem;
     width: 5rem;
     padding: 1rem;
   }
   .noPhoto {
     margin: 0;
-    height: 100%;
+    height: 5rem;
     min-width: 5rem;
     width: 5rem;
   }
