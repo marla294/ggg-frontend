@@ -1,15 +1,6 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import AddToShoppingListButton from './Buttons/AddToShoppingListButton';
-import DeleteIngredientButton from './Buttons/DeleteIngredientButton';
 import ListItemStyles from './styles/ListItemStyles';
-
-const ButtonDivStyles = styled.div`
-  display: grid;
-  grid-gap: 0.5rem;
-  width: 100%;
-`;
 
 function IngredientListItem({ ingredient }) {
   return (
