@@ -27,16 +27,7 @@ function IngredientListItem({ ingredient }) {
         <h3>
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
         </h3>
-        <p>{ingredient?.description}</p>
       </div>
-      <ButtonDivStyles>
-        <AddToShoppingListButton ingredient={ingredient}>
-          Add to shopping list
-        </AddToShoppingListButton>
-      </ButtonDivStyles>
-      <DeleteIngredientButton id={ingredient?.id} ingredientsPage>
-        &times;
-      </DeleteIngredientButton>
     </ListItemStyles>
   );
 }
