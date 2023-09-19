@@ -17,7 +17,6 @@ function RecipeListItem({ recipe }) {
         <h3>
           <Link href={`/recipe/${recipe?.id}`}>{recipe?.name}</Link>
         </h3>
-        <p>{recipe?.description}</p>
       </div>
     </ListItemStyles>
   );
