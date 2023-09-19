@@ -14,9 +14,9 @@ function RecipeListItem({ recipe }) {
         <div className="noPhoto" />
       )}
       <div className="details">
-        <h3>
+        <h2>
           <Link href={`/recipe/${recipe?.id}`}>{recipe?.name}</Link>
-        </h3>
+        </h2>
       </div>
     </ListItemStyles>
   );

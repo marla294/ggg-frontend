@@ -15,9 +15,9 @@ function IngredientListItem({ ingredient }) {
       )}
 
       <div className="details">
-        <h3>
+        <h2>
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
-        </h3>
+        </h2>
       </div>
     </ListItemStyles>
   );

@@ -26,13 +26,13 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
         <div className="noPhoto" />
       )}
       <div className="details">
-        <h3>
+        <h2>
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
-        </h3>
-        <p>
+        </h2>
+        <h3>
           Amount: {roundQuantity(quantity / 10)}{' '}
           {ingredient?.units === 'none' ? '' : ingredient?.units}
-        </p>
+        </h3>
       </div>
       <ButtonDivStyles>
         <EditShoppingListItemButton shoppingListItem={shoppingListItem}>

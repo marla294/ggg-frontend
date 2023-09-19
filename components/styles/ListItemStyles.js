@@ -2,23 +2,22 @@ import styled from 'styled-components';
 
 const ListItemStyles = styled.div`
   background: white;
-  border: 1px solid var(--lightGray);
+  /* border: 1px solid var(--lightGray); */
   font-size: 1rem;
   position: relative;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 4rem 1fr 18rem;
+  grid-template-columns: 10rem 1fr 18rem;
   width: 100%;
-  height: 5rem;
+  height: 10rem;
   padding: 0;
 
   img {
     object-fit: cover;
     margin: 0;
-    height: 5rem;
-    min-width: 5rem;
+    height: 10rem;
+    min-width: 10rem;
     width: 5rem;
-    padding: 1rem;
   }
   .noPhoto {
     margin: 0;
@@ -27,9 +26,7 @@ const ListItemStyles = styled.div`
     width: 5rem;
   }
   .details {
-    height: 4rem;
     width: 100%;
-    line-height: 1.2rem;
     padding: 0.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -37,7 +34,8 @@ const ListItemStyles = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     margin-left: 1rem;
-    align-self: start;
+    align-self: center;
+    justify-self: center;
   }
   .removeFromShoppingList {
     width: 2.5rem;
