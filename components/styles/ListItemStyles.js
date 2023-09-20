@@ -33,7 +33,7 @@ const ListItemStyles = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-left: 1rem;
+    margin-left: 2rem;
     align-self: center;
     justify-self: center;
   }
@@ -43,15 +43,6 @@ const ListItemStyles = styled.div`
     position: absolute;
     top: 1.2rem;
     right: 2rem;
-  }
-  .editShoppingItem {
-    width: 2.5rem;
-    height: 2.7rem;
-    position: absolute;
-    top: 1.2rem;
-    right: 5rem;
-    font-size: 0.8rem;
-    padding: 0.5rem 0.6rem;
   }
   .delete {
     background: transparent;

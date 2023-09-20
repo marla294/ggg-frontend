@@ -30,14 +30,16 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
         </h2>
         <h3>
-          Amount: {roundQuantity(quantity / 10)}{' '}
-          {ingredient?.units === 'none' ? '' : ingredient?.units}
+          <EditShoppingListItemButton shoppingListItem={shoppingListItem}>
+            Amount: {roundQuantity(quantity / 10)}{' '}
+            {ingredient?.units === 'none' ? '' : ingredient?.units}
+          </EditShoppingListItemButton>
         </h3>
       </div>
       <ButtonDivStyles>
-        <EditShoppingListItemButton shoppingListItem={shoppingListItem}>
+        {/* <EditShoppingListItemButton shoppingListItem={shoppingListItem}>
           ✏️
-        </EditShoppingListItemButton>
+        </EditShoppingListItemButton> */}
         <DeleteShoppingListItemButton itemId={itemId}>
           &times;
         </DeleteShoppingListItemButton>

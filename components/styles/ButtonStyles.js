@@ -47,6 +47,17 @@ const ButtonStyles = styled.button`
     color: var(--darkOrange);
     border: 1px solid var(--darkOrange);
   }
+
+  &.link {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export default ButtonStyles;

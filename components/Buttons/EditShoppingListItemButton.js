@@ -9,7 +9,7 @@ function EditShoppingItemItemButton({ shoppingListItem, children }) {
   return (
     <ButtonStyles
       type="button"
-      className="editShoppingItem lime small emoji"
+      className="link"
       onClick={() => {
         setShoppingListItem(shoppingListItem);
         openEditShoppingItemModal();
