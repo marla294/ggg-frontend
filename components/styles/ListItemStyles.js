@@ -7,7 +7,7 @@ const ListItemStyles = styled.div`
   position: relative;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 10rem 1fr 18rem;
+  grid-template-columns: 10rem 5fr 1fr;
   width: 100%;
   height: 10rem;
   padding: 0;

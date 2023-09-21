@@ -37,9 +37,6 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
         </h3>
       </div>
       <ButtonDivStyles>
-        {/* <EditShoppingListItemButton shoppingListItem={shoppingListItem}>
-          ✏️
-        </EditShoppingListItemButton> */}
         <DeleteShoppingListItemButton itemId={itemId}>
           &times;
         </DeleteShoppingListItemButton>
