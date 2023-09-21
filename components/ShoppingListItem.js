@@ -28,6 +28,9 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
       <div className="details">
         <h2>
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
+          <DeleteShoppingListItemButton itemId={itemId}>
+            &times;
+          </DeleteShoppingListItemButton>
         </h2>
         <h3>
           <EditShoppingListItemButton shoppingListItem={shoppingListItem}>
@@ -37,9 +40,9 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
         </h3>
       </div>
       <ButtonDivStyles>
-        <DeleteShoppingListItemButton itemId={itemId}>
+        {/* <DeleteShoppingListItemButton itemId={itemId}>
           &times;
-        </DeleteShoppingListItemButton>
+        </DeleteShoppingListItemButton> */}
       </ButtonDivStyles>
     </ListItemStyles>
   );

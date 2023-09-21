@@ -22,7 +22,7 @@ function DeleteShoppingListItemButton({ itemId, children }) {
   return (
     <ButtonStyles
       type="button"
-      className="removeFromShoppingList orange small"
+      className="removeFromShoppingList link"
       onClick={async () => {
         if (itemId) {
           await deleteItem();

@@ -58,6 +58,16 @@ const ButtonStyles = styled.button`
       text-decoration: underline;
     }
   }
+
+  &.removeFromShoppingList {
+    padding-left: 0.5rem !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--orange);
+    &:hover {
+      text-decoration: none;
+    }
+  }
 `;
 
 export default ButtonStyles;

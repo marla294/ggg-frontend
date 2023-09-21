@@ -7,7 +7,7 @@ const ListItemStyles = styled.div`
   position: relative;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 10rem 5fr 1fr;
+  grid-template-columns: 10rem 5fr;
   width: 100%;
   height: 10rem;
   padding: 0;
@@ -36,13 +36,6 @@ const ListItemStyles = styled.div`
     margin-left: 2rem;
     align-self: center;
     justify-self: center;
-  }
-  .removeFromShoppingList {
-    width: 2.5rem;
-    height: 2.7rem;
-    position: absolute;
-    top: 1.2rem;
-    right: 2rem;
   }
   .delete {
     background: transparent;
