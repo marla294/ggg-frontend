@@ -52,6 +52,11 @@ const ListItemStyles = styled.div`
     top: 1.2rem;
     right: 3rem;
   }
+
+  &.loadingDelete {
+    background-color: rgba(1, 1, 1, 0.25);
+    z-index: 500;
+  }
 `;
 
 export default ListItemStyles;

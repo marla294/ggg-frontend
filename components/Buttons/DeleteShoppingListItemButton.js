@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import ButtonStyles from '../styles/ButtonStyles';
@@ -11,14 +10,7 @@ const DELETE_SHOPPING_LIST_ITEM_MUTATION = gql`
   }
 `;
 
-function DeleteShoppingListItemButton({ itemId, children }) {
-  const [deleteItem] = useMutation(DELETE_SHOPPING_LIST_ITEM_MUTATION, {
-    variables: {
-      id: itemId,
-    },
-    refetchQueries: 'all',
-  });
-
+function DeleteShoppingListItemButton({ itemId, deleteItem, children }) {
   return (
     <ButtonStyles
       type="button"
@@ -36,6 +28,7 @@ function DeleteShoppingListItemButton({ itemId, children }) {
 
 DeleteShoppingListItemButton.propTypes = {
   itemId: PropTypes.string,
+  deleteItem: PropTypes.any,
   children: PropTypes.any,
 };
 

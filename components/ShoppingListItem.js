@@ -2,7 +2,10 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import DeleteShoppingListItemButton from './Buttons/DeleteShoppingListItemButton';
+import { useMutation } from '@apollo/client';
+import DeleteShoppingListItemButton, {
+  DELETE_SHOPPING_LIST_ITEM_MUTATION,
+} from './Buttons/DeleteShoppingListItemButton';
 import ListItemStyles from './styles/ListItemStyles';
 import EditShoppingListItemButton from './Buttons/EditShoppingListItemButton';
 import roundQuantity from '../lib/roundQuantity';
@@ -15,8 +18,18 @@ const ButtonDivStyles = styled.div`
 `;
 
 function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
+  const [deleteItem, { loading: loadingDelete }] = useMutation(
+    DELETE_SHOPPING_LIST_ITEM_MUTATION,
+    {
+      variables: {
+        id: itemId,
+      },
+      refetchQueries: 'all',
+    }
+  );
+
   return (
-    <ListItemStyles>
+    <ListItemStyles className={`${loadingDelete ? 'loadingDelete' : ''}`}>
       {ingredient?.photo?.image?.publicUrlTransformed ? (
         <img
           src={ingredient?.photo?.image?.publicUrlTransformed}
@@ -28,7 +41,7 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
       <div className="details">
         <h2>
           <Link href={`/ingredient/${ingredient?.id}`}>{ingredient?.name}</Link>
-          <DeleteShoppingListItemButton itemId={itemId}>
+          <DeleteShoppingListItemButton itemId={itemId} deleteItem={deleteItem}>
             &times;
           </DeleteShoppingListItemButton>
         </h2>
@@ -39,11 +52,6 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
           </EditShoppingListItemButton>
         </h3>
       </div>
-      <ButtonDivStyles>
-        {/* <DeleteShoppingListItemButton itemId={itemId}>
-          &times;
-        </DeleteShoppingListItemButton> */}
-      </ButtonDivStyles>
     </ListItemStyles>
   );
 }
