@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
+import { useEffect, useState } from 'react';
 import DeleteShoppingListItemButton, {
   DELETE_SHOPPING_LIST_ITEM_MUTATION,
 } from './Buttons/DeleteShoppingListItemButton';
@@ -10,15 +10,9 @@ import ListItemStyles from './styles/ListItemStyles';
 import EditShoppingListItemButton from './Buttons/EditShoppingListItemButton';
 import roundQuantity from '../lib/roundQuantity';
 
-const ButtonDivStyles = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 0.5rem;
-  width: 100%;
-`;
-
 function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
-  const [deleteItem, { loading: loadingDelete }] = useMutation(
+  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [deleteItem, { loading }] = useMutation(
     DELETE_SHOPPING_LIST_ITEM_MUTATION,
     {
       variables: {
@@ -27,6 +21,10 @@ function ShoppingListItem({ itemId, ingredient, quantity, shoppingListItem }) {
       refetchQueries: 'all',
     }
   );
+
+  useEffect(() => {
+    if (loading) setLoadingDelete(true);
+  }, [loading]);
 
   return (
     <ListItemStyles className={`${loadingDelete ? 'loadingDelete' : ''}`}>

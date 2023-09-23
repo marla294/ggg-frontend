@@ -54,8 +54,15 @@ const ListItemStyles = styled.div`
   }
 
   &.loadingDelete {
-    background-color: rgba(1, 1, 1, 0.25);
-    z-index: 500;
+    & a {
+      color: var(--lightGray) !important;
+    }
+    & button {
+      color: var(--lightGray) !important;
+    }
+    & img {
+      opacity: 0.5;
+    }
   }
 `;
 

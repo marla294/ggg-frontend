@@ -9,7 +9,7 @@ function EditShoppingItemItemButton({ shoppingListItem, children }) {
   return (
     <ButtonStyles
       type="button"
-      className="link"
+      className="link editShoppingListButton"
       onClick={() => {
         setShoppingListItem(shoppingListItem);
         openEditShoppingItemModal();
