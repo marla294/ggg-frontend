@@ -91,7 +91,7 @@ export default function ShoppingList() {
             onClick={() => {
               if (
                 confirm(
-                  'are you sure you want to clear the entire shopping list?'
+                  'Are you sure you want to clear the entire shopping list?'
                 )
               ) {
                 shoppingListItems?.allShoppingListItems?.forEach((item) => {
@@ -147,19 +147,12 @@ export default function ShoppingList() {
             ))}
           </select>
         </SortByStyles>
-        <input
-          name="searchTerm"
-          id="searchTerm"
-          placeholder="Search..."
-          value={inputs.searchTerm}
-          onChange={handleChange}
-        />
       </IngredientsBarStyles>
       <h2>Shopping List</h2>
       <ShoppingListItems
-        searchTerm={inputs.searchTerm}
         sortBy={inputs.sortBy}
         filterStore={inputs.filterStore}
+        shoppingListItems={shoppingListItems}
       />
     </PleaseSignIn>
   );

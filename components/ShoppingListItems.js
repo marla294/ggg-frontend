@@ -46,7 +46,7 @@ const SEARCH_SHOPPING_LIST_QUERY = gql`
   }
 `;
 
-function ShoppingListItems({ searchTerm, sortBy, filterStore }) {
+function ShoppingListItems({ sortBy, filterStore }) {
   const user = useUser();
   const [findItems, { loading, data, error }] = useLazyQuery(
     SEARCH_SHOPPING_LIST_QUERY,
@@ -55,15 +55,15 @@ function ShoppingListItems({ searchTerm, sortBy, filterStore }) {
       nextFetchPolicy: 'cache-first',
     }
   );
-  const findItemsButChill = debounce(findItems, 5);
+
   useEffect(() => {
-    findItemsButChill({
+    findItems({
       variables: {
         userId: user?.id,
-        searchTerm,
+        searchTerm: '',
       },
     });
-  }, [searchTerm]);
+  }, [findItems, user?.id]);
 
   if (loading)
     return (
@@ -78,21 +78,11 @@ function ShoppingListItems({ searchTerm, sortBy, filterStore }) {
       </ListWrapperStyles>
     );
   if (!data?.allShoppingListItems || data?.allShoppingListItems.length === 0) {
-    if (searchTerm === '') {
-      return (
-        <>
-          <AddShoppingListItemModal />
-          <ListWrapperStyles>
-            <div>Please add some shopping list items to get started!</div>
-          </ListWrapperStyles>
-        </>
-      );
-    }
     return (
       <>
         <AddShoppingListItemModal />
         <ListWrapperStyles>
-          <div>Sorry, no results found for "{searchTerm}"</div>
+          <div>Please add some shopping list items to get started!</div>
         </ListWrapperStyles>
       </>
     );
