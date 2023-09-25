@@ -1,11 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Router from 'next/router';
 import Head from 'next/head';
+import styled from 'styled-components';
 import ButtonStyles from './styles/ButtonStyles';
 import useForm from '../lib/useForm';
 import IngredientsList from './IngredientsList';
 import PleaseSignIn from './PleaseSignIn';
 import IngredientsBarStyles from './styles/IngredientsBarStyles';
+
+export const ButtonDivStyles = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+`;
 
 export default function Ingredients() {
   const { inputs, handleChange } = useForm({
@@ -19,7 +26,7 @@ export default function Ingredients() {
         <title>Ingredients | Go Get Ur Groceries</title>
       </Head>
       <IngredientsBarStyles>
-        <div>
+        <ButtonDivStyles>
           <ButtonStyles
             type="button"
             className="lime small"
@@ -29,7 +36,7 @@ export default function Ingredients() {
           >
             Add
           </ButtonStyles>
-        </div>
+        </ButtonDivStyles>
         <input
           name="searchTerm"
           id="searchTerm"

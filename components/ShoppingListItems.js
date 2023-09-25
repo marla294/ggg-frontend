@@ -49,11 +49,7 @@ const SEARCH_SHOPPING_LIST_QUERY = gql`
 function ShoppingListItems({ sortBy, filterStore }) {
   const user = useUser();
   const [findItems, { loading, data, error }] = useLazyQuery(
-    SEARCH_SHOPPING_LIST_QUERY,
-    {
-      fetchPolicy: 'network-only',
-      nextFetchPolicy: 'cache-first',
-    }
+    SEARCH_SHOPPING_LIST_QUERY
   );
 
   useEffect(() => {

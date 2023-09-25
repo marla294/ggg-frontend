@@ -17,7 +17,7 @@ import { useUser } from './User';
 import { DELETE_SHOPPING_LIST_ITEM_MUTATION } from './Buttons/DeleteShoppingListItemButton';
 import stores from '../lib/stores';
 
-const ButtonDivStyles = styled.div`
+export const ButtonDivStyles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 0.5rem;
